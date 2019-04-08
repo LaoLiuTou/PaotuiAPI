@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- <setting name="logImpl" value="STDOUT_LOGGING"/>  -->
+		<setting name="logImpl" value="LOG4J"/> 
+		<setting name="cacheEnabled" value="true"/> 
+		<setting name="lazyLoadingEnabled" value="true"/> 
+		<setting name="multipleResultSetsEnabled" value="true"/> 
+		<setting name="useColumnLabel" value="true"/> 
+		<setting name="useGeneratedKeys" value="false"/> 
+		<setting name="autoMappingBehavior" value="PARTIAL"/> 
+		<setting name="defaultExecutorType" value="SIMPLE"/> 
+		<setting name="defaultStatementTimeout" value="25"/> 
+		<setting name="safeRowBoundsEnabled" value="false"/> 
+		<setting name="mapUnderscoreToCamelCase" value="false"/> 
+		<setting name="localCacheScope" value="SESSION"/> 
+		<setting name="jdbcTypeForNull" value="OTHER"/> 
+		<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/> 
+	</settings> 
+	<typeAliases>
+		<typeAlias alias="Addresses" type="com.paotui.model.addresses.Addresses" /> 
+		<typeAlias alias="Banner" type="com.paotui.model.banner.Banner" /> 
+		<typeAlias alias="Configure" type="com.paotui.model.configure.Configure" /> 
+		<typeAlias alias="Customer" type="com.paotui.model.customer.Customer" /> 
+		<typeAlias alias="Message" type="com.paotui.model.message.Message" /> 
+		<typeAlias alias="News" type="com.paotui.model.news.News" /> 
+		<typeAlias alias="Orders" type="com.paotui.model.orders.Orders" /> 
+		<typeAlias alias="Scores" type="com.paotui.model.scores.Scores" /> 
+		<typeAlias alias="User" type="com.paotui.model.user.User" /> 
+	</typeAliases>
+	<mappers>
+		<mapper resource="com/paotui/model/addresses/Addresses.xml"/> 
+		<mapper resource="com/paotui/model/banner/Banner.xml"/> 
+		<mapper resource="com/paotui/model/configure/Configure.xml"/> 
+		<mapper resource="com/paotui/model/customer/Customer.xml"/> 
+		<mapper resource="com/paotui/model/message/Message.xml"/> 
+		<mapper resource="com/paotui/model/news/News.xml"/> 
+		<mapper resource="com/paotui/model/orders/Orders.xml"/> 
+		<mapper resource="com/paotui/model/scores/Scores.xml"/> 
+		<mapper resource="com/paotui/model/user/User.xml"/> 
+	</mappers>  
+</configuration>

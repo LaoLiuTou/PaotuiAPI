@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.paotui.dao.addresses.IAddressesMapper"> 
+	<select id="selectaddressesById" parameterType="String" resultType="Addresses">
+		SELECT * FROM addresses WHERE ID=#{id}
+	</select>
+
+	<delete id="deleteaddresses" parameterType="String"> 
+		DELETE FROM addresses WHERE ID=#{id}
+	</delete>
+
+	<select id="selectaddressesByParam" parameterType="java.util.Map" resultType="Addresses">
+		SELECT *
+		FROM addresses
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND ID =#{id} </if>
+			<if test="cus_id != null"> AND CUS_ID =#{cus_id} </if>
+			<if test="username != null"> AND USERNAME =#{username} </if>
+			<if test="phone != null"> AND PHONE =#{phone} </if>
+			<if test="address != null"> AND ADDRESS =#{address} </if>
+			<if test="house_num != null"> AND HOUSE_NUM =#{house_num} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
+			<if test="state != null"> AND STATE =#{state} </if>
+		</trim>  
+			<if test="orderBy!= null"> ORDER BY   #{orderBy} </if>
+		LIMIT #{fromPage},#{toPage} 
+	</select>
+
+	<select id="selectCountaddressesByParam" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(id) 
+		FROM addresses 
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND ID =#{id} </if>
+			<if test="cus_id != null"> AND CUS_ID =#{cus_id} </if>
+			<if test="username != null"> AND USERNAME =#{username} </if>
+			<if test="phone != null"> AND PHONE =#{phone} </if>
+			<if test="address != null"> AND ADDRESS =#{address} </if>
+			<if test="house_num != null"> AND HOUSE_NUM =#{house_num} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
+			<if test="state != null"> AND STATE =#{state} </if>
+		</trim>  
+	</select>
+
+	<update id="updateaddresses" parameterType="Addresses">
+		UPDATE addresses 
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="id != null">ID=#{id}, </if>
+			<if test="cus_id != null">CUS_ID=#{cus_id}, </if>
+			<if test="username != null">USERNAME=#{username}, </if>
+			<if test="phone != null">PHONE=#{phone}, </if>
+			<if test="address != null">ADDRESS=#{address}, </if>
+			<if test="house_num != null">HOUSE_NUM=#{house_num}, </if>
+			<if test="c_dt != null">C_DT=#{c_dt}, </if>
+			<if test="u_dt != null">U_DT=#{u_dt}, </if>
+			<if test="state != null">STATE=#{state}, </if>
+		</trim>
+		WHERE ID=#{id}
+	</update>
+
+	<insert id="addaddresses" parameterType="Addresses" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO addresses 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="cus_id != null">CUS_ID, </if>
+			<if test="username != null">USERNAME, </if>
+			<if test="phone != null">PHONE, </if>
+			<if test="address != null">ADDRESS, </if>
+			<if test="house_num != null">HOUSE_NUM, </if>
+			<if test="c_dt != null">C_DT, </if>
+			<if test="u_dt != null">U_DT, </if>
+			<if test="state != null">STATE, </if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
+			<if test="cus_id != null">#{cus_id}, </if>
+			<if test="username != null">#{username}, </if>
+			<if test="phone != null">#{phone}, </if>
+			<if test="address != null">#{address}, </if>
+			<if test="house_num != null">#{house_num}, </if>
+			<if test="c_dt != null">#{c_dt}, </if>
+			<if test="u_dt != null">#{u_dt}, </if>
+			<if test="state != null">#{state}, </if>
+		</trim>
+	</insert>
+
+	<insert id="muladdaddresses" parameterType="java.util.List" keyProperty="id" useGeneratedKeys="true">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			INSERT INTO addresses 
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+				<if test="item.id != null">ID, </if>
+				<if test="item.cus_id != null">CUS_ID, </if>
+				<if test="item.username != null">USERNAME, </if>
+				<if test="item.phone != null">PHONE, </if>
+				<if test="item.address != null">ADDRESS, </if>
+				<if test="item.house_num != null">HOUSE_NUM, </if>
+				<if test="item.c_dt != null">C_DT, </if>
+				<if test="item.u_dt != null">U_DT, </if>
+				<if test="item.state != null">STATE, </if>
+			</trim>
+			<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
+				<if test="item.id != null">#{item.id}, </if>
+				<if test="item.cus_id != null">#{item.cus_id}, </if>
+				<if test="item.username != null">#{item.username}, </if>
+				<if test="item.phone != null">#{item.phone}, </if>
+				<if test="item.address != null">#{item.address}, </if>
+				<if test="item.house_num != null">#{item.house_num}, </if>
+				<if test="item.c_dt != null">#{item.c_dt}, </if>
+				<if test="item.u_dt != null">#{item.u_dt}, </if>
+				<if test="item.state != null">#{item.state}, </if>
+			</trim>
+		</foreach>
+	</insert>
+</mapper>
