@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+ 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paotui.service.user.IUserService;
+import com.paotui.utils.MD5Encryption;
+import com.paotui.utils.TokenUtils;
 import com.paotui.model.user.User;
 @Controller
 public class UserController {
@@ -188,4 +192,95 @@ public class UserController {
 		}
 		return resultMap;
 	}
+	
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/login")
+	@ResponseBody
+	public Map login(HttpServletRequest request,User user){
+		Map resultMap=new HashMap();
+		try {
+			if(user.getUsername()!=null&&user.getPassword()!=null){
+				
+				Map paramMap=new HashMap();
+				paramMap.put("fromPage",0);
+				paramMap.put("toPage",1); 
+				paramMap.put("username",user.getUsername());
+				paramMap.put("state",0);
+				List<User> list=iUserService.selectUserByParam(paramMap);
+				if(list.size()>0){
+					if(list.get(0).getPassword().equals(MD5Encryption.getEncryption(user.getPassword()).toLowerCase())){
+						String userToken= UUID.randomUUID().toString();
+						 
+						resultMap.put("status", "0");
+						resultMap.put("token", userToken);
+						resultMap.put("msg", list.get(0));
+						logger.info("用户登录："+list.get(0).getUsername());
+						TokenUtils.TokenBean tokenBean =new TokenUtils().new TokenBean();
+						tokenBean.setTimesamp(System.currentTimeMillis()+"");
+						tokenBean.setUsername(list.get(0).getUsername());
+						tokenBean.setUserid(list.get(0).getId()+"");
+	  					TokenUtils.add(userToken, tokenBean);
+					}
+					else{
+						resultMap.put("status", "-1");
+						resultMap.put("msg", "密码错误！");
+					}
+					
+				}
+				else{
+					resultMap.put("status", "-1");
+					resultMap.put("msg", "用户不存在，或已禁用！");
+				}
+				
+			}
+			else{
+				resultMap.put("status", "-1");
+				resultMap.put("msg", "用户名或密码不能为空！");
+			}
+			 
+			 
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "登录失败！");
+			logger.info("登录失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/passwordUser")
+	@ResponseBody
+	public Map password(User user){
+		Map resultMap=new HashMap();
+		try {
+			if(user.getId()==null){
+				resultMap.put("status", "-1");
+				resultMap.put("msg", "参数不能为空！");
+			}
+			else{
+				User temp=iUserService.selectUserById(user.getId()+"");
+				String pass=MD5Encryption.getEncryption(user.getPassword()).toLowerCase();
+				if(!pass.equals(temp.getPassword().toLowerCase())){
+					resultMap.put("status", "-1");
+					resultMap.put("msg", "密码不一致！");
+				}
+				else{
+					int resultUpdate=iUserService.updateUser(user);
+					resultMap.put("status", "0");
+					resultMap.put("msg", "更新成功！");
+					logger.info("更新成功，主键："+user.getId());
+				}
+				
+			}
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "更新失败！");
+			logger.info("更新失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	
 }

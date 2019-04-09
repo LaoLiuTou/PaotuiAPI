@@ -186,4 +186,47 @@ public class ConfigureController {
 		}
 		return resultMap;
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/allConfigure")
+	@ResponseBody
+	public Map all(HttpServletRequest request, HttpServletResponse response,Configure configure)
+		throws ServletException, IOException {
+		Map resultMap=new HashMap();
+		try {
+			 
+			Map paramMap=new HashMap();
+			
+			paramMap.put("orderBy","ID DESC"); 
+			paramMap.put("id",configure.getId());
+			paramMap.put("property",configure.getProperty());
+			paramMap.put("value",configure.getValue());
+			paramMap.put("c_id",configure.getC_id());
+			String c_dtFrom=request.getParameter("c_dtFrom");
+			String c_dtTo=request.getParameter("c_dtTo");
+			if(c_dtFrom!=null&&!c_dtFrom.equals(""))
+			paramMap.put("c_dtFrom", sdf.parse(c_dtFrom));
+			if(c_dtTo!=null&&!c_dtTo.equals(""))
+			paramMap.put("c_dtTo", sdf.parse(c_dtTo));
+			String u_dtFrom=request.getParameter("u_dtFrom");
+			String u_dtTo=request.getParameter("u_dtTo");
+			if(u_dtFrom!=null&&!u_dtFrom.equals(""))
+			paramMap.put("u_dtFrom", sdf.parse(u_dtFrom));
+			if(u_dtTo!=null&&!u_dtTo.equals(""))
+			paramMap.put("u_dtTo", sdf.parse(u_dtTo));
+			paramMap.put("state",configure.getState());
+			int totalnumber=iConfigureService.selectCountConfigureByParam(paramMap);
+			paramMap.put("fromPage",0);
+			paramMap.put("toPage",totalnumber); 
+			List<Configure> list=iConfigureService.selectConfigureByParam(paramMap);
+			resultMap.put("status", "0");
+			resultMap.put("msg", list);
+			 
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "查询失败！");
+			logger.info("查询失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
 }

@@ -14,9 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+ 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paotui.service.customer.ICustomerService;
+import com.paotui.utils.MD5Encryption;
 import com.paotui.model.customer.Customer;
 @Controller
 public class CustomerController {
@@ -184,6 +186,104 @@ public class CustomerController {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "查询失败！");
 			logger.info("查询失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/loginCustomer")
+	@ResponseBody
+	public Map login(HttpServletRequest request,Customer customer){
+		Map resultMap=new HashMap();
+		try {
+			if(customer.getPhone()!=null&&customer.getPassword()!=null){
+				
+				Map paramMap=new HashMap();
+				paramMap.put("fromPage",0);
+				paramMap.put("toPage",1); 
+				paramMap.put("phone",customer.getPhone());
+				//paramMap.put("audit_status","已审核");
+				List<Customer> list=iCustomerService.selectCustomerByParam(paramMap);
+				if(list.size()>0){
+					
+					String localpwdStr=list.get(0).getPassword();
+					if(localpwdStr.equals(customer.getPassword().toLowerCase())){
+						
+						if(list.get(0).getState()!=null&&list.get(0).getState()==0){
+							resultMap.put("status", "0");
+							resultMap.put("msg", list.get(0));
+							logger.info("用户登录："+list.get(0).getPhone());
+						}
+						else if(list.get(0).getState()!=null&&list.get(0).getState()==1){
+							resultMap.put("status", "-1");
+							resultMap.put("msg", "该账号正在审核！");
+							
+						}
+						 
+						
+					}
+					else{
+						resultMap.put("status", "-1");
+						resultMap.put("msg", "密码错误！");
+					}
+				}
+				else{
+					resultMap.put("status", "-1");
+					resultMap.put("msg", "用户名不存在！");
+				}
+			}
+			else{
+				resultMap.put("status", "-1");
+				resultMap.put("msg", "用户名或密码不能为空！");
+			}
+			 
+			 
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "登录失败！");
+			logger.info("登录失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/registerCustomer")
+	@ResponseBody
+	public Map register(Customer customer){
+		Map resultMap=new HashMap();
+		try {
+			if(customer.getPhone()!=null&&customer.getPassword()!=null){
+				
+				Map paramMap=new HashMap();
+				paramMap.put("fromPage",0);
+				paramMap.put("toPage",1); 
+				paramMap.put("phone",customer.getPhone());
+				//paramMap.put("audit_status","已审核");
+				List<Customer> list=iCustomerService.selectCustomerByParam(paramMap);
+				if(list.size()>0){
+					resultMap.put("status", "-1");
+					resultMap.put("msg", "用户名已存在！");
+				}
+				else{
+					String password=MD5Encryption.getEncryption(customer.getPassword()).toLowerCase();
+					customer.setPassword(password);
+					iCustomerService.addCustomer(customer);
+					resultMap.put("status", "0");
+					resultMap.put("msg", customer.getId());
+					logger.info("新建成功，主键："+customer.getId());
+				}
+				
+			}
+			else{
+				resultMap.put("status", "-1");
+				resultMap.put("msg", "用户名或密码不能为空！");
+			}
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "新建失败！");
+			logger.info("新建失败！"+e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 		return resultMap;
