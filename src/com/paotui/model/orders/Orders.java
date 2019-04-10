@@ -91,6 +91,28 @@ public class Orders {
 		this.state = state;
 	}
 
+	private String ordernum;
+	private String cusname;
+	private String phone;
+	public String getOrdernum() {
+		return ordernum;
+	}
+	public void setOrdernum(String ordernum) {
+		this.ordernum = ordernum;
+	}
+	public String getCusname() {
+		return cusname;
+	}
+	public void setCusname(String cusname) {
+		this.cusname = cusname;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
 
 
 }

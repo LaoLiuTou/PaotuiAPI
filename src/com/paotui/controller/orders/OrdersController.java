@@ -45,7 +45,7 @@ public class OrdersController {
 			else{
 				Customer customer=iCustomerService.selectCustomerById(orders.getCus_id()+"");
 				String balance=customer.getBalance();
-				if(Float.parseFloat(balance)>Float.parseFloat(orders.getPrice())){
+				if(Float.parseFloat(balance)>=Float.parseFloat(orders.getPrice())){
 					iOrdersService.addOrders(orders);
 					resultMap.put("status", "0");
 					resultMap.put("msg", orders.getId());
@@ -171,7 +171,7 @@ public class OrdersController {
 				Map paramMap=new HashMap();
 				paramMap.put("fromPage",(Integer.parseInt(page)-1)*Integer.parseInt(size));
 				paramMap.put("toPage",Integer.parseInt(size)); 
-				paramMap.put("orderBy","ID DESC"); 
+				paramMap.put("orderBy","a.ID DESC"); 
 				paramMap.put("id",orders.getId());
 				paramMap.put("cus_id",orders.getCus_id());
 				paramMap.put("price",orders.getPrice());

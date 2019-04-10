@@ -1,4 +1,5 @@
 package com.paotui.service.orders;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -56,10 +57,12 @@ public class OrdersServiceImpl  implements IOrdersService {
 	*/ 
 	@Transactional
 	public  int addOrders(Orders orders){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		int result=0;
 		orders.setPay_dt(new Date());
 		orders.setStatus("0");
 		orders.setState(Long.parseLong("0"));
+		orders.setOrdernum(sdf.format(new Date())+((int)((Math.random()*9+1)*100000)));
 		result=iOrdersMapper.addorders(orders);
 		if(result>0){
 			Customer customer=iCustomerMapper.selectcustomerById(orders.getCus_id()+"");
