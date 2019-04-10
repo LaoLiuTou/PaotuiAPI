@@ -1,14 +1,20 @@
 package com.paotui.service.orders;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.paotui.dao.customer.ICustomerMapper;
 import com.paotui.dao.orders.IOrdersMapper;
+import com.paotui.model.customer.Customer;
 import com.paotui.model.orders.Orders;
 public class OrdersServiceImpl  implements IOrdersService {
 
 	@Autowired
 	private IOrdersMapper iOrdersMapper;
+	@Autowired
+	private ICustomerMapper iCustomerMapper;
 	/**
 	* 通过id选取
 	* @return
@@ -50,7 +56,21 @@ public class OrdersServiceImpl  implements IOrdersService {
 	*/ 
 	@Transactional
 	public  int addOrders(Orders orders){
-		return iOrdersMapper.addorders(orders);
+		int result=0;
+		orders.setPay_dt(new Date());
+		orders.setStatus("0");
+		orders.setState(Long.parseLong("0"));
+		result=iOrdersMapper.addorders(orders);
+		if(result>0){
+			Customer customer=iCustomerMapper.selectcustomerById(orders.getCus_id()+"");
+			String balance=customer.getBalance();
+			Customer temp = new Customer();
+			temp.setId(orders.getCus_id());
+			temp.setBalance((Float.parseFloat(balance)-Float.parseFloat(orders.getPrice()))+"");
+			iCustomerMapper.updatecustomer(temp);
+		} 
+		
+		return result;
 	}
 
 	/**

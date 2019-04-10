@@ -16,12 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.paotui.service.customer.ICustomerService;
 import com.paotui.service.orders.IOrdersService;
+import com.paotui.model.customer.Customer;
 import com.paotui.model.orders.Orders;
 @Controller
 public class OrdersController {
 	@Autowired
 	private IOrdersService iOrdersService;
+	@Autowired
+	private ICustomerService iCustomerService;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Logger logger = Logger.getLogger("PaotuiLogger");
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -30,10 +34,29 @@ public class OrdersController {
 	public Map add(Orders orders){
 		Map resultMap=new HashMap();
 		try {
-			iOrdersService.addOrders(orders);
-			resultMap.put("status", "0");
-			resultMap.put("msg", orders.getId());
-			logger.info("新建成功，主键："+orders.getId());
+			if(orders.getCus_id()==null){
+				resultMap.put("status", "-1");
+				resultMap.put("msg", "用户ID不能为空！");
+			}
+			else if(orders.getPrice()==null){
+				resultMap.put("status", "-1");
+				resultMap.put("msg", "金额不能为空！");
+			}
+			else{
+				Customer customer=iCustomerService.selectCustomerById(orders.getCus_id()+"");
+				String balance=customer.getBalance();
+				if(Float.parseFloat(balance)>Float.parseFloat(orders.getPrice())){
+					iOrdersService.addOrders(orders);
+					resultMap.put("status", "0");
+					resultMap.put("msg", orders.getId());
+					logger.info("新建成功，主键："+orders.getId());
+				}
+				else{
+					resultMap.put("status", "-1");
+					resultMap.put("msg", "您的余额已不足！");
+				}
+				
+			}
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "新建失败！");
