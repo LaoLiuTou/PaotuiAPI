@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="admin, dashboard, bootstrap, template, flat, modern, theme, responsive, fluid, retina, backend, html5, css, css3">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+    <title>新建资讯</title>
+
+
+    <!--common-->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet">
+
+    <link href="js/fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div class="left-side sticky-left-side">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <a href=""><img src="images/logo.png" alt=""></a>
+        </div>
+
+        <!--<div class="logo-icon text-center" id="title">
+            &lt;!&ndash;<a href=""><img src="images/logo_icon.png" alt=""></a>&ndash;&gt;
+        </div>-->
+        <!--logo and iconic logo end-->
+
+
+        <div class="left-side-inner">
+
+            <!--sidebar nav start-->
+            <div  id="menu" class="left-side-inner">
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                    <li id="menu1" class="active"><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+                    <li id="menu2" class="menu-list"><a href=""><i class="fa fa-desktop"></i> <span>新闻管理</span></a>
+                        <ul class="sub-menu-list">
+                            <li id="menu2-1"><a href="pt_news.html">资讯管理</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu3" class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>订单管理</span></a>
+                        <ul class="sub-menu-list">
+                            <li id="menu3-1"><a href="ws_statistics_stop.html">订单管理</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu4" class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>系统设置</span></a>
+                        <ul class="sub-menu-list">
+                            <li id="menu4-1"><a href="pt_user.html">账号管理</a></li>
+                            <li id="menu4-4"><a href="pt_config.html">APP管理</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+    <!-- left side end-->
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div class="header-section">
+
+            <!--toggle button start-->
+            <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+            <!--toggle button end-->
+
+            <!--search start-->
+            <!--<form class="searchform" action="index.html" method="post">
+                <input type="text" class="form-control" name="keyword" placeholder="请输入您要搜索的内容..." />
+            </form>-->
+            <!--search end-->
+
+            <!--notification menu start -->
+            <div class="menu-right">
+                <ul class="notification-menu">
+
+                    <li>
+                        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <img src="images/photos/user-avatar.png" alt="" />
+                            <span id="loginName"></span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                            <li><a href="#"><i class="fa fa-user"></i>  个人信息</a></li>
+                            <li><a href="#" ><i class="fa fa-cog"></i>  设置</a></li>
+                            <li><a href="#" id="logoutBtn"><i class="fa fa-sign-out"></i> 退出</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+            <!--notification menu end -->
+
+        </div>
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">资讯管理</a>
+                </li>
+                <li>
+                    <a href="#" onclick="window.history.go(-1)">新建资讯</a>
+                </li>
+            </ul>
+
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-md-12">
+                    <!--statistics start-->
+
+
+                    <!--表格开始-->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    数据修改
+                                </header>
+                                <div class="panel-body">
+                                    <form class="form-horizontal adminex-form" id="addForm" >
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">资讯标题</label>
+                                            <div class="col-sm-9">
+                                                <input type="text"   id="title" class="form-control" placeholder="请输入资讯标题">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">标题图片</label>
+                                            <div class="col-sm-9">
+                                                <input id="files" type="file" name="files" multiple>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">资讯类型</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control m-bot15"   id="type">
+                                                    <option value="1">电信资讯</option>
+                                                    <option value="2">政府资讯</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">内容图片</label>
+                                            <div class="col-sm-9">
+                                                <input id="content" type="file" name="files" multiple>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 pdnone mb10">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-info popovers" id="addBtn" >保存</button>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </section>
+
+
+                        </div>
+                    </div>
+                    <!--表格结束-->
+                    <!--statistics end-->
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer>
+            版权所有 ©
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- modal -->
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+
+<!--common scripts for all pages-->
+<script src="js/scripts.js"></script>
+
+<script src="js/fileinput/js/plugins/piexif.js" type="text/javascript"></script>
+<script src="js/fileinput/js/plugins/sortable.js" type="text/javascript"></script>
+<script src="js/fileinput/js/fileinput.js" type="text/javascript"></script>
+<script src="js/fileinput/js/locales/zh.js" type="text/javascript"></script>
+
+<script src="js/main/config.js"></script>
+<script src="js/main/md5.js"></script>
+<script src="js/main/pt_news.js"></script>
+<script>
+    var params={};
+    var imagesArray= new Array();
+    var headerImage;
+    $(document).ready(function(){
+
+
+        $('#files').fileinput({
+            theme: 'fa',
+            language: 'zh',
+            uploadAsync: true,//异步上传
+            uploadUrl: url+'filesUpload',
+            allowedFileExtensions: ['jpg', 'png', 'gif','mp4'],
+            showUpload: true,
+            showCaption: false,
+            showRemove : false, //显示移除按钮
+            enctype: 'multipart/form-data',
+            maxFileSize:0,
+            maxFileCount:1,
+            dropZoneTitle: '拖拽文件到这里 &hellip;',
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！"
+        }).on("filebatchselected", function(event, files) {
+            //$(this).fileinput("upload");
+        }).on("fileuploaded", function(event,data, previewId, index) { //异步上传成功结果处理
+            if(data.response.data.length>0){
+                headerImage=data.response.data[0];
+            }
+        }).on('filesuccessremove', function (event, previewId,index) {
+            headerImage='';
+        });
+
+        $('#content').fileinput({
+            theme: 'fa',
+            language: 'zh',
+            uploadAsync: true,//异步上传
+            uploadUrl: url+'filesUpload',
+            allowedFileExtensions: ['jpg', 'png', 'gif','mp4'],
+            showUpload: true,
+            showCaption: false,
+            showRemove : false, //显示移除按钮
+            enctype: 'multipart/form-data',
+            maxFileSize:0,
+            maxFileCount:20,
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！"
+        }).on("filebatchselected", function(event, files) {
+            //$(this).fileinput("upload");
+        }).on("fileuploaded", function(event,data, previewId, index) { //异步上传成功结果处理
+            //console.log(JSON.stringify(data.response));
+            //console.log(previewId);
+            //console.log(index);
+            if(data.response.data.length>0){
+                imagesArray.push({'index':index,'image':data.response.data[0]});
+            }
+        }).on('filesuccessremove', function (event, previewId,index) {
+            /*console.log(JSON.stringify(event));
+            console.log(previewId);
+            console.log(index);*/
+            for (var i = 0; i < imagesArray.length; i++) {
+                if (imagesArray[i].index== index) {
+                    imagesArray.remove(imagesArray[i]);
+                }
+            }
+        });
+        Array.prototype.remove = function(val) {
+            var index = this.indexOf(val);
+            if (index > -1) {
+                this.splice(index, 1);
+            }
+        };
+
+
+        //add
+        $('#addBtn').click(function () {
+
+            function compare(property){
+                return function(a,b){
+                    var value1 = a[property];
+                    var value2 = b[property];
+                    return value1 - value2;
+                }
+            }
+            var tempimage=imagesArray.sort(compare('index'));
+            var images=new Array();
+            for (var i = 0; i < tempimage.length; i++) {
+                images.push(tempimage[i].image);
+            }
+
+            $('#addForm input').each(function () {
+                if($(this).val()!='')
+                    params[$(this).attr('id')]=$(this).val();
+            });
+            $('#addForm select').each(function () {
+                if($(this).val()!='')
+                    params[$(this).attr('id')]=$(this).val();
+            });
+            var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+            params['c_id']=userinfo['id'];
+            params['content']=JSON.stringify(images);
+            params['image']=headerImage;
+            addNews(params);
+        });
+
+
+
+    });
+
+</script>
+</body>
+</html>
