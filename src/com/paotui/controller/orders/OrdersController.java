@@ -197,6 +197,9 @@ public class OrdersController {
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 				paramMap.put("status",orders.getStatus());
 				paramMap.put("state",orders.getState());
+				String searchText=request.getParameter("searchText");
+				if(searchText!=null&&!searchText.equals(""))
+				paramMap.put("searchText",searchText);
 				List<Orders> list=iOrdersService.selectOrdersByParam(paramMap);
 				int totalnumber=iOrdersService.selectCountOrdersByParam(paramMap);
 				Map tempMap=new HashMap();

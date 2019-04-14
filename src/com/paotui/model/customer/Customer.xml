@@ -28,6 +28,7 @@
 			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
 			<if test="state != null"> AND STATE =#{state} </if>
 			<if test="balance != null"> AND BALANCE =#{balance} </if>
+			<if test="searchText != null"> AND PHONE like #{searchText} </if>
 		</trim>  
 			<if test="orderBy!= null"> ORDER BY   #{orderBy} </if>
 		LIMIT #{fromPage},#{toPage} 
@@ -51,6 +52,7 @@
 			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
 			<if test="state != null"> AND STATE =#{state} </if>
 			<if test="balance != null"> AND BALANCE =#{balance} </if>
+			<if test="searchText != null"> AND PHONE like #{searchText} </if>
 		</trim>  
 	</select>
 

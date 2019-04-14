@@ -34,7 +34,7 @@ public class CORSFilter implements Filter {
 		}
 		else{
 			
-		    if( !uri.startsWith("/login")&&!uri.startsWith("/pages")){
+		    if( !uri.startsWith("/login")&&!uri.startsWith("/pages")&&!uri.startsWith("/version")){
 		    	String token = request.getHeader("token");
 		        String timesamp = request.getHeader("timesamp");
 		        String sign = request.getHeader("sign");

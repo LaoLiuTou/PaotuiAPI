@@ -170,6 +170,9 @@ public class CustomerController {
 				if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 				paramMap.put("state",customer.getState());
+				String searchText=request.getParameter("searchText");
+				if(searchText!=null&&!searchText.equals(""))
+				paramMap.put("searchText",searchText);
 				List<Customer> list=iCustomerService.selectCustomerByParam(paramMap);
 				int totalnumber=iCustomerService.selectCountCustomerByParam(paramMap);
 				Map tempMap=new HashMap();
@@ -267,11 +270,13 @@ public class CustomerController {
 					resultMap.put("msg", "用户名已存在！");
 				}
 				else{
-					String password=MD5Encryption.getEncryption(customer.getPassword()).toLowerCase();
-					customer.setPassword(password);
+					//String password=MD5Encryption.getEncryption(customer.getPassword()).toLowerCase();
+					//customer.setPassword(password);
+					customer.setState(Long.parseLong("0"));
+					customer.setBalance("20");
 					iCustomerService.addCustomer(customer);
 					resultMap.put("status", "0");
-					resultMap.put("msg", customer.getId());
+					resultMap.put("msg", customer);
 					logger.info("新建成功，主键："+customer.getId());
 				}
 				
