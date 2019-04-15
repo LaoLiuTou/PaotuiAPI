@@ -120,8 +120,35 @@ function  queryNews (searchText,currentPage,pageSize) {
                 if(data[o].type=='1'){
                     html+='<td style="line-height: 50px;">电信资讯</td>\n' ;
                 }
-                else{
-                    html+='<td style="line-height: 50px;">政府资讯</td>\n' ;
+                else if(data[o].type=='2'){
+                    html+='<td style="line-height: 50px;">免费抽奖</td>\n' ;
+                }
+                else if(data[o].type=='3'){
+                	html+='<td style="line-height: 50px;">政府资讯</td>\n' ;
+                }
+                else if(data[o].type=='4'){
+                	html+='<td style="line-height: 50px;">宽带业务</td>\n' ;
+                }
+                else if(data[o].type=='5'){
+                	html+='<td style="line-height: 50px;">套餐资讯</td>\n' ;
+                }
+                else if(data[o].type=='6'){
+                	html+='<td style="line-height: 50px;">每日报价</td>\n' ;
+                }
+                else if(data[o].type=='7'){
+                	html+='<td style="line-height: 50px;">二手机收售</td>\n' ;
+                }
+                else if(data[o].type=='8'){
+                	html+='<td style="line-height: 50px;">靓号</td>\n' ;
+                }
+                else if(data[o].type=='9'){
+                	html+='<td style="line-height: 50px;">招聘</td>\n' ;
+                }
+                else if(data[o].type=='10'){
+                	html+='<td style="line-height: 50px;">饮食</td>\n' ;
+                }
+                else if(data[o].type=='11'){
+                	html+='<td style="line-height: 50px;">靓号收集</td>\n' ;
                 }
                 html+='<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
                     '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;

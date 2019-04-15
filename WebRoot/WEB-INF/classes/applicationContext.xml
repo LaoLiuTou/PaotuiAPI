@@ -98,4 +98,9 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 </bean>
 <bean id="iUserService" class="com.paotui.service.user.UserServiceImpl"></bean>
+<bean id="iDialrecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.dialrecord.IDialrecordMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iDialrecordService" class="com.paotui.service.dialrecord.DialrecordServiceImpl"></bean>
 </beans>

@@ -32,6 +32,7 @@ public class SendMessageController {
 			String param="action=send&userid=8609&account=huili&password=huili123&mobile="+mobile+"&content="+content+"&sendTime=&checkcontent=1";
 			//http://sms.37037.com/sms.aspx?action=send&userid=8609&account=huili&password=huili123&mobile=13321419193&content=测试&sendTime=&checkcontent=1
 			//发送 POST 请求
+			System.out.println(url+param);
 			String result=HttpRequestUtil.sendPostRequest(url,param);
 			String returnStr="Faild";
 			Pattern p=Pattern.compile("<returnstatus>(\\w+)</returnstatus>");

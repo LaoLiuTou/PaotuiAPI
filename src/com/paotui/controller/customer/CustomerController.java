@@ -125,8 +125,9 @@ public class CustomerController {
 			}
 			else{
 				int resultUpdate=iCustomerService.updateCustomer(customer);
+				Customer resultSelect=iCustomerService.selectCustomerById(customer.getId()+"");
 				resultMap.put("status", "0");
-				resultMap.put("msg", "更新成功！");
+				resultMap.put("msg", resultSelect);
 				logger.info("更新成功，主键："+customer.getId());
 			}
 		} catch (Exception e) {
