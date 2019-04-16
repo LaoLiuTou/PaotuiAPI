@@ -273,8 +273,7 @@ public class CustomerController {
 				else{
 					//String password=MD5Encryption.getEncryption(customer.getPassword()).toLowerCase();
 					//customer.setPassword(password);
-					customer.setState(Long.parseLong("0"));
-					customer.setBalance("20");
+					
 					iCustomerService.addCustomer(customer);
 					resultMap.put("status", "0");
 					resultMap.put("msg", customer);

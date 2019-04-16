@@ -30,6 +30,7 @@
 		<typeAlias alias="Scores" type="com.paotui.model.scores.Scores" /> 
 		<typeAlias alias="User" type="com.paotui.model.user.User" /> 
 		<typeAlias alias="Dialrecord" type="com.paotui.model.dialrecord.Dialrecord" /> 
+		<typeAlias alias="Installinfo" type="com.paotui.model.installinfo.Installinfo" /> 
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/paotui/model/addresses/Addresses.xml"/> 
@@ -42,5 +43,6 @@
 		<mapper resource="com/paotui/model/scores/Scores.xml"/> 
 		<mapper resource="com/paotui/model/user/User.xml"/> 
 		<mapper resource="com/paotui/model/dialrecord/Dialrecord.xml"/> 
+		<mapper resource="com/paotui/model/installinfo/Installinfo.xml"/> 
 	</mappers>  
 </configuration>

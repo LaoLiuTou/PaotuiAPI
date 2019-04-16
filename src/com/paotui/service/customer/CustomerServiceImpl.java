@@ -1,14 +1,20 @@
 package com.paotui.service.customer;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.paotui.dao.configure.IConfigureMapper;
 import com.paotui.dao.customer.ICustomerMapper;
+import com.paotui.model.configure.Configure;
 import com.paotui.model.customer.Customer;
 public class CustomerServiceImpl  implements ICustomerService {
 
 	@Autowired
 	private ICustomerMapper iCustomerMapper;
+	@Autowired
+	private IConfigureMapper iConfigureMapper;
 	/**
 	* 通过id选取
 	* @return
@@ -48,9 +54,23 @@ public class CustomerServiceImpl  implements ICustomerService {
 	* 添加 
 	* @return
 	*/ 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Transactional
 	public  int addCustomer(Customer customer){
-		return iCustomerMapper.addcustomer(customer);
+		int result=0;
+		String initbalance="5";
+		Map paramMap=new HashMap();
+		paramMap.put("fromPage",0);
+		paramMap.put("toPage",1); 
+		paramMap.put("property","initbalance");
+		List<Configure> list=iConfigureMapper.selectconfigureByParam(paramMap);
+		if(list.size()>0){
+			initbalance=list.get(0).getValue();
+		}
+		customer.setState(Long.parseLong("0"));
+		customer.setBalance(initbalance);
+		result=iCustomerMapper.addcustomer(customer);
+		return result;
 	}
 
 	/**
