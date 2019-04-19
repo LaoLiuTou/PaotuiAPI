@@ -25,6 +25,7 @@ $(document).ready(function(){
 
 
 
+
 });
 
 /**
@@ -305,39 +306,35 @@ Date.prototype.format = function(fmt) {
 
 
 function setMenu(par,sub){
-    var menuStr='<ul class="nav nav-pills nav-stacked custom-nav">\n' +
-        '      <li id="menu1"><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>\n' +
-        '      <li id="menu2" class="menu-list"><a href=""><i class="fa fa-desktop"></i> <span>生产大屏控制</span></a>\n' +
-        '          <ul class="sub-menu-list">\n' +
-        '               <li id="menu2_1"><a href="ws_first1.html">旋压A线</a></li>\n' +
-        '               <li id="menu2_2"><a href="ws_second1.html">旋压B线</a></li>\n' +
-        '               <li id="menu2_3"><a href="ws_third1.html">滚型轮辋</a></li>\n' +
-        '               <li id="menu2_4"><a href="ws_fourth1.html">型钢轮辋</a></li>\n' +
-        '               <li id="menu2_5"><a href="ws_fifth1.html">旋压轮辐</a></li>\n' +
-        '               <li id="menu2_6"><a href="ws_sixth1.html">滚型轮辐</a></li>\n' +
-        '           </ul>\n' +
-        '       </li>\n' +
-        '       <li id="menu3" class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>生产数据统计</span></a>\n' +
-        '          <ul class="sub-menu-list">\n' +
-        '               <li id="menu3_1"><a href="ws_statistics.html">停台数据统计</a></li>\n' +
-        '               <li id="menu3_2"><a href="ws_statistics.html">生产完成统计</a></li>\n' +
-        '          </ul>\n' +
-        '       </li>\n' +
-        '       <li id="menu4" class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>系统设置</span></a>\n' +
-        '           <ul class="sub-menu-list">\n' +
-        '               <li id="menu4_1"><a href="ws_user.html">账号管理</a></li>\n' +
-        '               <li id="menu4_2"><a href="ws_permission.html">权限管理</a></li>\n' +
-        '               <li id="menu4_3"><a href="ws_datamanager.html">数据管理</a></li>\n' +
-        '               <li id="menu4_4"><a href="ws_timer.html">时间管理</a></li>\n' +
-        '           </ul>\n' +
-        '       </li>\n' +
-        '</ul>';
+    var menuStr=' <ul class="nav nav-pills nav-stacked custom-nav">\n' +
+        '                <li id="menu1" ><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>\n' +
+        '                <li id="menu2" class="menu-list"><a href="javascript:;"><i class="fa fa-desktop"></i> <span>资讯管理</span></a>\n' +
+        '                    <ul class="sub-menu-list">\n' +
+        '                        <li id="menu2-1"><a href="pt_news.html">资讯管理</a></li>\n' +
+        '                    </ul>\n' +
+        '                </li>\n' +
+        '                <li id="menu3" class="menu-list"><a href="javascript:;"><i class="fa fa-bar-chart-o"></i> <span>订单管理</span></a>\n' +
+        '                    <ul class="sub-menu-list">\n' +
+        '                        <li id="menu3-1"><a href="pt_order.html">订单管理</a></li>\n' +
+        '                    </ul>\n' +
+        '                </li>\n' +
+        '                <li id="menu4" class="menu-list"><a href="javascript:;"><i class="fa fa-bar-chart-o"></i> <span>人员管理</span></a>\n' +
+        '                    <ul class="sub-menu-list">\n' +
+        '                        <li id="menu4-1"><a href="pt_cus_sta.html">客户管理</a></li>\n' +
+        '                        <li id="menu4-2"><a href="pt_drivers.html">司机管理</a></li>\n' +
+        '                    </ul>\n' +
+        '                </li>\n' +
+        '                <li id="menu5" class="menu-list"><a href="javascript:;"><i class="fa fa-cogs"></i> <span>系统设置</span></a>\n' +
+        '                    <ul class="sub-menu-list">\n' +
+        '                        <li id="menu5-1"><a href="pt_user.html">账号管理</a></li>\n' +
+        '                        <li id="menu5-2"><a href="pt_config.html">APP管理</a></li>\n' +
+        '                        <li id="menu5-3"><a href="pt_install.html">安装统计</a></li>\n' +
+        '                    </ul>\n' +
+        '                </li>\n' +
+        '            </ul>';
     $('#menu').html(menuStr);
-
+    $('#menu li').removeClass("active");
     $('#menu'+par).addClass("active");
-    $('#menu'+par+'_'+sub).addClass("active");
-
-
-
+    $('#menu'+par+'-'+sub).addClass("active");
 
 }

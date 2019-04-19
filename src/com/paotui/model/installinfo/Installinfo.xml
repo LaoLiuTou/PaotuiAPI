@@ -30,6 +30,38 @@
 			<if test="orderBy!= null"> ORDER BY   #{orderBy} </if>
 		LIMIT #{fromPage},#{toPage} 
 	</select>
+	<select id="statisticinstallinfoByParam" parameterType="java.util.Map" resultType="Installinfo">
+		SELECT DATE_FORMAT(c_dt,
+		 <choose>
+			 <when test="stype == 'month'">
+                 '%Y年%m月'
+             </when>
+             <when test="stype == 'day'">
+                 '%Y年%m月%d日'
+             </when>
+             <when test="stype == 'hour'">
+                 '%Y年%m月%d日%H时'
+             </when>
+            
+         </choose>
+		) as days,COUNT(id) as count 
+		FROM installinfo 
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND ID =#{id} </if>
+			<if test="devicebrand != null"> AND DEVICEBRAND =#{devicebrand} </if>
+			<if test="systemmodel != null"> AND SYSTEMMODEL =#{systemmodel} </if>
+			<if test="systemversion != null"> AND SYSTEMVERSION =#{systemversion} </if>
+			<if test="imei != null"> AND IMEI =#{imei} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
+			<if test="state != null"> AND STATE =#{state} </if>
+		</trim>  
+		GROUP BY days 
+	</select>
 
 	<select id="selectCountinstallinfoByParam" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(id) 
@@ -49,6 +81,7 @@
 			<if test="state != null"> AND STATE =#{state} </if>
 		</trim>  
 	</select>
+ 
 
 	<update id="updateinstallinfo" parameterType="Installinfo">
 		UPDATE installinfo 

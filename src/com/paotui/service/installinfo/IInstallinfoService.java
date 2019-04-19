@@ -10,6 +10,12 @@ public interface IInstallinfoService {
 	public Installinfo selectInstallinfoById(String id);
 
 	/**
+	 * 统计
+	 * @return
+	 */ 
+	@SuppressWarnings("rawtypes")
+	public List<Installinfo> statisticInstallinfoByParam(Map paramMap); 
+	/**
 	* 通过查询参数获取信息
 	* @return
 	*/ 

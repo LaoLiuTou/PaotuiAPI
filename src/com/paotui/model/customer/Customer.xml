@@ -10,6 +10,42 @@
 		DELETE FROM customer WHERE ID=#{id}
 	</delete>
 
+	<select id="statisticcustomerByParam" parameterType="java.util.Map" resultType="Customer">
+		SELECT DATE_FORMAT(c_dt,
+		 <choose>
+			 <when test="stype == 'month'">
+                 '%Y年%m月'
+             </when>
+             <when test="stype == 'day'">
+                 '%Y年%m月%d日'
+             </when>
+             <when test="stype == 'hour'">
+                 '%Y年%m月%d日%H时'
+             </when>
+            
+         </choose>
+		) as days,COUNT(id) as count 
+		FROM customer 
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND ID =#{id} </if>
+			<if test="nickname != null"> AND NICKNAME =#{nickname} </if>
+			<if test="phone != null"> AND PHONE =#{phone} </if>
+			<if test="password != null"> AND PASSWORD =#{password} </if>
+			<if test="header != null"> AND HEADER =#{header} </if>
+			<if test="wechat != null"> AND WECHAT =#{wechat} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
+			<if test="state != null"> AND STATE =#{state} </if>
+			<if test="balance != null"> AND BALANCE =#{balance} </if>
+			<if test="searchText != null"> AND PHONE like #{searchText} </if>
+		</trim>   
+		GROUP BY days 
+	</select>
+	
 	<select id="selectcustomerByParam" parameterType="java.util.Map" resultType="Customer">
 		SELECT *
 		FROM customer

@@ -40,30 +40,7 @@
 
             <!--sidebar nav start-->
             <div  id="menu" class="left-side-inner">
-                <ul class="nav nav-pills nav-stacked custom-nav">
-                    <li id="menu1" ><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
-                    <li id="menu2" class="menu-list"><a href=""><i class="fa fa-desktop"></i> <span>资讯管理</span></a>
-                        <ul class="sub-menu-list">
-                            <li id="menu2-1"><a href="pt_news.html">资讯管理</a></li>
-                        </ul>
-                    </li>
-                    <li id="menu3" class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>订单管理</span></a>
-                        <ul class="sub-menu-list">
-                            <li id="menu3-1"><a href="pt_order.html">订单管理</a></li>
-                        </ul>
-                    </li>
-                    <li id="menu4" class="menu-list active"><a href=""><i class="fa fa-bar-chart-o"></i> <span>客户管理</span></a>
-                        <ul class="sub-menu-list">
-                            <li id="menu4-1" class="active"><a href="pt_customer.html">客户管理</a></li>
-                        </ul>
-                    </li>
-                    <li id="menu5" class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>系统设置</span></a>
-                        <ul class="sub-menu-list">
-                            <li id="menu5-1"><a href="pt_user.html">账号管理</a></li>
-                            <li id="menu5-2"><a href="pt_config.html">APP管理</a></li>
-                        </ul>
-                    </li>
-                </ul>
+
             </div>
             <!--sidebar nav end-->
 
@@ -133,7 +110,7 @@
                 <li>
                     <a href="#">系统设置</a>
                 </li>
-                <li class="active">账号管理</li>
+                <li class="active">客户管理</li>
             </ul>
 
         </div>
@@ -160,37 +137,62 @@
                             <!--<a href="javascript:;" class="fa fa-times"></a>-->
                          </span>
                         </header>
-                        <div class="panel-body">
-                            <form class="form-horizontal" role="form">
-                                <div class="form-group col-md-3 mr10">
-                                    <div class="col-md-12 pdnone">
-                                        <input class="form-control" id="searchText" size="16" type="text" placeholder="请输入您要搜索的客户..." />
-                                    </div>
-                                </div>
-                                <button id="searchBtn" type="button" class="btn btn-info popovers mb10">搜索</button>
-                            </form>
-                            <div class="adv-table">
-                                <table  class="display table table-bordered table-striped" id="dynamic-table">
-                                    <thead>
-                                    <tr>
-                                        <th>编号</th>
-                                        <th>头像</th>
-                                        <th>昵称</th>
-                                        <th>手机号</th>
-                                        <th>代金券余额</th>
-                                        <th>创建时间</th>
-                                        <th>状态</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="contentTbody">
 
-                                    </tbody>
-                                </table>
-                                <!--分页-->
-                                <div class="text-center">
-                                    <ul class="pagination">
-                                    </ul>
+                        <header class="panel-heading custom-tab">
+                            <ul class="nav nav-tabs">
+
+                                <li class="">
+                                    <a  href="pt_cus_sta.html">
+                                        <i class="fa fa-tachometer"></i>
+                                        客户统计
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a data-toggle="tab" href="#second">
+                                        <i class="fa fa-tachometer"></i>
+                                        客户列表
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </header>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div id="first" class="tab-pane ">
+                                </div>
+                                <div id="second" class="tab-pane active">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group col-md-3 mr10">
+                                            <div class="col-md-12 pdnone">
+                                                <input class="form-control" id="searchText" size="16" type="text" placeholder="请输入您要搜索的客户..." />
+                                            </div>
+                                        </div>
+                                        <button id="searchBtn" type="button" class="btn btn-info popovers mb10">搜索</button>
+                                    </form>
+                                    <div class="adv-table">
+                                        <table  class="display table table-bordered table-striped" id="dynamic-table">
+                                            <thead>
+                                            <tr>
+                                                <th>编号</th>
+                                                <th>头像</th>
+                                                <th>昵称</th>
+                                                <th>手机号</th>
+                                                <th>代金券余额</th>
+                                                <th>创建时间</th>
+                                                <th>状态</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="contentTbody">
+
+                                            </tbody>
+                                        </table>
+                                        <!--分页-->
+                                        <div class="text-center">
+                                            <ul class="pagination">
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -251,7 +253,7 @@
 
 <script>
     $(document).ready(function () {
-
+        setMenu("4","1");
         //搜索
         $('#searchBtn').click(function () {
             queryCustomer($('#searchText').val(),currentPage,pageSize);

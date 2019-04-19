@@ -9,6 +9,12 @@ import com.paotui.model.installinfo.Installinfo;
  	*/
 	public Installinfo selectinstallinfoById(String id);
 	/**
+	 * 统计
+	 * @return
+	 */ 
+	@SuppressWarnings("rawtypes")
+	public List<Installinfo> statisticinstallinfoByParam(Map paramMap); 
+	/**
  	* 通过查询参数获取信息
  	* @return
  */ 

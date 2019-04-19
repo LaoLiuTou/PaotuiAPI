@@ -7,7 +7,7 @@
   <meta name="author" content="ThemeBucket">
   <link rel="shortcut icon" href="#" type="image/png">
 
-  <title>账号管理</title>
+  <title>司机管理</title>
 
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
@@ -110,7 +110,7 @@
                 <li>
                     <a href="#">系统设置</a>
                 </li>
-                <li class="active">账号管理</li>
+                <li class="active">司机管理</li>
             </ul>
 
         </div>
@@ -128,10 +128,11 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            用户管理
+                            司机管理
 
                             <span class="tools pull-right">
                             <button type="button" class="btn btn-info popovers"  data-toggle="modal" data-target="#newly-box">新建</button>
+                            <!--<button type="button" class="btn btn-info popovers"  id="newBtn" >新建</button>-->
                             <!--<span class="tools pull-right">-->
                             <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
                             <!--<a href="javascript:;" class="fa fa-times"></a>-->
@@ -141,7 +142,7 @@
                             <form class="form-horizontal" role="form">
                                 <div class="form-group col-md-3 mr10">
                                     <div class="col-md-12 pdnone">
-                                        <input class="form-control" id="searchText" size="16" type="text" placeholder="请输入您要搜索的用户名..." />
+                                        <input class="form-control" id="searchText" size="16" type="text" placeholder="请输入您要搜索的客户..." />
                                     </div>
                                 </div>
                                 <button id="searchBtn" type="button" class="btn btn-info popovers mb10">搜索</button>
@@ -151,32 +152,24 @@
                                     <thead>
                                     <tr>
                                         <th>编号</th>
-                                        <th>用户名</th>
-                                        <th>昵称</th>
-                                        <th>备注</th>
+                                        <th>车牌号码</th>
+                                        <th>姓名</th>
+                                        <th>所属公司</th>
+                                        <th>手机号码</th>
+                                        <th>接单次数</th>
+                                        <th>余额</th>
                                         <th>创建时间</th>
                                         <th>状态</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="userTbody">
+                                    <tbody id="contentTbody">
 
                                     </tbody>
                                 </table>
                                 <!--分页-->
                                 <div class="text-center">
                                     <ul class="pagination">
-                                        <!--<li><a href="#">&laquo;</a></li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li class="disabled"><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">...</a></li>
-                                        <li><a href="#">6</a></li>
-                                        <li><a href="#">7</a></li>
-                                        <li><a href="#">8</a></li>
-                                        <li><a href="#">&raquo;</a></li>-->
                                     </ul>
                                 </div>
                             </div>
@@ -199,54 +192,6 @@
     <!-- main content end-->
 </section>
 
-<!-- Modal -->
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="update-box" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">修改</h4>
-            </div>
-            <div class="modal-body">
-
-                <form role="form">
-                    <div class="form-group">
-                        <label>用户名</label>
-                        <input type="text" class="form-control" id="update_username" placeholder="请输入用户名">
-                    </div>
-                    <!--<div class="form-group">
-                        <label>密码</label>
-                        <input type="text" class="form-control" id="update_password" placeholder="请输入密码">
-                    </div>-->
-                    <div class="form-group">
-                        <label>昵称</label>
-                        <input type="text" class="form-control" id="update_nickname" placeholder="请输入密码">
-                    </div>
-
-                    <div class="form-group">
-                        <label>备注</label>
-                        <textarea class="form-control textarea-line" id="update_comment" placeholder="请输入描述"></textarea>
-
-                    </div>
-                    <div class="form-group">
-                        <label>状态</label>
-                        <select class="form-control m-bot15" id="update_state">
-                            <option value="0">启用</option>
-                            <option value="1">禁用</option>
-                        </select>
-                    </div>
-
-
-                </form>
-            </div>
-            <div class="clearfix"></div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                <button class="btn btn-info popovers" type="button" id="updateBtn">提交</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="delete-box" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -266,35 +211,51 @@
     </div>
 </div>
 
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="password-box" class="modal fade">
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="update-box" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">重置密码</h4>
+                <h4 class="modal-title">修改</h4>
             </div>
             <div class="modal-body">
-                <form role="form">
 
+                <form role="form">
                     <div class="form-group">
-                        <label>密码</label>
-                        <input type="text" class="form-control" id="pass_password" placeholder="请输入密码">
+                        <label>车牌号</label>
+                        <input type="text" class="form-control" id="update_number" placeholder="请输入车牌号">
                     </div>
                     <div class="form-group">
-                        <label>确认密码</label>
-                        <input type="text" class="form-control" id="pass_repassword" placeholder="请输入密码">
+                        <label>司机姓名</label>
+                        <input type="text" class="form-control" id="update_drivername" placeholder="请输入司机姓名">
                     </div>
+                    <div class="form-group">
+                        <label>所属公司</label>
+                        <input type="text" class="form-control" id="update_company" placeholder="请输入所属公司">
+                    </div>
+                    <div class="form-group">
+                        <label>手机号码</label>
+                        <input type="text" class="form-control" id="update_phone" placeholder="请输入司机手机号码">
+                    </div>
+                    <div class="form-group">
+                        <label>状态</label>
+                        <select class="form-control m-bot15" id="update_status">
+                            <option value="0">启用</option>
+                            <option value="1">禁用</option>
+                        </select>
+                    </div>
+
+
                 </form>
             </div>
             <div class="clearfix"></div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                <button class="btn btn-info popovers" type="button" id="passwordBtn">确定</button>
+                <button class="btn btn-info popovers" type="button" id="updateBtn">提交</button>
             </div>
         </div>
     </div>
 </div>
-
 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="newly-box" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -306,26 +267,24 @@
 
                 <form role="form">
                     <div class="form-group">
-                        <label>用户名</label>
-                        <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+                        <label>车牌号</label>
+                        <input type="text" class="form-control" id="number" placeholder="请输入车牌号">
                     </div>
                     <div class="form-group">
-                        <label>密码</label>
-                        <input type="text" class="form-control" id="password" placeholder="请输入密码">
+                        <label>司机姓名</label>
+                        <input type="text" class="form-control" id="drivername" placeholder="请输入司机姓名">
                     </div>
                     <div class="form-group">
-                        <label>昵称</label>
-                        <input type="text" class="form-control" id="nickname" placeholder="请输入密码">
+                        <label>所属公司</label>
+                        <input type="text" class="form-control" id="company" placeholder="请输入所属公司">
                     </div>
-
                     <div class="form-group">
-                        <label>备注</label>
-                        <textarea class="form-control textarea-line" id="comment" placeholder="请输入描述"></textarea>
-
+                        <label>手机号码</label>
+                        <input type="text" class="form-control" id="phone" placeholder="请输入司机手机号码">
                     </div>
                     <div class="form-group">
                         <label>状态</label>
-                        <select class="form-control m-bot15" id="state">
+                        <select class="form-control m-bot15" id="status">
                             <option value="0">启用</option>
                             <option value="1">禁用</option>
                         </select>
@@ -345,7 +304,6 @@
 <!-- modal -->
 
 
-
 <!-- Placed js at the end of the document so the pages load faster -->
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
@@ -359,116 +317,113 @@
 
 <script src="js/main/config.js"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_user.js"></script>
+<script src="js/main/pt_drivers.js"></script>
 
 <script>
     $(document).ready(function () {
-        setMenu("5","1");
+
+        setMenu("4","2");
+
         //搜索
         $('#searchBtn').click(function () {
-            queryUsers($('#searchText').val(),currentPage,pageSize);
+            queryDrivers($('#searchText').val(),currentPage,pageSize);
         });
 
         //列表
         var currentPage=1;
         var pageSize=10;
-        queryUsers($('#searchText').val(),currentPage,pageSize);
+        queryDrivers($('#searchText').val(),currentPage,pageSize);
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            queryUsers($('#searchText').val(),currentPage,pageSize);
+            queryDrivers($('#searchText').val(),currentPage,pageSize);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            queryUsers($('#searchText').val(),currentPage,pageSize);
+            queryDrivers($('#searchText').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            queryUsers($('#searchText').val(),currentPage,pageSize);
+            queryDrivers($('#searchText').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','#jumpBtn',function(){
             var reg=/^[1-9]\d*$|^0$/;
             if(reg.test($('#jumpPageText').val())==true){
-                queryUsers($('#searchText').val(),$('#jumpPageText').val(),pageSize);
+                queryDrivers($('#searchText').val(),$('#jumpPageText').val(),pageSize);
             }else{
                 alert("页码输入有误！");
                 return false;
             }
         });
 
+
         //新建
         $('#addBtn').click(function () {
-            if($('#username').val()==''){
-                alert('用户名不能为空！');
+            if($('#number').val()==''){
+                alert('车牌号不能为空！');
                 return false;
             }
-            if($('#password').val()==''){
-                alert('用户密码不能为空！');
+            if($('#drivername').val()==''){
+                alert('司机姓名不能为空！');
                 return false;
             }
-            if($('#nickname').val()==''){
-                alert('用户昵称不能为空！');
+            if($('#company').val()==''){
+                alert('所属公司不能为空！');
                 return false;
             }
-            addUser();
-        });
-
-        //修改
-        $('#userTbody').on('click','.updateUser',function () {
-            userIndex=$(this).attr('index');
-            currentUser=userList[userIndex];
-
-            $('#update_username').val(currentUser.username);
-            /*$('#update_password').val(currentUser.password);*/
-            $('#update_nickname').val(currentUser.nickname);
-            $('#update_comment').val(currentUser.comment);
-            $('#update_state').val(currentUser.state);
-        });
-        $('#updateBtn').click(function () {
-            if($('#update_username').val()==''){
-                alert('用户名不能为空！');
-                return false;
-            }
-
-            if($('#update_nickname').val()==''){
-                alert('用户昵称不能为空！');
+            if($('#phone').val()==''){
+                alert('司机手机号码不能为空！');
                 return false;
             }
             var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
-            var bodyParam={'id':currentUser.id,'username':$('#update_username').val(),'nickname':$('#update_nickname').val(),
-                'comment':$('#update_comment').val(),'state':$('#update_state').val(),'c_id':userinfo['id']};
-            updateUser(bodyParam);
-        });
-        $('#userTbody').on('click','.passwordUser',function () {
-            userIndex=$(this).attr('index');
-            currentUser=userList[userIndex];
-        });
-        $('#passwordBtn').click(function () {
-            if($('#pass_password').val()==''){
-                alert('密码不能为空！');
-                return false;
-            }
-            if($('#pass_repassword').val()==''){
-                alert('确认密码不能为空！');
-                return false;
-            }
-            if($('#pass_repassword').val()!=$('#pass_password').val()){
-                alert('两次输入密码不一致！');
-                return false;
-            }
-            var bodyParam={'id':currentUser.id,'password':$('#pass_password').val()};
-            updateUser(bodyParam);
+            var bodyParam={'number':$('#number').val(),'drivername':$('#drivername').val(),
+                'company':$('#company').val(),'phone':$('#phone').val(),'status':$('#update_status').val(),'c_id':userinfo['id']};
+            addDrivers(bodyParam);
         });
 
+        //修改
+        $('#contentTbody').on('click','.updateDrivers',function () {
+            driversIndex=$(this).attr('index');
+            currentDrivers=driversList[driversIndex];
+            $('#update_number').val(currentDrivers.number);
+            $('#update_drivername').val(currentDrivers.drivername);
+            $('#update_company').val(currentDrivers.company);
+            $('#update_phone').val(currentDrivers.phone);
+            $('#update_status').val(currentDrivers.status);
+        });
+        $('#updateBtn').click(function () {
+            if($('#update_number').val()==''){
+                alert('车牌号不能为空！');
+                return false;
+            }
+            if($('#update_drivername').val()==''){
+                alert('司机姓名不能为空！');
+                return false;
+            }
+            if($('#update_company').val()==''){
+                alert('所属公司不能为空！');
+                return false;
+            }
+            if($('#update_phone').val()==''){
+                alert('司机手机号码不能为空！');
+                return false;
+            }
+
+            var bodyParam={'id':currentDrivers.id,'number':$('#update_number').val(),'drivername':$('#update_drivername').val(),
+                'company':$('#update_company').val(),'phone':$('#update_phone').val(),'status':$('#update_status').val()};
+            updateDrivers(bodyParam);
+        });
+
+
         //删除
-        $('#userTbody').on('click','.deleteUser',function () {
-            userIndex=$(this).attr('index');
-            currentUser=userList[userIndex];
+        $('#contentTbody').on('click','.deleteDrivers',function () {
+            driversIndex=$(this).attr('index');
+            currentDrivers=driversList[driversIndex];
         });
         $('#deleteBtn').click(function () {
-            deleteUser(currentUser.id);
+            deleteDrivers(currentDrivers.id);
         });
     });
 

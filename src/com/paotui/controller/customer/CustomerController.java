@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paotui.service.customer.ICustomerService;
 import com.paotui.utils.MD5Encryption;
-import com.paotui.model.customer.Customer;
+import com.paotui.model.customer.Customer; 
 @Controller
 public class CustomerController {
 	@Autowired
@@ -289,6 +289,48 @@ public class CustomerController {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "新建失败！");
 			logger.info("新建失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/statisticCustomer")
+	@ResponseBody
+	public Map statistic(HttpServletRequest request, HttpServletResponse response,Customer customer)
+		throws ServletException, IOException {
+		Map resultMap=new HashMap();
+		try {
+			Map paramMap=new HashMap();
+			String stype=request.getParameter("stype");
+			if(stype!=null&&!stype.equals(""))
+				paramMap.put("stype",stype);
+			paramMap.put("id",customer.getId());
+			paramMap.put("nickname",customer.getNickname());
+			paramMap.put("phone",customer.getPhone());
+			paramMap.put("password",customer.getPassword());
+			paramMap.put("header",customer.getHeader());
+			paramMap.put("wechat",customer.getWechat());
+			String c_dtFrom=request.getParameter("c_dtFrom");
+			String c_dtTo=request.getParameter("c_dtTo");
+			if(c_dtFrom!=null&&!c_dtFrom.equals(""))
+			paramMap.put("c_dtFrom", sdf.parse(c_dtFrom));
+			if(c_dtTo!=null&&!c_dtTo.equals(""))
+			paramMap.put("c_dtTo", sdf.parse(c_dtTo));
+			String u_dtFrom=request.getParameter("u_dtFrom");
+			String u_dtTo=request.getParameter("u_dtTo");
+			if(u_dtFrom!=null&&!u_dtFrom.equals(""))
+			paramMap.put("u_dtFrom", sdf.parse(u_dtFrom));
+			if(u_dtTo!=null&&!u_dtTo.equals(""))
+			paramMap.put("u_dtTo", sdf.parse(u_dtTo));
+			paramMap.put("state",customer.getState());
+			List<Customer> list=iCustomerService.statisticCustomerByParam(paramMap);
+			resultMap.put("status", "0");
+			resultMap.put("msg", list);
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "查询失败！");
+			logger.info("查询失败！"+e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 		return resultMap;

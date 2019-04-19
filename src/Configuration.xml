@@ -31,6 +31,7 @@
 		<typeAlias alias="User" type="com.paotui.model.user.User" /> 
 		<typeAlias alias="Dialrecord" type="com.paotui.model.dialrecord.Dialrecord" /> 
 		<typeAlias alias="Installinfo" type="com.paotui.model.installinfo.Installinfo" /> 
+		<typeAlias alias="Drivers" type="com.paotui.model.drivers.Drivers" /> 
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/paotui/model/addresses/Addresses.xml"/> 
@@ -44,5 +45,6 @@
 		<mapper resource="com/paotui/model/user/User.xml"/> 
 		<mapper resource="com/paotui/model/dialrecord/Dialrecord.xml"/> 
 		<mapper resource="com/paotui/model/installinfo/Installinfo.xml"/> 
+		<mapper resource="com/paotui/model/drivers/Drivers.xml"/> 
 	</mappers>  
 </configuration>

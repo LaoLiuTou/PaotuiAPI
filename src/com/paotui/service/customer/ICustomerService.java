@@ -10,9 +10,15 @@ public interface ICustomerService {
 	public Customer selectCustomerById(String id);
 
 	/**
-	* 通过查询参数获取信息
+	* 统计
 	* @return
 	*/ 
+	@SuppressWarnings("rawtypes")
+	public List<Customer> statisticCustomerByParam(Map paramMap); 
+	/**
+	 * 通过查询参数获取信息
+	 * @return
+	 */ 
 	@SuppressWarnings("rawtypes")
 	public List<Customer> selectCustomerByParam(Map paramMap); 
 

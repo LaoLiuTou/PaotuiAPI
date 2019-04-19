@@ -18,6 +18,14 @@ public class InstallinfoServiceImpl  implements IInstallinfoService {
 	}
 
 	/**
+	 * 统计
+	 * @return
+	 */ 
+	@SuppressWarnings("rawtypes")
+	public List<Installinfo> statisticInstallinfoByParam(Map paramMap){ 
+		return iInstallinfoMapper.statisticinstallinfoByParam(paramMap);
+	}
+	/**
 	* 通过查询参数获取信息
 	* @return
 	*/ 

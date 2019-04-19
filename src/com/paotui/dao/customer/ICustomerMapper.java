@@ -9,11 +9,17 @@ import com.paotui.model.customer.Customer;
  	*/
 	public Customer selectcustomerById(String id);
 	/**
- 	* 通过查询参数获取信息
+ 	* 统计
  	* @return
- */ 
- @SuppressWarnings("rawtypes")
-	public List<Customer> selectcustomerByParam(Map paramMap); 
+	 */ 
+	 @SuppressWarnings("rawtypes")
+		public List<Customer> statisticcustomerByParam(Map paramMap); 
+	 /**
+	  * 通过查询参数获取信息
+	  * @return
+	  */ 
+	 @SuppressWarnings("rawtypes")
+	 public List<Customer> selectcustomerByParam(Map paramMap); 
 	/**
 		* 通过查询参数获取总条数
 	    * @return

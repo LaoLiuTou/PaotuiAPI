@@ -17,11 +17,10 @@
 
 
     // Toggle Left Menu
-   jQuery('.menu-list > a').click(function() {
-      
+    $('#menu').on('click','.menu-list > a' ,function(){
       var parent = jQuery(this).parent();
       var sub = parent.find('> ul');
-      
+
       if(!jQuery('body').hasClass('left-side-collapsed')) {
          if(sub.is(':visible')) {
             sub.slideUp(200, function(){

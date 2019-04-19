@@ -74,6 +74,20 @@ public class Installinfo {
 		this.state = state;
 	}
 
+	private String count;
+	private String days;
+	public String getCount() {
+		return count;
+	}
+	public void setCount(String count) {
+		this.count = count;
+	}
+	public String getDays() {
+		return days;
+	}
+	public void setDays(String days) {
+		this.days = days;
+	}
 
 
 }

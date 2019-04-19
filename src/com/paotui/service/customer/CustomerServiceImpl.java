@@ -28,6 +28,14 @@ public class CustomerServiceImpl  implements ICustomerService {
 	* @return
 	*/ 
 	@SuppressWarnings("rawtypes")
+	public List<Customer> statisticCustomerByParam(Map paramMap){ 
+		return iCustomerMapper.statisticcustomerByParam(paramMap);
+	}
+	/**
+	 * 通过查询参数获取信息
+	 * @return
+	 */ 
+	@SuppressWarnings("rawtypes")
 	public List<Customer> selectCustomerByParam(Map paramMap){ 
 		return iCustomerMapper.selectcustomerByParam(paramMap);
 	}

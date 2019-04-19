@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>客户统计</title>
+
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet">
+    <!--pickers css-->
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div class="left-side sticky-left-side">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <!-- <a href=""><img src="images/logo.png" alt=""></a>-->
+        </div>
+
+        <div class="logo-icon text-center" id="title">
+            <!--<a href=""><img src="images/logo_icon.png" alt=""></a>-->
+        </div>
+        <!--logo and iconic logo end-->
+
+        <div class="left-side-inner">
+
+            <!--sidebar nav start-->
+            <div  id="menu" class="left-side-inner">
+
+            </div>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div class="header-section">
+
+        <!--toggle button start-->
+        <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+        <!--toggle button end-->
+
+        <!--search start-->
+       <!-- <form class="searchform" action="index.html" method="post">
+            <input type="text" class="form-control" name="keyword" placeholder="请输入您要搜索的内容..." />
+        </form>-->
+        <!--search end-->
+
+            <!-- header section start-->
+            <div class="header-section">
+
+                <!--toggle button start-->
+                <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+                <!--toggle button end-->
+
+                <!--search start-->
+                <!--search end-->
+                <!--<form class="searchform" action="" method="post">
+                    <input type="text" class="form-control" id="searchText" placeholder="请输入您要搜索的用户名..." />
+                    <button>搜索</button>
+                </form>-->
+
+                <!--notification menu start -->
+                <div class="menu-right">
+                    <ul class="notification-menu">
+
+                        <li>
+                            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <img src="images/photos/user-avatar.png" alt="" />
+                                <span id="loginName"></span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                <li><a href="#"><i class="fa fa-user"></i>  个人信息</a></li>
+                                <li><a href="#" ><i class="fa fa-cog"></i>  设置</a></li>
+                                <li><a href="#" id="logoutBtn"><i class="fa fa-sign-out"></i> 退出</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+                <!--notification menu end -->
+
+            </div>
+
+        </div>
+
+        <!-- header section end-->
+        <!-- page heading start-->
+        <div class="page-heading">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">系统设置</a>
+                </li>
+                <li class="active">客户管理</li>
+            </ul>
+
+        </div>
+        <!-- page heading start-->
+        <!--<div class="page-heading">-->
+            <!--页面标题-->
+        <!--</div>-->
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+
+            <!--表格开始-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            客户统计
+
+                            <span class="tools pull-right">
+                            <!--<button type="button" class="btn btn-info popovers"  id="newBtn" >新建</button>-->
+                            <!--<span class="tools pull-right">-->
+                            <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
+                            <!--<a href="javascript:;" class="fa fa-times"></a>-->
+                         </span>
+                        </header>
+
+                        <header class="panel-heading custom-tab">
+                            <ul class="nav nav-tabs">
+
+                                <li class="active">
+                                    <a  data-toggle="tab" href="#first">
+                                        <i class="fa fa-tachometer"></i>
+                                        客户统计
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="pt_customer.html">
+                                        <i class="fa fa-tachometer"></i>
+                                        客户列表
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </header>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div id="first" class="tab-pane active">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group col-md-5">
+                                            <label class="col-sm-3 control-label" style="padding-left:2px;padding-right:2px">日期</label>
+                                            <div class="input-group input-large custom-date-range">
+                                                <input type="text" id="startTime" class="form-control default-date-picker" size="16">
+                                                <span class="input-group-addon">至</span>
+                                                <input type="text" id="endTime" class="form-control default-date-picker" size="16">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label class="col-sm-3 control-label" style="padding-left:2px;padding-right:2px">间隔</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control m-bot15"   id="stype">
+                                                    <option value="month">月</option>
+                                                    <option value="day">日</option>
+                                                    <option value="hour">时</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <button id="searchBtn" type="button" class="btn btn-info popovers mb10">搜索</button>
+                                    </form>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <section class="panel">
+
+                                                <div class="panel-body">
+                                                    <div id="main" style="height: 500px;"></div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="second" class="tab-pane ">
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!--表格结束-->
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer class="sticky-footer">
+            2018 &copy; 版权所有
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="delete-box" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">删除</h4>
+            </div>
+            <div class="modal-body">
+                确定要删除记录吗？
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                <button class="btn btn-info popovers" type="button" id="deleteBtn">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+<!--common scripts for all pages-->
+<script src="js/scripts.js"></script>
+<!--pickers plugins-->
+<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+<script src="js/main/config.js"></script>
+<script src="js/main/md5.js"></script>
+<script src="js/main/pt_customer.js"></script>
+
+<!--echarts-->
+<script src="js/build/dist/echarts.js"></script>
+<script>
+    $(document).ready(function () {
+        setMenu("4","1");
+        $('.default-date-picker').datetimepicker({
+            format: "yyyy-mm-dd",
+            todayBtn: "linked",
+            minView: 4,
+            autoclose:true
+        });
+        var currentDay = new Date().format("yyyy");
+        $('#startTime').val(currentDay+'-01-01');
+        $('#endTime').val(currentDay+'-12-31');
+        var bodyParam={'c_dtFrom':currentDay+'-01-01 00:00:00','c_dtTo':currentDay+'-12-31 23:59:59','stype':$('#stype').val()};
+        statisticCustomer(bodyParam);
+
+        //搜索
+        $('#searchBtn').click(function () {
+            var bodyParam={'stype':$('#stype').val()};
+            if($('#startTime').val()!=''){
+                bodyParam['c_dtFrom']=$('#startTime').val()+' 00:00:00';
+            }
+            if($('#endTime').val()!=''){
+                bodyParam['c_dtTo']=$('#endTime').val()+' 23:59:59';
+            }
+
+            statisticCustomer(bodyParam);
+        });
+    });
+    function statisticCustomer(bodyParam){
+        var httpR = new createHttpR(url+'statisticCustomer','post','text',bodyParam,'callBack');
+        httpR.HttpRequest(function(response){
+            var obj = JSON.parse(response);
+            var status = obj['status'];
+            //var msg = obj['msg'];
+            if(status=='0'){
+                var x_data = [];
+                var y_data = [];
+                var data = obj['msg'];
+                console.log(JSON.stringify(data));
+                for (var item in data) {
+                    if($('#stype').val()=='day'){
+                        x_data.push(data[item].days.substr(5,10));
+                    }
+                    else if($('#stype').val()=='hour'){
+                        x_data.push(data[item].days.substr(8,13));
+                    }
+                    else{
+                        x_data.push(data[item].days);
+                    }
+                    y_data.push(data[item].count);
+                }
+                //统计
+                var ECharts;
+                // 路径配置
+                require.config({
+                    paths: {
+                        echarts: 'js/build/dist'
+                    }
+                });
+
+                // 使用
+                require(
+                    [
+                        'echarts',
+                        'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        ECharts = ec;
+                        var  option = {
+                            title : {
+                                text: '注册用户数量统计',
+                                subtext: ''
+                            },
+                            tooltip : {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                data:['客户数量']
+                            },
+
+                            calculable : true,
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    boundaryGap : false,
+                                    data : x_data
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value',
+                                    axisLabel : {
+                                        formatter: '{value} '
+                                    }
+                                }
+                            ],
+                            series : [
+                                {
+                                    name:'客户数量',
+                                    type:'line',
+                                    data:y_data,
+                                    markPoint : {
+                                        data : [
+                                            {type : 'max', name: '最大值'},
+                                            {type : 'min', name: '最小值'}
+                                        ]
+                                    }
+                                    /*,
+                                    itemStyle : {
+                                        normal : {
+                                            color:'#fa2d00',
+                                            lineStyle:{
+                                                color:'#06d4f0'
+                                            }
+                                        }
+                                    }*/
+                                }
+                            ]
+                        };
+
+                        //接下来我们就可以进行图表的init操作了
+                        var myChart = ECharts.init(document.getElementById("main"));
+                        myChart.setOption(option);
+                    });
+
+
+
+            }
+        });
+    }
+
+</script>
+
+
+</body>
+</html>

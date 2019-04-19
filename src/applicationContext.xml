@@ -108,4 +108,9 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 </bean>
 <bean id="iInstallinfoService" class="com.paotui.service.installinfo.InstallinfoServiceImpl"></bean>
+<bean id="iDriversMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.drivers.IDriversMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iDriversService" class="com.paotui.service.drivers.DriversServiceImpl"></bean>
 </beans>
