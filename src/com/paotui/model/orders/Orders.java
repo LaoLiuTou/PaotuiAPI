@@ -113,6 +113,28 @@ public class Orders {
 		this.phone = phone;
 	}
 	
+	private String drivername;
+	private String number;
+	private String driverphone;
+	public String getDrivername() {
+		return drivername;
+	}
+	public void setDrivername(String drivername) {
+		this.drivername = drivername;
+	}
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	public String getDriverphone() {
+		return driverphone;
+	}
+	public void setDriverphone(String driverphone) {
+		this.driverphone = driverphone;
+	}
+	
 
 
 }

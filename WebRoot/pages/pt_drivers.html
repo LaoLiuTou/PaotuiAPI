@@ -132,7 +132,7 @@
 
                             <span class="tools pull-right">
                             <button type="button" class="btn btn-info popovers"  data-toggle="modal" data-target="#newly-box">新建</button>
-                            <!--<button type="button" class="btn btn-info popovers"  id="newBtn" >新建</button>-->
+                            <button type="button" class="btn btn-info popovers"  id="downloadQrcode" >下载二维码</button>
                             <!--<span class="tools pull-right">-->
                             <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
                             <!--<a href="javascript:;" class="fa fa-times"></a>-->
@@ -424,6 +424,23 @@
         });
         $('#deleteBtn').click(function () {
             deleteDrivers(currentDrivers.id);
+        });
+
+        //下载二维码
+        $("#downloadQrcode").click(function () {
+            var bodyParam={};
+            var httpR = new createHttpR(url+'createQrcode','post','text',bodyParam,'callBack');
+            httpR.HttpRequest(function(response){
+                var obj = JSON.parse(response);
+                var status = obj['status'];
+                //var msg = obj['msg'];
+                if(status=='0'){
+                    var htmlExport=url+'upload/upload/出租车二维码.zip';
+
+                    window.open(htmlExport);
+                }
+            });
+
         });
     });
 

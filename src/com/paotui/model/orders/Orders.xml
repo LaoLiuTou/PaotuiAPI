@@ -3,9 +3,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.paotui.dao.orders.IOrdersMapper"> 
 	<select id="selectordersById" parameterType="String" resultType="Orders">
-		SELECT a.*,b.nickname as cusname,b.phone as phone 
+		SELECT a.*,b.nickname as cusname,b.phone as phone, 
+		c.drivername as drivername,c.number as number,c.phone as driverphone  
 		FROM orders a 
 		LEFT JOIN customer b ON a.cus_id=b.id 
+		LEFT JOIN drivers c ON a.driver=c.id 
 		WHERE a.ID=#{id}
 	</select>
 
@@ -14,9 +16,11 @@
 	</delete>
 
 	<select id="selectordersByParam" parameterType="java.util.Map" resultType="Orders">
-		SELECT a.*,b.nickname as cusname,b.phone as phone 
+		SELECT a.*,b.nickname as cusname,b.phone as phone, 
+		c.drivername as drivername,c.number as number,c.phone as driverphone  
 		FROM orders a 
 		LEFT JOIN customer b ON a.cus_id=b.id 
+		LEFT JOIN drivers c ON a.driver=c.id 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="id != null"> AND a.ID =#{id} </if>
 			<if test="cus_id != null"> AND a.CUS_ID =#{cus_id} </if>

@@ -19,8 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class FileUploadController {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	Logger logger = Logger.getLogger("FileUSLogger"); 
-	
+	Logger logger = Logger.getLogger("PaotuiLogger");
 	/*** 
      * 保存文件 
      * @param file 

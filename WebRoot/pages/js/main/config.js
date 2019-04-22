@@ -1,5 +1,6 @@
 //后台服务地址
-var url = 'http://127.0.0.1/Paotui/';
+//var url = 'http://127.0.0.1/Paotui/';
+var url = 'http://app.dongsheng.club:8888/';
 
 //secret key
 var sk = 'TTILY';
