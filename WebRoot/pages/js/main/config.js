@@ -328,7 +328,7 @@ function setMenu(par,sub){
         '                <li id="menu5" class="menu-list"><a href="javascript:;"><i class="fa fa-cogs"></i> <span>系统设置</span></a>\n' +
         '                    <ul class="sub-menu-list">\n' +
         '                        <li id="menu5-1"><a href="pt_user.html">账号管理</a></li>\n' +
-        '                        <li id="menu5-2"><a href="pt_config.html">APP管理</a></li>\n' +
+        '                        <li id="menu5-2"><a href="pt_config.html">APP设置</a></li>\n' +
         '                        <li id="menu5-3"><a href="pt_install.html">安装统计</a></li>\n' +
         '                    </ul>\n' +
         '                </li>\n' +

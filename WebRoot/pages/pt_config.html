@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>APP设置</title>
+
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div class="left-side sticky-left-side">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <!-- <a href=""><img src="images/logo.png" alt=""></a>-->
+        </div>
+
+        <div class="logo-icon text-center" id="title">
+            <!--<a href=""><img src="images/logo_icon.png" alt=""></a>-->
+        </div>
+        <!--logo and iconic logo end-->
+
+        <div class="left-side-inner">
+
+            <!--sidebar nav start-->
+            <div  id="menu" class="left-side-inner">
+
+            </div>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div class="header-section">
+
+        <!--toggle button start-->
+        <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+        <!--toggle button end-->
+
+        <!--search start-->
+       <!-- <form class="searchform" action="index.html" method="post">
+            <input type="text" class="form-control" name="keyword" placeholder="请输入您要搜索的内容..." />
+        </form>-->
+        <!--search end-->
+
+            <!-- header section start-->
+            <div class="header-section">
+
+                <!--toggle button start-->
+                <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+                <!--toggle button end-->
+
+                <!--search start-->
+                <!--search end-->
+                <!--<form class="searchform" action="" method="post">
+                    <input type="text" class="form-control" id="searchText" placeholder="请输入您要搜索的用户名..." />
+                    <button>搜索</button>
+                </form>-->
+
+                <!--notification menu start -->
+                <div class="menu-right">
+                    <ul class="notification-menu">
+
+                        <li>
+                            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <img src="images/photos/user-avatar.png" alt="" />
+                                <span id="loginName"></span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                <li><a href="#"><i class="fa fa-user"></i>  个人信息</a></li>
+                                <li><a href="#" ><i class="fa fa-cog"></i>  设置</a></li>
+                                <li><a href="#" id="logoutBtn"><i class="fa fa-sign-out"></i> 退出</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+                <!--notification menu end -->
+
+            </div>
+
+        </div>
+
+        <!-- header section end-->
+        <!-- page heading start-->
+        <div class="page-heading">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">系统设置</a>
+                </li>
+                <li class="active">APP设置</li>
+            </ul>
+
+        </div>
+        <!-- page heading start-->
+        <!--<div class="page-heading">-->
+            <!--页面标题-->
+        <!--</div>-->
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+
+            <!--表格开始-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            APP设置
+
+                        </header>
+                        <div class="panel-body">
+                            <!--<form class="form-horizontal" role="form">
+                                <div class="form-group col-md-3 mr10">
+                                    <div class="col-md-12 pdnone">
+                                        <input class="form-control" id="searchText" size="16" type="text" placeholder="请输入您要搜索的用户名..." />
+                                    </div>
+                                </div>
+                                <button id="searchBtn" type="button" class="btn btn-info popovers mb10">搜索</button>
+                            </form>-->
+                            <div class="adv-table">
+                                <table  class="display table table-bordered table-striped" id="dynamic-table">
+                                    <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>备注</th>
+                                        <!--<th>属性</th>-->
+                                        <th>值</th>
+                                        <th>创建时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="contentTbody">
+
+                                    </tbody>
+                                </table>
+                                <!--分页-->
+                                <div class="text-center">
+                                    <ul class="pagination">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!--表格结束-->
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer class="sticky-footer">
+            2018 &copy; 版权所有
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="update-box" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">修改</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                   <h4 id="update_note"></h4>
+                    <div class="form-group">
+                        <label>编辑属性的值</label>
+                        <textarea class="form-control textarea-line" id="update_value" placeholder=""></textarea>
+
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                <button class="btn btn-info popovers" type="button" id="updateBtn">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+<!--common scripts for all pages-->
+<script src="js/scripts.js"></script>
+
+<script src="js/main/config.js"></script>
+<script src="js/main/md5.js"></script>
+<script src="js/main/pt_config.js"></script>
+
+<script>
+    $(document).ready(function () {
+        setMenu("5","2");
+        //搜索
+        $('#searchBtn').click(function () {
+            queryConfigure($('#searchText').val(),currentPage,pageSize);
+        });
+
+        //列表
+        var currentPage=1;
+        var pageSize=10;
+        queryConfigure($('#searchText').val(),currentPage,pageSize);
+
+        $('.pagination').on('click','.pageBtn',function(){
+            currentPage=$(this).attr('index');
+            queryConfigure($('#searchText').val(),currentPage,pageSize);
+        });
+        $('.pagination').on('click','.prevBtn',function(){
+            currentPage--;
+            queryConfigure($('#searchText').val(),currentPage,pageSize);
+
+        });
+        $('.pagination').on('click','.nextBtn',function(){
+            currentPage++;
+            queryConfigure($('#searchText').val(),currentPage,pageSize);
+
+        });
+        $('.pagination').on('click','#jumpBtn',function(){
+            var reg=/^[1-9]\d*$|^0$/;
+            if(reg.test($('#jumpPageText').val())==true){
+                queryConfigure($('#searchText').val(),$('#jumpPageText').val(),pageSize);
+            }else{
+                alert("页码输入有误！");
+                return false;
+            }
+        });
+
+  
+        //修改
+        $('#contentTbody').on('click','.updateConfigure',function () {
+            configureIndex=$(this).attr('index');
+            currentConfigure=configureList[configureIndex];
+
+            $('#update_note').text(currentConfigure.note);
+            $('#update_value').val(currentConfigure.value);
+        });
+        $('#updateBtn').click(function () {
+            if($('#update_value').val()==''){
+                alert('值不能为空！');
+                return false;
+            }
+            if(currentConfigure.type=='int'){
+                if (!(/(^[1-9]\d*$)/.test($('#update_value').val()))) {
+                    alert('请输入正整数！');
+                    return false;
+                }
+            }
+
+            var bodyParam={'id':currentConfigure.id,'value':$('#update_value').val()};
+            updateConfigure(bodyParam);
+        });
+    
+    });
+
+</script>
+
+
+</body>
+</html>

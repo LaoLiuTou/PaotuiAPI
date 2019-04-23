@@ -17,6 +17,8 @@
 			<if test="id != null"> AND ID =#{id} </if>
 			<if test="property != null"> AND PROPERTY =#{property} </if>
 			<if test="value != null"> AND VALUE =#{value} </if>
+			<if test="type != null"> AND TYPE =#{type} </if>
+			<if test="note != null"> AND NOTE =#{note} </if>
 			<if test="c_id != null"> AND C_ID =#{c_id} </if>
 			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
 			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
@@ -37,6 +39,8 @@
 			<if test="id != null"> AND ID =#{id} </if>
 			<if test="property != null"> AND PROPERTY =#{property} </if>
 			<if test="value != null"> AND VALUE =#{value} </if>
+			<if test="type != null"> AND TYPE =#{type} </if>
+			<if test="note != null"> AND NOTE =#{note} </if>
 			<if test="c_id != null"> AND C_ID =#{c_id} </if>
 			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
 			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
@@ -53,7 +57,9 @@
 		<trim prefix="SET" suffixOverrides=",">
 			<if test="id != null">ID=#{id}, </if>
 			<if test="property != null">PROPERTY=#{property}, </if>
+			<if test="type != null">TYPE=#{type}, </if>
 			<if test="value != null">VALUE=#{value}, </if>
+			<if test="note != null">NOTE=#{note}, </if>
 			<if test="c_id != null">C_ID=#{c_id}, </if>
 			<if test="c_dt != null">C_DT=#{c_dt}, </if>
 			<if test="u_dt != null">U_DT=#{u_dt}, </if>
@@ -67,6 +73,8 @@
 		<trim prefix="(" suffix=")" suffixOverrides="," >
 			<if test="property != null">PROPERTY, </if>
 			<if test="value != null">VALUE, </if>
+			<if test="type != null">TYPE, </if>
+			<if test="note != null">NOTE, </if>
 			<if test="c_id != null">C_ID, </if>
 			<if test="c_dt != null">C_DT, </if>
 			<if test="u_dt != null">U_DT, </if>
@@ -75,6 +83,8 @@
 		<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
 			<if test="property != null">#{property}, </if>
 			<if test="value != null">#{value}, </if>
+			<if test="type != null">#{type}, </if>
+			<if test="note != null">#{note}, </if>
 			<if test="c_id != null">#{c_id}, </if>
 			<if test="c_dt != null">#{c_dt}, </if>
 			<if test="u_dt != null">#{u_dt}, </if>
@@ -90,6 +100,8 @@
 				<if test="item.id != null">ID, </if>
 				<if test="item.property != null">PROPERTY, </if>
 				<if test="item.value != null">VALUE, </if>
+				<if test="item.type != null">TYPE, </if>
+				<if test="item.note != null">NOTE, </if>
 				<if test="item.c_id != null">C_ID, </if>
 				<if test="item.c_dt != null">C_DT, </if>
 				<if test="item.u_dt != null">U_DT, </if>
@@ -99,6 +111,8 @@
 				<if test="item.id != null">#{item.id}, </if>
 				<if test="item.property != null">#{item.property}, </if>
 				<if test="item.value != null">#{item.value}, </if>
+				<if test="item.type != null">#{item.type}, </if>
+				<if test="item.note != null">#{item.note}, </if>
 				<if test="item.c_id != null">#{item.c_id}, </if>
 				<if test="item.c_dt != null">#{item.c_dt}, </if>
 				<if test="item.u_dt != null">#{item.u_dt}, </if>
