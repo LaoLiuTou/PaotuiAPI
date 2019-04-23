@@ -113,12 +113,14 @@ function  queryOrder (searchText,currentPage,pageSize) {
             var html='';
 
             for(var o in data){
+                console.log(JSON.stringify(data[o]));
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td >'+data[o].id+'</td>\n' +
                     '<td >'+data[o].ordernum+'</td>\n' +
                     '<td >'+data[o].price+'</td>\n' +
                     '<td >'+data[o].phone+'</td>\n' +
-                    '<td >'+data[o].driver+'</td>\n' +
+                    '<td >'+data[o].drivername+'</td>\n' +
+                    '<td >'+data[o].number+'</td>\n' +
                     '<td >'+data[o].note+'</td>\n' +
                     '<td >'+data[o].pay_dt+'</td>\n' ;
                 if(data[o].status=='0'){

@@ -441,6 +441,26 @@
                 }
             });
 
+            /*$.ajax({
+                url : url+'createQrcode',
+                type : 'POST',
+                data : {},
+                success : function(response) {
+                    var obj = JSON.parse(response);
+                    var status = obj['status'];
+                    //var msg = obj['msg'];
+                    if(status=='0'){
+                        var htmlExport=url+'upload/upload/出租车二维码.zip';
+
+                        window.open(htmlExport);
+                    }
+
+                },
+                error : function(response) {
+                    alert('导出失败！');
+                }
+            });*/
+
         });
     });
 
