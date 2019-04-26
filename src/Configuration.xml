@@ -33,6 +33,7 @@
 		<typeAlias alias="Installinfo" type="com.paotui.model.installinfo.Installinfo" /> 
 		<typeAlias alias="Drivers" type="com.paotui.model.drivers.Drivers" /> 
 		<typeAlias alias="Orderspt" type="com.paotui.model.orderspt.Orderspt" /> 
+		<typeAlias alias="Ticket" type="com.paotui.model.ticket.Ticket" /> 
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/paotui/model/addresses/Addresses.xml"/> 
@@ -48,5 +49,6 @@
 		<mapper resource="com/paotui/model/installinfo/Installinfo.xml"/> 
 		<mapper resource="com/paotui/model/drivers/Drivers.xml"/> 
 		<mapper resource="com/paotui/model/orderspt/Orderspt.xml"/> 
+		<mapper resource="com/paotui/model/ticket/Ticket.xml"/> 
 	</mappers>  
 </configuration>

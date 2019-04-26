@@ -127,6 +127,13 @@ public class Customer {
 	public void setInviter(Long inviter) {
 		this.inviter = inviter;
 	}
+	private String invitername;
+	public String getInvitername() {
+		return invitername;
+	}
+	public void setInvitername(String invitername) {
+		this.invitername = invitername;
+	}
 	
 	
 }

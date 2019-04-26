@@ -55,7 +55,7 @@ public class OrdersptServiceImpl  implements IOrdersptService {
 	public  int addOrderspt(Orderspt orderspt){
 		
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		int result=0;
 		orderspt.setStatus("0");
 		orderspt.setState(Long.parseLong("0"));

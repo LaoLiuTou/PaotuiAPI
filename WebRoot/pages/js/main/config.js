@@ -1,6 +1,6 @@
 //后台服务地址
-//var url = 'http://127.0.0.1/Paotui/';
-var url = 'http://app.dongsheng.club:8888/';
+var url = 'http://127.0.0.1/Paotui/';
+//var url = 'http://app.dongsheng.club:8888/';
 
 //secret key
 var sk = 'TTILY';
@@ -316,7 +316,9 @@ function setMenu(par,sub){
         '                </li>\n' +
         '                <li id="menu3" class="menu-list"><a href="javascript:;"><i class="fa fa-bar-chart-o"></i> <span>订单管理</span></a>\n' +
         '                    <ul class="sub-menu-list">\n' +
-        '                        <li id="menu3-1"><a href="pt_order.html">订单管理</a></li>\n' +
+        '                        <li id="menu3-1"><a href="pt_order.html">叫车订单</a></li>\n' +
+        '                        <li id="menu3-2"><a href="pt_orderpt.html">跑腿订单</a></li>\n' +
+        '                        <li id="menu3-3"><a href="pt_ticket.html">订票管理</a></li>\n' +
         '                    </ul>\n' +
         '                </li>\n' +
         '                <li id="menu4" class="menu-list"><a href="javascript:;"><i class="fa fa-bar-chart-o"></i> <span>人员管理</span></a>\n' +

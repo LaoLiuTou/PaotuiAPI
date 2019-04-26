@@ -159,7 +159,7 @@ function  queryNews (searchText,currentPage,pageSize) {
                     html+='<td style="line-height: 50px;">启用</td>\n' ;
                 }*/
                 html+='<td style="line-height: 50px;"><a class="updateNews" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +
-                    '<a class="deleteNews" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
+                    '<a class="deleteNews" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';
                 html+='</tr>';
             }
             $('#contentTbody').html(html);

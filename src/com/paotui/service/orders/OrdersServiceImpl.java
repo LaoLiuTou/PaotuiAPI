@@ -57,7 +57,7 @@ public class OrdersServiceImpl  implements IOrdersService {
 	*/ 
 	@Transactional
 	public  int addOrders(Orders orders){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		int result=0;
 		orders.setPay_dt(new Date());
 		orders.setStatus("0");

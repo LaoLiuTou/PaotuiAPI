@@ -1,7 +1,7 @@
-//选取的Install
-var installList;
-var installIndex;
-var currentInstall;
+    //选取的Ticket
+    var ticketList;
+    var ticketIndex;
+    var currentTicket;
 
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -10,8 +10,8 @@ var currentInstall;
 /**
  * 添加资讯
  */
-function addInstall(bodyParam){
-    var httpR = new createHttpR(url+'addInstall','post','text',bodyParam,'callBack');
+function addTicket(bodyParam){
+    var httpR = new createHttpR(url+'addTicket','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -23,20 +23,19 @@ function addInstall(bodyParam){
         }
     });
 }
-
 /**
  * 查询单条资讯
  */
-function selectInstall(id){
+function selectTicket(id){
     var bodyParam={'id':id};
-    var httpR = new createHttpR(url+'selectInstall','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'selectTicket','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
         //var msg = obj['msg'];
         if(status=='0'){
             var data = obj['msg'];
-            currentInstall=data;
+            currentTicket=data;
             for (var item in data) {
                 $('#'+item).val(data[item]);
                 if(item=='img'){
@@ -54,9 +53,9 @@ function selectInstall(id){
  * 修改资讯
  * @param id
  */
-function updateInstall(bodyParam){
+function updateTicket(bodyParam){
 
-    var httpR = new createHttpR(url+'updateInstall','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'updateTicket','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -73,9 +72,9 @@ function updateInstall(bodyParam){
  * 删除资讯
  * @param id
  */
-function deleteInstall(id){
+function deleteTicket(id){
     var bodyParam={'id':id};
-    var httpR = new createHttpR(url+'deleteInstall','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'deleteTicket','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -88,11 +87,11 @@ function deleteInstall(id){
 }
 /**
  * 查询资讯
- * @param installname
+ * @param ticketname
  * @param currentPage
  * @param pageSize
  */
-function  queryInstall (searchText,currentPage,pageSize) {
+function  queryTicket (searchText,currentPage,pageSize) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
@@ -103,34 +102,39 @@ function  queryInstall (searchText,currentPage,pageSize) {
         var bodyParam={'page':currentPage,'size':pageSize,'searchText':'%'+searchText+'%'};
     }
 
-    var httpR = new createHttpR(url+'listInstall','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'listTicket','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
         var msg = obj['msg'];
         if(status=='0'){
             var data=msg['data'];
-            installList=msg['data'];
+            ticketList=msg['data'];
             var html='';
+
 
             for(var o in data){
                 html+='<tr index='+o+' class="gradeX">\n' +
-                    '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
-                    '<td style="line-height: 50px;width:50px"><img src="'+url+data[o].header+'" width="50px" height="50px"></td>\n' +
-                    '<td style="line-height: 50px;">'+data[o].nickname+'</td>\n' +
-                    '<td style="line-height: 50px;">'+data[o].phone+'</td>\n' +
-                    '<td style="line-height: 50px;">'+data[o].balance+'</td>\n' +
-                    '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
+                    '<td >'+data[o].id+'</td>\n' +
+                    '<td >'+data[o].phone+'</td>\n' +
+                    '<td >'+data[o].note+'</td>\n' +
+                    '<td >'+data[o].resume+'</td>\n' +
+                    '<td >'+data[o].c_dt+'</td>\n' ;
+
                 if(data[o].state=='1'){
-                    html+='<td style="line-height: 50px;">停用</td>\n' ;
+                    html+='<td >已完成</td>\n' ;
+                    html+='<td >';
+
                 }
                 else{
-                    html+='<td style="line-height: 50px;">启用</td>\n' ;
+                    html+='<td >未完成</td>\n' ;
+                    html+='<td >';
+                    html+='<a class="completeTicket" href="" index='+o+' data-toggle="modal" data-target="#complete-box"><span class="label label-info label-mini">完成</span></a>   ' ;
+
                 }
-                html+='<td style="line-height: 50px;">' +
-                    '<a class="deleteInstall" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';
-                //html+='<td style="line-height: 50px;"><a class="updateInstall" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +
-                //    '<a class="deleteInstall" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
+                html+='<a class="deleteTicket" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';
+                //html+='<td style="line-height: 50px;"><a class="updateTicket" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +
+                //    '<a class="deleteTicket" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
                 html+='</tr>';
             }
             $('#contentTbody').html(html);

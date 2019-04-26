@@ -113,24 +113,24 @@ function  queryOrder (searchText,currentPage,pageSize) {
             var html='';
 
             for(var o in data){
-                console.log(JSON.stringify(data[o]));
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td >'+data[o].id+'</td>\n' +
                     '<td >'+data[o].ordernum+'</td>\n' +
                     '<td >'+data[o].price+'</td>\n' +
                     '<td >'+data[o].phone+'</td>\n' +
                     '<td >'+data[o].drivername+'</td>\n' +
+                    '<td >'+data[o].driverphone+'</td>\n' +
                     '<td >'+data[o].number+'</td>\n' +
                     '<td >'+data[o].note+'</td>\n' +
                     '<td >'+data[o].pay_dt+'</td>\n' ;
-                if(data[o].status=='0'){
+                if(data[o].status=='1'){
                     html+='<td >已完成</td>\n' ;
                 }
                 else{
                     html+='<td >未完成</td>\n' ;
                 }
                 html+='<td >' +
-                    '<a class="deleteOrder" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
+                    '<a class="deleteOrder" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';
                 //html+='<td style="line-height: 50px;"><a class="updateOrder" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +
                 //    '<a class="deleteOrder" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
                 html+='</tr>';

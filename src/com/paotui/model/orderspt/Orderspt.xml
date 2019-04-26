@@ -38,35 +38,38 @@
 			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
 			<if test="status != null"> AND a.STATUS =#{status} </if>
 			<if test="state != null"> AND a.STATE =#{state} </if>
+			<if test="searchText != null"> AND CONCAT(IFNULL(a.ORDERNUM,''),' ',IFNULL(b.phone,'')) like #{searchText} </if>
 		</trim>  
 			<if test="orderBy!= null"> ORDER BY   #{orderBy} </if>
 		LIMIT #{fromPage},#{toPage} 
 	</select>
 
 	<select id="selectCountordersptByParam" parameterType="java.util.Map" resultType="int">
-		SELECT COUNT(id) 
-		FROM orderspt 
+		SELECT COUNT(a.id) 
+		FROM orderspt a 
+		LEFT JOIN customer b ON a.cus_id=b.id 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test="id != null"> AND ID =#{id} </if>
-			<if test="cus_id != null"> AND CUS_ID =#{cus_id} </if>
-			<if test="ordernum != null"> AND ORDERNUM =#{ordernum} </if>
-			<if test="price != null"> AND PRICE =#{price} </if>
-			<if test="fromaddress != null"> AND FROMADDRESS =#{fromaddress} </if>
-			<if test="fromphone != null"> AND FROMPHONE =#{fromphone} </if>
-			<if test="toaddress != null"> AND TOADDRESS =#{toaddress} </if>
-			<if test="tophone != null"> AND TOPHONE =#{tophone} </if>
-			<if test="note != null"> AND NOTE =#{note} </if>
-			<if test="send_dtFrom != null"> AND unix_timestamp(SEND_DT) &gt;=unix_timestamp(#{send_dtFrom}) </if>
-			<if test="send_dtTo != null"> AND unix_timestamp(SEND_DT) &lt;=unix_timestamp(#{send_dtTo}) </if>
-			<if test="send_dt != null"> AND SEND_DT =#{send_dt} </if>
-			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
-			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
-			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
-			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
-			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
-			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
-			<if test="status != null"> AND STATUS =#{status} </if>
-			<if test="state != null"> AND STATE =#{state} </if>
+			<if test="id != null"> AND a.ID =#{id} </if>
+			<if test="cus_id != null"> AND a.CUS_ID =#{cus_id} </if>
+			<if test="ordernum != null"> AND a.ORDERNUM =#{ordernum} </if>
+			<if test="price != null"> AND a.PRICE =#{price} </if>
+			<if test="fromaddress != null"> AND a.FROMADDRESS =#{fromaddress} </if>
+			<if test="fromphone != null"> AND a.FROMPHONE =#{fromphone} </if>
+			<if test="toaddress != null"> AND a.TOADDRESS =#{toaddress} </if>
+			<if test="tophone != null"> AND a.TOPHONE =#{tophone} </if>
+			<if test="note != null"> AND a.NOTE =#{note} </if>
+			<if test="send_dtFrom != null"> AND unix_timestamp(a.SEND_DT) &gt;=unix_timestamp(#{send_dtFrom}) </if>
+			<if test="send_dtTo != null"> AND unix_timestamp(a.SEND_DT) &lt;=unix_timestamp(#{send_dtTo}) </if>
+			<if test="send_dt != null"> AND a.SEND_DT =#{send_dt} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(a.C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(a.C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND a.C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(a.U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(a.U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
+			<if test="status != null"> AND a.STATUS =#{status} </if>
+			<if test="state != null"> AND a.STATE =#{state} </if>
+			<if test="searchText != null"> AND CONCAT(IFNULL(a.ORDERNUM,''),' ',IFNULL(b.phone,'')) like #{searchText} </if>
 		</trim>  
 	</select>
 

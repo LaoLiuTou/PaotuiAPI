@@ -126,10 +126,17 @@ function  queryCustomer (searchText,currentPage,pageSize) {
                 else{
                     html+='<td style="line-height: 50px;">启用</td>\n' ;
                 }
+                if(data[o].isnew=='0'){
+                    html+='<td style="line-height: 50px;">' +
+                        '<a class="balanceCustomer" href="" index='+o+' data-toggle="modal" data-target="#balance-box"><span class="label label-success label-mini">增加2元</span></a></td>\n';
+                }
+                else{
+                    html+='<td style="line-height: 50px;">' +
+                        '<span class="label label-default label-mini">已增加</span></td>\n';
+                }
+
                 html+='<td style="line-height: 50px;">' +
-                    '<a class="deleteCustomer" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
-                //html+='<td style="line-height: 50px;"><a class="updateCustomer" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +
-                //    '<a class="deleteCustomer" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
+                    '<a class="deleteCustomer" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';
                 html+='</tr>';
             }
             $('#contentTbody').html(html);

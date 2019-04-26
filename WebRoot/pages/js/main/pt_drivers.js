@@ -128,7 +128,7 @@ function  queryDrivers (searchText,currentPage,pageSize) {
                     html+='<td >启用</td>\n' ;
                 }
                 html+='<td ><a class="updateDrivers" href="" index='+o+' data-toggle="modal" data-target="#update-box"><span class="label label-info label-mini">修改</span></a>   ' +
-                    '<a class="deleteDrivers" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
+                    '<a class="deleteDrivers" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';
                 html+='</tr>';
             }
             $('#contentTbody').html(html);

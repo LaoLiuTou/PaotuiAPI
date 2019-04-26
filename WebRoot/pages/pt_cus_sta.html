@@ -305,7 +305,6 @@
                 var x_data = [];
                 var y_data = [];
                 var data = obj['msg'];
-                console.log(JSON.stringify(data));
                 for (var item in data) {
                     if($('#stype').val()=='day'){
                         x_data.push(data[item].days.substr(5,10));
