@@ -2,13 +2,15 @@ package com.paotui.service.customer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.paotui.dao.configure.IConfigureMapper;
 import com.paotui.dao.customer.ICustomerMapper;
 import com.paotui.model.configure.Configure;
 import com.paotui.model.customer.Customer;
+import com.paotui.utils.ShareCodeUtil;
 public class CustomerServiceImpl  implements ICustomerService {
 
 	@Autowired
@@ -66,6 +68,7 @@ public class CustomerServiceImpl  implements ICustomerService {
 	@Transactional
 	public  int addCustomer(Customer customer){
 		int result=0;
+		//默认余额
 		String initbalance="5";
 		Map paramMap=new HashMap();
 		paramMap.put("fromPage",0);
@@ -78,6 +81,13 @@ public class CustomerServiceImpl  implements ICustomerService {
 		customer.setState(Long.parseLong("0"));
 		customer.setBalance(initbalance);
 		result=iCustomerMapper.addcustomer(customer);
+		if(result>0){
+			//邀请码
+			Customer temp = new Customer();
+			temp.setId(customer.getId());
+			temp.setInvitecode(ShareCodeUtil.getCodeByUid(Integer.parseInt(customer.getId()+"")));
+			iCustomerMapper.updatecustomer(temp);
+		}
 		return result;
 	}
 

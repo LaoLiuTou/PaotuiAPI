@@ -106,4 +106,27 @@ public class Customer {
 		this.days = days;
 	}
 
+	private String isnew;
+	public String getIsnew() {
+		return isnew;
+	}
+	public void setIsnew(String isnew) {
+		this.isnew = isnew;
+	}
+	private String invitecode;
+	public String getInvitecode() {
+		return invitecode;
+	}
+	public void setInvitecode(String invitecode) {
+		this.invitecode = invitecode;
+	}
+	private Long inviter;
+	public Long getInviter() {
+		return inviter;
+	}
+	public void setInviter(Long inviter) {
+		this.inviter = inviter;
+	}
+	
+	
 }

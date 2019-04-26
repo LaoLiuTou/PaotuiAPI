@@ -33,6 +33,9 @@
 			<if test="password != null"> AND PASSWORD =#{password} </if>
 			<if test="header != null"> AND HEADER =#{header} </if>
 			<if test="wechat != null"> AND WECHAT =#{wechat} </if>
+			<if test="inviter != null"> AND INVITER =#{inviter} </if>
+			<if test="invitecode != null"> AND INVITECODE =#{invitecode} </if>
+			<if test="isnew != null"> AND ISNEW =#{isnew} </if>
 			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
 			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
 			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
@@ -56,6 +59,9 @@
 			<if test="password != null"> AND PASSWORD =#{password} </if>
 			<if test="header != null"> AND HEADER =#{header} </if>
 			<if test="wechat != null"> AND WECHAT =#{wechat} </if>
+			<if test="inviter != null"> AND INVITER =#{inviter} </if>
+			<if test="invitecode != null"> AND INVITECODE =#{invitecode} </if>
+			<if test="isnew != null"> AND ISNEW =#{isnew} </if>
 			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
 			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
 			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
@@ -80,6 +86,9 @@
 			<if test="password != null"> AND PASSWORD =#{password} </if>
 			<if test="header != null"> AND HEADER =#{header} </if>
 			<if test="wechat != null"> AND WECHAT =#{wechat} </if>
+			<if test="inviter != null"> AND INVITER =#{inviter} </if>
+			<if test="invitecode != null"> AND INVITECODE =#{invitecode} </if>
+			<if test="isnew != null"> AND ISNEW =#{isnew} </if>
 			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
 			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
 			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
@@ -101,6 +110,9 @@
 			<if test="password != null">PASSWORD=#{password}, </if>
 			<if test="header != null">HEADER=#{header}, </if>
 			<if test="wechat != null">WECHAT=#{wechat}, </if>
+			<if test="inviter != null">INVITER=#{inviter}, </if>
+			<if test="invitecode != null">INVITECODE=#{invitecode}, </if>
+			<if test="isnew != null">ISNEW=#{isnew}, </if>
 			<if test="c_dt != null">C_DT=#{c_dt}, </if>
 			<if test="u_dt != null">U_DT=#{u_dt}, </if>
 			<if test="state != null">STATE=#{state}, </if>
@@ -117,6 +129,9 @@
 			<if test="password != null">PASSWORD, </if>
 			<if test="header != null">HEADER, </if>
 			<if test="wechat != null">WECHAT, </if>
+			<if test="inviter != null">INVITER, </if>
+			<if test="invitecode != null">INVITECODE, </if>
+			<if test="isnew != null">ISNEW, </if>
 			<if test="c_dt != null">C_DT, </if>
 			<if test="u_dt != null">U_DT, </if>
 			<if test="state != null">STATE, </if>
@@ -128,6 +143,9 @@
 			<if test="password != null">#{password}, </if>
 			<if test="header != null">#{header}, </if>
 			<if test="wechat != null">#{wechat}, </if>
+			<if test="inviter != null">#{inviter}, </if>
+			<if test="invitecode != null">#{invitecode}, </if>
+			<if test="isnew != null">#{isnew}, </if>
 			<if test="c_dt != null">#{c_dt}, </if>
 			<if test="u_dt != null">#{u_dt}, </if>
 			<if test="state != null">#{state}, </if>
@@ -146,6 +164,9 @@
 				<if test="item.password != null">PASSWORD, </if>
 				<if test="item.header != null">HEADER, </if>
 				<if test="item.wechat != null">WECHAT, </if>
+				<if test="item.inviter != null">INVITER, </if>
+				<if test="item.invitecode != null">INVITECODE, </if>
+				<if test="item.isnew != null">ISNEW, </if>
 				<if test="item.c_dt != null">C_DT, </if>
 				<if test="item.u_dt != null">U_DT, </if>
 				<if test="item.state != null">STATE, </if>
@@ -158,6 +179,9 @@
 				<if test="item.password != null">#{item.password}, </if>
 				<if test="item.header != null">#{item.header}, </if>
 				<if test="item.wechat != null">#{item.wechat}, </if>
+				<if test="item.inviter != null">#{item.inviter}, </if>
+				<if test="item.invitecode != null">#{item.invitecode}, </if>
+				<if test="item.isnew != null">#{item.isnew}, </if>
 				<if test="item.c_dt != null">#{item.c_dt}, </if>
 				<if test="item.u_dt != null">#{item.u_dt}, </if>
 				<if test="item.state != null">#{item.state}, </if>

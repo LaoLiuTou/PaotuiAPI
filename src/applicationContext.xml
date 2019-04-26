@@ -113,4 +113,9 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 </bean>
 <bean id="iDriversService" class="com.paotui.service.drivers.DriversServiceImpl"></bean>
+<bean id="iOrdersptMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.orderspt.IOrdersptMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iOrdersptService" class="com.paotui.service.orderspt.OrdersptServiceImpl"></bean>
 </beans>

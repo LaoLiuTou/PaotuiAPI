@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.paotui.dao.orderspt.IOrdersptMapper"> 
+	<select id="selectordersptById" parameterType="String" resultType="Orderspt">
+		SELECT a.*,b.nickname as cusname,b.phone as phone 
+		FROM orderspt a 
+		LEFT JOIN customer b ON a.cus_id=b.id 
+		WHERE a.ID=#{id}
+	</select>
+
+	<delete id="deleteorderspt" parameterType="String"> 
+		DELETE FROM orderspt WHERE ID=#{id}
+	</delete>
+
+	<select id="selectordersptByParam" parameterType="java.util.Map" resultType="Orderspt">
+		SELECT a.*,b.nickname as cusname,b.phone as phone 
+		FROM orderspt a 
+		LEFT JOIN customer b ON a.cus_id=b.id 
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND a.ID =#{id} </if>
+			<if test="cus_id != null"> AND a.CUS_ID =#{cus_id} </if>
+			<if test="ordernum != null"> AND a.ORDERNUM =#{ordernum} </if>
+			<if test="price != null"> AND a.PRICE =#{price} </if>
+			<if test="fromaddress != null"> AND a.FROMADDRESS =#{fromaddress} </if>
+			<if test="fromphone != null"> AND a.FROMPHONE =#{fromphone} </if>
+			<if test="toaddress != null"> AND a.TOADDRESS =#{toaddress} </if>
+			<if test="tophone != null"> AND a.TOPHONE =#{tophone} </if>
+			<if test="note != null"> AND a.NOTE =#{note} </if>
+			<if test="send_dtFrom != null"> AND unix_timestamp(a.SEND_DT) &gt;=unix_timestamp(#{send_dtFrom}) </if>
+			<if test="send_dtTo != null"> AND unix_timestamp(a.SEND_DT) &lt;=unix_timestamp(#{send_dtTo}) </if>
+			<if test="send_dt != null"> AND a.SEND_DT =#{send_dt} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(a.C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(a.C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND a.C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(a.U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(a.U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
+			<if test="status != null"> AND a.STATUS =#{status} </if>
+			<if test="state != null"> AND a.STATE =#{state} </if>
+		</trim>  
+			<if test="orderBy!= null"> ORDER BY   #{orderBy} </if>
+		LIMIT #{fromPage},#{toPage} 
+	</select>
+
+	<select id="selectCountordersptByParam" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(id) 
+		FROM orderspt 
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND ID =#{id} </if>
+			<if test="cus_id != null"> AND CUS_ID =#{cus_id} </if>
+			<if test="ordernum != null"> AND ORDERNUM =#{ordernum} </if>
+			<if test="price != null"> AND PRICE =#{price} </if>
+			<if test="fromaddress != null"> AND FROMADDRESS =#{fromaddress} </if>
+			<if test="fromphone != null"> AND FROMPHONE =#{fromphone} </if>
+			<if test="toaddress != null"> AND TOADDRESS =#{toaddress} </if>
+			<if test="tophone != null"> AND TOPHONE =#{tophone} </if>
+			<if test="note != null"> AND NOTE =#{note} </if>
+			<if test="send_dtFrom != null"> AND unix_timestamp(SEND_DT) &gt;=unix_timestamp(#{send_dtFrom}) </if>
+			<if test="send_dtTo != null"> AND unix_timestamp(SEND_DT) &lt;=unix_timestamp(#{send_dtTo}) </if>
+			<if test="send_dt != null"> AND SEND_DT =#{send_dt} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
+			<if test="status != null"> AND STATUS =#{status} </if>
+			<if test="state != null"> AND STATE =#{state} </if>
+		</trim>  
+	</select>
+
+	<update id="updateorderspt" parameterType="Orderspt">
+		UPDATE orderspt 
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="id != null">ID=#{id}, </if>
+			<if test="cus_id != null">CUS_ID=#{cus_id}, </if>
+			<if test="ordernum != null">ORDERNUM=#{ordernum}, </if>
+			<if test="price != null">PRICE=#{price}, </if>
+			<if test="fromaddress != null">FROMADDRESS=#{fromaddress}, </if>
+			<if test="fromphone != null">FROMPHONE=#{fromphone}, </if>
+			<if test="toaddress != null">TOADDRESS=#{toaddress}, </if>
+			<if test="tophone != null">TOPHONE=#{tophone}, </if>
+			<if test="note != null">NOTE=#{note}, </if>
+			<if test="send_dt != null">SEND_DT=#{send_dt}, </if>
+			<if test="c_dt != null">C_DT=#{c_dt}, </if>
+			<if test="u_dt != null">U_DT=#{u_dt}, </if>
+			<if test="status != null">STATUS=#{status}, </if>
+			<if test="state != null">STATE=#{state}, </if>
+		</trim>
+		WHERE ID=#{id}
+	</update>
+
+	<insert id="addorderspt" parameterType="Orderspt" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO orderspt 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="cus_id != null">CUS_ID, </if>
+			<if test="ordernum != null">ORDERNUM, </if>
+			<if test="price != null">PRICE, </if>
+			<if test="fromaddress != null">FROMADDRESS, </if>
+			<if test="fromphone != null">FROMPHONE, </if>
+			<if test="toaddress != null">TOADDRESS, </if>
+			<if test="tophone != null">TOPHONE, </if>
+			<if test="note != null">NOTE, </if>
+			<if test="send_dt != null">SEND_DT, </if>
+			<if test="c_dt != null">C_DT, </if>
+			<if test="u_dt != null">U_DT, </if>
+			<if test="status != null">STATUS, </if>
+			<if test="state != null">STATE, </if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
+			<if test="cus_id != null">#{cus_id}, </if>
+			<if test="ordernum != null">#{ordernum}, </if>
+			<if test="price != null">#{price}, </if>
+			<if test="fromaddress != null">#{fromaddress}, </if>
+			<if test="fromphone != null">#{fromphone}, </if>
+			<if test="toaddress != null">#{toaddress}, </if>
+			<if test="tophone != null">#{tophone}, </if>
+			<if test="note != null">#{note}, </if>
+			<if test="send_dt != null">#{send_dt}, </if>
+			<if test="c_dt != null">#{c_dt}, </if>
+			<if test="u_dt != null">#{u_dt}, </if>
+			<if test="status != null">#{status}, </if>
+			<if test="state != null">#{state}, </if>
+		</trim>
+	</insert>
+
+	<insert id="muladdorderspt" parameterType="java.util.List" keyProperty="id" useGeneratedKeys="true">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			INSERT INTO orderspt 
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+				<if test="item.id != null">ID, </if>
+				<if test="item.cus_id != null">CUS_ID, </if>
+				<if test="item.ordernum != null">ORDERNUM, </if>
+				<if test="item.price != null">PRICE, </if>
+				<if test="item.fromaddress != null">FROMADDRESS, </if>
+				<if test="item.fromphone != null">FROMPHONE, </if>
+				<if test="item.toaddress != null">TOADDRESS, </if>
+				<if test="item.tophone != null">TOPHONE, </if>
+				<if test="item.note != null">NOTE, </if>
+				<if test="item.send_dt != null">SEND_DT, </if>
+				<if test="item.c_dt != null">C_DT, </if>
+				<if test="item.u_dt != null">U_DT, </if>
+				<if test="item.status != null">STATUS, </if>
+				<if test="item.state != null">STATE, </if>
+			</trim>
+			<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
+				<if test="item.id != null">#{item.id}, </if>
+				<if test="item.cus_id != null">#{item.cus_id}, </if>
+				<if test="item.ordernum != null">#{item.ordernum}, </if>
+				<if test="item.price != null">#{item.price}, </if>
+				<if test="item.fromaddress != null">#{item.fromaddress}, </if>
+				<if test="item.fromphone != null">#{item.fromphone}, </if>
+				<if test="item.toaddress != null">#{item.toaddress}, </if>
+				<if test="item.tophone != null">#{item.tophone}, </if>
+				<if test="item.note != null">#{item.note}, </if>
+				<if test="item.send_dt != null">#{item.send_dt}, </if>
+				<if test="item.c_dt != null">#{item.c_dt}, </if>
+				<if test="item.u_dt != null">#{item.u_dt}, </if>
+				<if test="item.status != null">#{item.status}, </if>
+				<if test="item.state != null">#{item.state}, </if>
+			</trim>
+		</foreach>
+	</insert>
+</mapper>

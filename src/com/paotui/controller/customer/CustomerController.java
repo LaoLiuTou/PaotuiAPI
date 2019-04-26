@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paotui.service.customer.ICustomerService;
 import com.paotui.utils.MD5Encryption;
+import com.paotui.utils.ShareCodeUtil;
 import com.paotui.model.customer.Customer; 
 @Controller
 public class CustomerController {
@@ -158,6 +159,9 @@ public class CustomerController {
 				paramMap.put("password",customer.getPassword());
 				paramMap.put("header",customer.getHeader());
 				paramMap.put("wechat",customer.getWechat());
+				paramMap.put("inviter",customer.getInviter());
+				paramMap.put("invitecode",customer.getInvitecode());
+				paramMap.put("isnew",customer.getIsnew());
 				String c_dtFrom=request.getParameter("c_dtFrom");
 				String c_dtTo=request.getParameter("c_dtTo");
 				if(c_dtFrom!=null&&!c_dtFrom.equals(""))
@@ -271,15 +275,23 @@ public class CustomerController {
 					resultMap.put("msg", "用户名已存在！");
 				}
 				else{
-					//String password=MD5Encryption.getEncryption(customer.getPassword()).toLowerCase();
-					//customer.setPassword(password);
-					
+					if(customer.getInvitecode()!=null&&!customer.getInvitecode().equals("")){
+						String cus_id=ShareCodeUtil.getUidByCode(customer.getInvitecode())+"";
+						Customer temp=iCustomerService.selectCustomerById(cus_id);
+						if(temp!=null){
+							customer.setInviter(temp.getId());
+						}
+						else{
+							resultMap.put("status", "-1");
+							resultMap.put("msg", "该邀请码不存在！");
+							return resultMap;
+						}
+					}
 					iCustomerService.addCustomer(customer);
 					resultMap.put("status", "0");
 					resultMap.put("msg", customer);
 					logger.info("新建成功，主键："+customer.getId());
 				}
-				
 			}
 			else{
 				resultMap.put("status", "-1");
@@ -311,6 +323,9 @@ public class CustomerController {
 			paramMap.put("password",customer.getPassword());
 			paramMap.put("header",customer.getHeader());
 			paramMap.put("wechat",customer.getWechat());
+			paramMap.put("inviter",customer.getInviter());
+			paramMap.put("invitecode",customer.getInvitecode());
+			paramMap.put("isnew",customer.getIsnew());
 			String c_dtFrom=request.getParameter("c_dtFrom");
 			String c_dtTo=request.getParameter("c_dtTo");
 			if(c_dtFrom!=null&&!c_dtFrom.equals(""))
