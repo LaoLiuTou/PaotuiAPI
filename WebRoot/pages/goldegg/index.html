@@ -106,7 +106,7 @@
             <div id="card">
                 <a href="" target="_self" class="win"></a>
             </div>
-            <a href="my.html"   class="btn"></a>
+            <a href="javascript:;"   class="btn"></a>
             <span id="close"></span>
         </div>
     </div>
@@ -124,6 +124,11 @@
     $(document).ready(function(){
 
         $('#myWin').click(function(){
+            $(this).prop('href','my.html?cus_id='+GetQueryString('cus_id'));
+            $(this).click();
+
+        });
+        $('.btn').click(function(){
             $(this).prop('href','my.html?cus_id='+GetQueryString('cus_id'));
             $(this).click();
 
