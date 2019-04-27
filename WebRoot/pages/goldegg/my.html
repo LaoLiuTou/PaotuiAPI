@@ -30,7 +30,7 @@
     </script>
 <body>
 <div id="wrap">
-    <header>
+    <!--<header>
         <div class="title clearfix">
             客服：
             <div class="clearfix">
@@ -44,59 +44,56 @@
                 </p>
             </div>
         </div>
-    </header>
+    </header>-->
     <ul class="main">
-        <li>
-            <a href='" + v.adUrl + "'>
-                <img src='" + v.adImgUrl + "'>
-                <div>
-                    <p>恭喜您获得了<span id='text'>123444</span></p>
-                    <p>有效期：  <span>长期有效</span></p>
-                    <i class='iconfont icon-youjiantou-01'></i>
-                    </div>
-                </a>
-            </li>
 
     </ul>
 </div>
 
 <script src="common/js/jquery.min.js"></script>
+
+<script src="../js/main/config.js"></script>
 <script>
-    var $list = $(".main");//获得的奖品
 
-    $.ajaxSettings.async = false;
-    $.getJSON(basePath + "api/browse/browseWd", "", function(data){
+    $.ajax({
+        url : url+'listPrize',
+        type : 'POST',
+        async:false,
+        data : {
+            'cus_id' : GetQueryString('cus_id'),
+            'page' : '1',
+            'size' : 100
+        },
+        headers : {
+            'source' : 'APP'
+        },
+        success : function(response) {
+            var status = response['status'];
+            if(status=='0'){
+                var data=response['msg']['data'];
+                var html='';
+                for(var o in data) {
+                    html+= "<li>\n" ;
+                    html+="            <img class='prize-img' src='"+url+"upload/prize/prize"+data[o].details+".png'>\n";
+                    html+="            <div>\n" +
+                        "                <p>恭喜您获得了<span >"+data[o].details+"元代金券</span></p>\n" +
+                        "                <p>中奖日期：  <span>"+data[o].c_dt.substr(0,10)+"</span></p>\n" +
+                        "            </div>\n" +
+                        "        </li>";
+                }
+                $(".main").html(html);
+            }
+            else{
+                alert("获取记录失败！");
+            }
 
-        $.each(data,function(k,v){
-            var $dom = $("<li>" +
-                "<a href='" + v.adUrl + "'>" +
-                "<img src='" + v.adImgUrl + "'>" +
-                "<div>" +
-                "<p>恭喜您获得了<span id='text'>" + v.adTitle + "</span></p>" +
-                "<p>有效期：  <span>长期有效</span></p>" +
-                "<i class='iconfont icon-youjiantou-01'></i>" +
-                "</div>" +
-                "</a>" +
-                +"</li>");
-            $list.append($dom);
-        })
+        },
+        error : function(response) {
+            alert("获取记录失败！");
+        }
     });
 
-    /*var $list = $(".main");//获得的奖品
-    //循环data数组，显示已领取的奖品
-    for (var i = 0, length = data.length; i < length; i++) {
-        var $dom = $("<li>" +
-            "<a href='" + data[i].adUrl + "'>" +
-            "<img src='" + data[i].adImgUrl + "'>" +
-            "<div>" +
-            "<p>恭喜您获得了<span id='text'>" + data[i].adTitle + "</span></p>" +
-            "<p>有效期：  <span>长期有效</span></p>" +
-            "<i class='iconfont icon-youjiantou-01'></i>" +
-            "</div>" +
-            "</a>" +
-            +"</li>");
-        $list.append($dom);
-    }*/
+
 </script>
 </body>
 </html>

@@ -22,11 +22,11 @@ body {
   position: absolute;
   right: 0;
   top: 0.16rem;
-  width: 1.17333333rem;
+  width: 1.97333333rem;
   min-width: 1.6rem;
   background-color: #fdc434;
-  line-height: 0.48rem;
-  font-size: 0.24rem;
+  line-height: 0.68rem;
+  font-size: 0.34rem;
   text-align: center;
   color: #fff;
   border-radius: 3px 0 0 3px;
@@ -170,5 +170,5 @@ body {
   background-color: #f7b50b;
 }
 #mask-rule .box-rule .star {
-  background-image: url("../../common/image/rule/star1.png");
+  background-image: url("../common/image/rule/star1.png");
 }

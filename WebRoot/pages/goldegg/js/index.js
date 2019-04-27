@@ -5,14 +5,14 @@ $(function () {
         $egg = $(".goldegg"),//金蛋
         $change = $("#change"),//剩余次数
         length = $egg.length,
-        data = {count: 5},//次数
+        data = {count: 1},//次数
         arr = [],
         openArr,//记录被砸开的蛋的下标数组
         rem = 75;
 
     /*轮流提示*/
-    $(function () {
-        if (!!$.cookie("eggIndex")) {//如果存在cookie，也就是有金蛋被砸开
+    function initEgg() {
+        /*if (!!$.cookie("eggIndex")) {//如果存在cookie，也就是有金蛋被砸开
             openArr = $.cookie("eggIndex").split(",");//将cookie变为数组
             for (var i = 0; i < openArr.length; i++) {
                 arr.push(parseFloat(openArr[i]));//将上次cookie存入数组以免上次cookie被覆盖
@@ -20,7 +20,7 @@ $(function () {
                 $egg.eq(parseFloat(openArr[i])).removeClass("init");
                 $egg.eq(parseFloat(openArr[i])).data("mark", false);//更改金蛋状态为已砸开
             }
-        }
+        }*/
 
         //初始跳动
         $egg.eq(length).addClass("jump");
@@ -35,7 +35,7 @@ $(function () {
             $egg.eq(length).addClass("jump");
             $tips.eq(length).show();
         }, 1000);
-    });
+    }
 
     //跳过砸开的金蛋
     function reback() {
@@ -96,7 +96,8 @@ $(function () {
 
                 //记录被砸开的蛋
                 arr.push(i);//存入每个砸开蛋的下标
-                $.cookie("eggIndex", arr, {expires: 1});//存入cookie
+                //$.cookie("eggIndex", arr, {expires: 1});//存入cookie
+                alert(i);
             }, 600);
         }, 600);
         $egg.eq(i).data("mark", false);//更改金蛋状态为已砸开

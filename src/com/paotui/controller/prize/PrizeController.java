@@ -1,4 +1,4 @@
-package com.paotui.controller.ticket;
+package com.paotui.controller.prize;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,24 +16,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.paotui.service.ticket.ITicketService;
-import com.paotui.model.ticket.Ticket;
+import com.paotui.service.prize.IPrizeService;
+import com.paotui.model.prize.Prize;
 @Controller
-public class TicketController {
+public class PrizeController {
 	@Autowired
-	private ITicketService iTicketService;
+	private IPrizeService iPrizeService;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Logger logger = Logger.getLogger("PaotuiLogger");
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/addTicket")
+	@RequestMapping("/addPrize")
 	@ResponseBody
-	public Map add(Ticket ticket){
+	public Map add(Prize prize){
 		Map resultMap=new HashMap();
 		try {
-			iTicketService.addTicket(ticket);
+			iPrizeService.addPrize(prize);
 			resultMap.put("status", "0");
-			resultMap.put("msg", ticket.getId());
-			logger.info("新建成功，主键："+ticket.getId());
+			resultMap.put("msg", prize.getId());
+			logger.info("新建成功，主键："+prize.getId());
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "新建失败！");
@@ -43,19 +43,19 @@ public class TicketController {
 		return resultMap;
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/muladdTicket")
+	@RequestMapping("/muladdPrize")
 	@ResponseBody
-	public Map muladd(HttpServletRequest request,Ticket ticket){
+	public Map muladd(HttpServletRequest request,Prize prize){
 		Map resultMap=new HashMap();
 		try {
 			String data=request.getParameter("data");
 			ObjectMapper objectMapper = new ObjectMapper();
-			JavaType javaType = objectMapper.getTypeFactory().constructParametricType(ArrayList.class, Ticket.class);
-			List<Ticket> list = (List<Ticket>)objectMapper.readValue(data, javaType);
-			iTicketService.muladdTicket(list);
+			JavaType javaType = objectMapper.getTypeFactory().constructParametricType(ArrayList.class, Prize.class);
+			List<Prize> list = (List<Prize>)objectMapper.readValue(data, javaType);
+			iPrizeService.muladdPrize(list);
 			resultMap.put("status", "0");
 			resultMap.put("msg", "新建成功");
-			logger.info("新建成功，主键："+ticket.getId());
+			logger.info("新建成功，主键："+prize.getId());
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "新建失败！");
@@ -65,20 +65,20 @@ public class TicketController {
 		return resultMap;
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/deleteTicket")
+	@RequestMapping("/deletePrize")
 	@ResponseBody
-	public Map delete(Ticket ticket){
+	public Map delete(Prize prize){
 		Map resultMap=new HashMap();
 		try {
-			if(ticket.getId()==null){
+			if(prize.getId()==null){
 				resultMap.put("status", "-1");
 				resultMap.put("msg", "参数不能为空！");
 			}
 			else{
-				int resultDelete=iTicketService.deleteTicket(ticket.getId()+"");
+				int resultDelete=iPrizeService.deletePrize(prize.getId()+"");
 				resultMap.put("status", "0");
 				resultMap.put("msg", "删除成功！");
-				logger.info("删除成功，主键："+ticket.getId());
+				logger.info("删除成功，主键："+prize.getId());
 			}
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
@@ -89,17 +89,17 @@ public class TicketController {
 		return resultMap;
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/selectTicket")
+	@RequestMapping("/selectPrize")
 	@ResponseBody
-	public Map select(Ticket ticket){
+	public Map select(Prize prize){
 		Map resultMap=new HashMap();
 		try {
-			if(ticket.getId()==null){
+			if(prize.getId()==null){
 				resultMap.put("status", "-1");
 				resultMap.put("msg", "参数不能为空！");
 			}
 			else{
-				Ticket resultSelect=iTicketService.selectTicketById(ticket.getId()+"");
+				Prize resultSelect=iPrizeService.selectPrizeById(prize.getId()+"");
 				resultMap.put("status", "0");
 				resultMap.put("msg", resultSelect);
 			}
@@ -112,20 +112,20 @@ public class TicketController {
 		return resultMap;
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/updateTicket")
+	@RequestMapping("/updatePrize")
 	@ResponseBody
-	public Map update(Ticket ticket){
+	public Map update(Prize prize){
 		Map resultMap=new HashMap();
 		try {
-			if(ticket.getId()==null){
+			if(prize.getId()==null){
 				resultMap.put("status", "-1");
 				resultMap.put("msg", "参数不能为空！");
 			}
 			else{
-				int resultUpdate=iTicketService.updateTicket(ticket);
+				int resultUpdate=iPrizeService.updatePrize(prize);
 				resultMap.put("status", "0");
 				resultMap.put("msg", "更新成功！");
-				logger.info("更新成功，主键："+ticket.getId());
+				logger.info("更新成功，主键："+prize.getId());
 			}
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
@@ -136,9 +136,9 @@ public class TicketController {
 		return resultMap;
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/listTicket")
+	@RequestMapping("/listPrize")
 	@ResponseBody
-	public Map list(HttpServletRequest request, HttpServletResponse response,Ticket ticket)
+	public Map list(HttpServletRequest request, HttpServletResponse response,Prize prize)
 		throws ServletException, IOException {
 		Map resultMap=new HashMap();
 		try {
@@ -148,11 +148,11 @@ public class TicketController {
 				Map paramMap=new HashMap();
 				paramMap.put("fromPage",(Integer.parseInt(page)-1)*Integer.parseInt(size));
 				paramMap.put("toPage",Integer.parseInt(size)); 
-				paramMap.put("orderBy","a.ID DESC"); 
-				paramMap.put("id",ticket.getId());
-				paramMap.put("cus_id",ticket.getCus_id());
-				paramMap.put("note",ticket.getNote());
-				paramMap.put("resume",ticket.getResume());
+				paramMap.put("orderBy","ID DESC"); 
+				paramMap.put("id",prize.getId());
+				paramMap.put("cus_id",prize.getCus_id());
+				paramMap.put("type",prize.getType());
+				paramMap.put("details",prize.getDetails());
 				String c_dtFrom=request.getParameter("c_dtFrom");
 				String c_dtTo=request.getParameter("c_dtTo");
 				if(c_dtFrom!=null&&!c_dtFrom.equals(""))
@@ -165,10 +165,9 @@ public class TicketController {
 				paramMap.put("u_dtFrom", sdf.parse(u_dtFrom));
 				if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
-				paramMap.put("state",ticket.getState());
-				paramMap.put("type",ticket.getType());
-				List<Ticket> list=iTicketService.selectTicketByParam(paramMap);
-				int totalnumber=iTicketService.selectCountTicketByParam(paramMap);
+				paramMap.put("state",prize.getState());
+				List<Prize> list=iPrizeService.selectPrizeByParam(paramMap);
+				int totalnumber=iPrizeService.selectCountPrizeByParam(paramMap);
 				Map tempMap=new HashMap();
 				resultMap.put("status", "0");
 				tempMap.put("num", totalnumber);

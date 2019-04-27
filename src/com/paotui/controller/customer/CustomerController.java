@@ -139,6 +139,7 @@ public class CustomerController {
 		}
 		return resultMap;
 	}
+ 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/listCustomer")
 	@ResponseBody
@@ -162,6 +163,7 @@ public class CustomerController {
 				paramMap.put("inviter",customer.getInviter());
 				paramMap.put("invitecode",customer.getInvitecode());
 				paramMap.put("isnew",customer.getIsnew());
+				paramMap.put("isprize",customer.getIsprize());
 				String c_dtFrom=request.getParameter("c_dtFrom");
 				String c_dtTo=request.getParameter("c_dtTo");
 				if(c_dtFrom!=null&&!c_dtFrom.equals(""))
@@ -326,6 +328,7 @@ public class CustomerController {
 			paramMap.put("inviter",customer.getInviter());
 			paramMap.put("invitecode",customer.getInvitecode());
 			paramMap.put("isnew",customer.getIsnew());
+			paramMap.put("isprize",customer.getIsprize());
 			String c_dtFrom=request.getParameter("c_dtFrom");
 			String c_dtTo=request.getParameter("c_dtTo");
 			if(c_dtFrom!=null&&!c_dtFrom.equals(""))

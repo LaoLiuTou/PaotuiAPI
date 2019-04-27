@@ -36,14 +36,6 @@ function selectCustomer(id){
         if(status=='0'){
             var data = obj['msg'];
             currentCustomer=data;
-            for (var item in data) {
-                $('#'+item).val(data[item]);
-                if(item=='img'){
-                    image=data[item];
-                }
-            }
-            initFiles();
-            allGoods();
         }
     });
 }

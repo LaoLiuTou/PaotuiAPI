@@ -134,6 +134,14 @@ public class Customer {
 	public void setInvitername(String invitername) {
 		this.invitername = invitername;
 	}
+	private String  isprize;
+	public String getIsprize() {
+		return isprize;
+	}
+	public void setIsprize(String isprize) {
+		this.isprize = isprize;
+	}
+ 
 	
 	
 }

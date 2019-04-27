@@ -1,11 +1,11 @@
-package com.paotui.model.ticket;
+package com.paotui.model.prize;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 /**
  * @author LT
  */
-public class Ticket {
+public class Prize {
 
 	/**  */
 	private  Long id;
@@ -23,21 +23,21 @@ public class Ticket {
 	public void setCus_id(Long cus_id) {
 		this.cus_id = cus_id;
 	}
-	/** 备注 */
-	private  String note;
-	public String getNote() {
-		return note;
+	/** 奖品类型 */
+	private  String type;
+	public String getType() {
+		return type;
 	}
-	public void setNote(String note) {
-		this.note = note;
+	public void setType(String type) {
+		this.type = type;
 	}
-	/** 回复 */
-	private  String resume;
-	public String getResume() {
-		return resume;
+	/** 详情 */
+	private  String details;
+	public String getDetails() {
+		return details;
 	}
-	public void setResume(String resume) {
-		this.resume = resume;
+	public void setDetails(String details) {
+		this.details = details;
 	}
 	/**  */
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -66,28 +66,6 @@ public class Ticket {
 		this.state = state;
 	}
 
-	private String cusname;
-	private String phone;
-	public String getCusname() {
-		return cusname;
-	}
-	public void setCusname(String cusname) {
-		this.cusname = cusname;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
 
-	private String type;
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	
 
 }

@@ -116,8 +116,15 @@ function  queryTicket (searchText,currentPage,pageSize) {
             for(var o in data){
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td >'+data[o].id+'</td>\n' +
-                    '<td >'+data[o].phone+'</td>\n' +
-                    '<td >'+data[o].note+'</td>\n' +
+                    '<td >'+data[o].phone+'</td>\n' ;
+                if(data[o].type=='1'){
+                    html+='<td >购票</td>\n' ;
+                }
+                else if(data[o].type=='2'){
+                    html+='<td >城市快讯</td>\n' ;
+                }
+
+                html+='<td >'+data[o].note+'</td>\n' +
                     '<td >'+data[o].resume+'</td>\n' +
                     '<td >'+data[o].c_dt+'</td>\n' ;
 

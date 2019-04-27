@@ -121,7 +121,7 @@ function  queryNews (searchText,currentPage,pageSize) {
                     html+='<td style="line-height: 50px;">电信资讯</td>\n' ;
                 }
                 else if(data[o].type=='2'){
-                    html+='<td style="line-height: 50px;">免费抽奖</td>\n' ;
+                    html+='<td style="line-height: 50px;">免费领手机</td>\n' ;
                 }
                 else if(data[o].type=='3'){
                 	html+='<td style="line-height: 50px;">政府资讯</td>\n' ;
@@ -130,26 +130,42 @@ function  queryNews (searchText,currentPage,pageSize) {
                 	html+='<td style="line-height: 50px;">宽带业务</td>\n' ;
                 }
                 else if(data[o].type=='5'){
-                	html+='<td style="line-height: 50px;">套餐资讯</td>\n' ;
+                	html+='<td style="line-height: 50px;">优惠套餐</td>\n' ;
                 }
                 else if(data[o].type=='6'){
-                	html+='<td style="line-height: 50px;">每日报价</td>\n' ;
+                	html+='<td style="line-height: 50px;">手机报价</td>\n' ;
                 }
                 else if(data[o].type=='7'){
                 	html+='<td style="line-height: 50px;">二手机收售</td>\n' ;
                 }
                 else if(data[o].type=='8'){
-                	html+='<td style="line-height: 50px;">靓号</td>\n' ;
+                	html+='<td style="line-height: 50px;">靓号收售</td>\n' ;
                 }
-                else if(data[o].type=='9'){
-                	html+='<td style="line-height: 50px;">招聘</td>\n' ;
+                else if(data[o].type=='21'){
+                	html+='<td style="line-height: 50px;">房屋信息</td>\n' ;
                 }
-                else if(data[o].type=='10'){
+                else if(data[o].type=='22'){
+                	html+='<td style="line-height: 50px;">招聘求职</td>\n' ;
+                }
+                else if(data[o].type=='23'){
+                	html+='<td style="line-height: 50px;">二手物品</td>\n' ;
+                }
+                else if(data[o].type=='24'){
+                	html+='<td style="line-height: 50px;">教育培训</td>\n' ;
+                }
+                else if(data[o].type=='25'){
                 	html+='<td style="line-height: 50px;">饮食</td>\n' ;
                 }
-                else if(data[o].type=='11'){
-                	html+='<td style="line-height: 50px;">靓号收集</td>\n' ;
+                else if(data[o].type=='26'){
+                	html+='<td style="line-height: 50px;">出兑出售</td>\n' ;
                 }
+                else if(data[o].type=='27'){
+                	html+='<td style="line-height: 50px;">便民信息港</td>\n' ;
+                }
+
+
+
+
                 html+='<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
                     '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
                 /*if(data[o].state=='1'){

@@ -1,4 +1,5 @@
 package com.paotui.service.orders;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -60,7 +61,7 @@ public class OrdersServiceImpl  implements IOrdersService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		int result=0;
 		orders.setPay_dt(new Date());
-		orders.setStatus("0");
+		//orders.setStatus("0");
 		orders.setState(Long.parseLong("0"));
 		orders.setOrdernum(sdf.format(new Date())+((int)((Math.random()*9+1)*100000)));
 		result=iOrdersMapper.addorders(orders);
@@ -69,7 +70,9 @@ public class OrdersServiceImpl  implements IOrdersService {
 			String balance=customer.getBalance();
 			Customer temp = new Customer();
 			temp.setId(orders.getCus_id());
-			temp.setBalance((Float.parseFloat(balance)-Float.parseFloat(orders.getPrice()))+"");
+			DecimalFormat decimalFormat=new DecimalFormat(".0");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+			String price=decimalFormat.format(Float.parseFloat(balance)-Float.parseFloat(orders.getPrice()));//format 返回的是字符串
+			temp.setBalance(price);
 			iCustomerMapper.updatecustomer(temp);
 		} 
 		
