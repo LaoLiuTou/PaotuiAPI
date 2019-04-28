@@ -59,6 +59,14 @@ public class CustomerServiceImpl  implements ICustomerService {
 	public  int updateCustomer(Customer customer){
 		return iCustomerMapper.updatecustomer(customer);
 	}
+	/**
+	 * 更新 
+	 * @return 
+	 */ 
+	@Transactional
+	public  int updateCustomerprize(Customer customer){
+		return iCustomerMapper.updatecustomerprize(customer);
+	}
 
 	/**
 	* 添加 

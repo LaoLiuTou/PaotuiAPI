@@ -117,11 +117,26 @@ function  queryTicket (searchText,currentPage,pageSize) {
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td >'+data[o].id+'</td>\n' +
                     '<td >'+data[o].phone+'</td>\n' ;
-                if(data[o].type=='1'){
+                if(data[o].type=='10'){
                     html+='<td >购票</td>\n' ;
                 }
+                else if(data[o].type=='1'){
+                    html+='<td >电信资讯</td>\n' ;
+                }
                 else if(data[o].type=='2'){
-                    html+='<td >城市快讯</td>\n' ;
+                    html+='<td >免费领手机</td>\n' ;
+                }
+                else if(data[o].type=='5'){
+                    html+='<td >优惠套餐</td>\n' ;
+                }
+                else if(data[o].type=='6'){
+                    html+='<td >手机报价</td>\n' ;
+                }
+                else if(data[o].type=='7'){
+                    html+='<td >二手机收售</td>\n' ;
+                }
+                else if(data[o].type=='11'){
+                    html+='<td >靓号收集</td>\n' ;
                 }
 
                 html+='<td >'+data[o].note+'</td>\n' +

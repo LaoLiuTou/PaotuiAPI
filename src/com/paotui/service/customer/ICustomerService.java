@@ -34,6 +34,11 @@ public interface ICustomerService {
 	* @return 
 	*/ 
 	public int updateCustomer(Customer customer);
+	/**
+	 * 更新 
+	 * @return 
+	 */ 
+	public int updateCustomerprize(Customer customer);
 
 	/**
 	* 添加 

@@ -32,6 +32,11 @@ import com.paotui.model.customer.Customer;
  */ 
 	public  int updatecustomer(Customer customer);
 	/**
+	 * 更新 
+	 * @return 
+	 */ 
+	public  int updatecustomerprize(Customer customer);
+	/**
  	* 添加 
  	* @return
  */ 

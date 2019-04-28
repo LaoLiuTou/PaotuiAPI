@@ -128,7 +128,9 @@
 		</trim>
 		WHERE ID=#{id}
 	</update>
-
+	<update id="updatecustomerprize" parameterType="Customer">
+		UPDATE customer SET ISPRIZE='1' where ISPRIZE='0'
+	</update>
 	<insert id="addcustomer" parameterType="Customer" keyProperty="id" useGeneratedKeys="true">
 		INSERT INTO customer 
 		<trim prefix="(" suffix=")" suffixOverrides="," >
