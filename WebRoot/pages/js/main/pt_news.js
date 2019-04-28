@@ -99,7 +99,7 @@ function  queryNews (searchText,currentPage,pageSize) {
         var bodyParam={'page':currentPage,'size':pageSize};
     }
     else{
-        var bodyParam={'page':currentPage,'size':pageSize,'searchText':searchText};
+        var bodyParam={'page':currentPage,'size':pageSize,'type':searchText};
     }
 
     var httpR = new createHttpR(url+'listNews','post','text',bodyParam,'callBack');
@@ -117,6 +117,9 @@ function  queryNews (searchText,currentPage,pageSize) {
                     '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
                     '<td style="line-height: 50px;width:120px"><img src="'+url+data[o].image+'" width="100px" height="50px"></td>\n' +
                     '<td style="line-height: 50px;">'+data[o].title+'</td>\n' ;
+
+
+
                 if(data[o].type=='1'){
                     html+='<td style="line-height: 50px;">电信资讯</td>\n' ;
                 }
@@ -125,9 +128,6 @@ function  queryNews (searchText,currentPage,pageSize) {
                 }
                 else if(data[o].type=='3'){
                 	html+='<td style="line-height: 50px;">政府资讯</td>\n' ;
-                }
-                else if(data[o].type=='4'){
-                	html+='<td style="line-height: 50px;">宽带业务</td>\n' ;
                 }
                 else if(data[o].type=='5'){
                 	html+='<td style="line-height: 50px;">优惠套餐</td>\n' ;
@@ -138,7 +138,7 @@ function  queryNews (searchText,currentPage,pageSize) {
                 else if(data[o].type=='7'){
                 	html+='<td style="line-height: 50px;">二手机收售</td>\n' ;
                 }
-                else if(data[o].type=='8'){
+                else if(data[o].type=='11'){
                 	html+='<td style="line-height: 50px;">靓号收售</td>\n' ;
                 }
                 else if(data[o].type=='21'){
@@ -161,6 +161,9 @@ function  queryNews (searchText,currentPage,pageSize) {
                 }
                 else if(data[o].type=='27'){
                 	html+='<td style="line-height: 50px;">便民信息港</td>\n' ;
+                }
+                else {
+                    html+='<td style="line-height: 50px;">其他</td>\n' ;
                 }
 
 

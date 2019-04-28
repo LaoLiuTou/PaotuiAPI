@@ -99,7 +99,7 @@ function  queryTicket (searchText,currentPage,pageSize) {
         var bodyParam={'page':currentPage,'size':pageSize};
     }
     else{
-        var bodyParam={'page':currentPage,'size':pageSize,'searchText':'%'+searchText+'%'};
+        var bodyParam={'page':currentPage,'size':pageSize,'type':searchText};
     }
 
     var httpR = new createHttpR(url+'listTicket','post','text',bodyParam,'callBack');
@@ -138,6 +138,29 @@ function  queryTicket (searchText,currentPage,pageSize) {
                 else if(data[o].type=='11'){
                     html+='<td >靓号收集</td>\n' ;
                 }
+                else if(data[o].type=='21'){
+                    html+='<td >房屋信息</td>\n' ;
+                }
+                else if(data[o].type=='22'){
+                    html+='<td >招聘求职</td>\n' ;
+                }
+                else if(data[o].type=='23'){
+                    html+='<td >二手物品</td>\n' ;
+                }
+                else if(data[o].type=='24'){
+                    html+='<td >教育培训</td>\n' ;
+                }
+                else if(data[o].type=='25'){
+                    html+='<td >饮食</td>\n' ;
+                }
+                else if(data[o].type=='26'){
+                    html+='<td >出兑出售</td>\n' ;
+                }
+                else if(data[o].type=='27'){
+                    html+='<td >便民信息港</td>\n' ;
+                }
+
+
 
                 html+='<td >'+data[o].note+'</td>\n' +
                     '<td >'+data[o].resume+'</td>\n' +
