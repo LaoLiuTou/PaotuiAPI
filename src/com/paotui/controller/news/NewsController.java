@@ -148,7 +148,7 @@ public class NewsController {
 				Map paramMap=new HashMap();
 				paramMap.put("fromPage",(Integer.parseInt(page)-1)*Integer.parseInt(size));
 				paramMap.put("toPage",Integer.parseInt(size)); 
-				paramMap.put("orderBy","a.ID DESC"); 
+				paramMap.put("orderBy","a.STATE DESC ,a.ID DESC "); 
 				paramMap.put("id",news.getId());
 				paramMap.put("title",news.getTitle());
 				paramMap.put("image",news.getImage());

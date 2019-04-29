@@ -173,7 +173,7 @@
                                         <th>类型</th>
                                         <th>创建者</th>
                                         <th>创建时间</th>
-                                        <!--<th>状态</th>-->
+                                        <th>置顶</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -294,6 +294,19 @@
         });
         $('#deleteBtn').click(function () {
             deleteNews(currentNews.id);
+        });
+        //置顶
+        $('#contentTbody').on('click','.topNews',function () {
+            newsIndex=$(this).attr('index');
+            currentNews=newsList[newsIndex];
+            var bodyParam={'id':currentNews.id,'state':'1'};
+            updateNews(bodyParam);
+        });
+        $('#contentTbody').on('click','.unTopNews',function () {
+            newsIndex=$(this).attr('index');
+            currentNews=newsList[newsIndex];
+            var bodyParam={'id':currentNews.id,'state':'0'};
+            updateNews(bodyParam);
         });
     });
 

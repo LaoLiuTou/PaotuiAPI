@@ -78,7 +78,7 @@
 			<if test="balance != null"> AND a.BALANCE =#{balance} </if>
 			<if test="searchText != null"> AND a.PHONE like #{searchText} </if>
 		</trim>  
-			<if test="orderBy!= null"> ORDER BY   #{orderBy} </if>
+			<if test="orderBy!= null"> ORDER BY    ${orderBy} </if>
 		LIMIT #{fromPage},#{toPage} 
 	</select>
 

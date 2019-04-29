@@ -171,12 +171,12 @@ function  queryNews (searchText,currentPage,pageSize) {
 
                 html+='<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
                     '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
-                /*if(data[o].state=='1'){
-                    html+='<td style="line-height: 50px;">停用</td>\n' ;
+                if(data[o].state=='1'){
+                    html+='<td style="line-height: 50px;"><a class="unTopNews" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">取消置顶</span></a></td>\n' ;
                 }
                 else{
-                    html+='<td style="line-height: 50px;">启用</td>\n' ;
-                }*/
+                    html+='<td style="line-height: 50px;"><a class="topNews" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">置顶</span></a></td>\n' ;
+                }
                 html+='<td style="line-height: 50px;"><a class="updateNews" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +
                     '<a class="deleteNews" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';
                 html+='</tr>';

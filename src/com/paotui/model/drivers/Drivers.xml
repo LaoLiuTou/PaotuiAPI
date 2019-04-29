@@ -30,7 +30,7 @@
 			<if test="status != null"> AND STATUS =#{status} </if>
 			<if test="state != null"> AND STATE =#{state} </if>
 		</trim>  
-			<if test="orderBy!= null"> ORDER BY   #{orderBy} </if>
+			<if test="orderBy!= null"> ORDER BY    ${orderBy} </if>
 		LIMIT #{fromPage},#{toPage} 
 	</select>
 

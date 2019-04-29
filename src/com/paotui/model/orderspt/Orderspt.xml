@@ -40,7 +40,7 @@
 			<if test="state != null"> AND a.STATE =#{state} </if>
 			<if test="searchText != null"> AND CONCAT(IFNULL(a.ORDERNUM,''),' ',IFNULL(b.phone,'')) like #{searchText} </if>
 		</trim>  
-			<if test="orderBy!= null"> ORDER BY   #{orderBy} </if>
+			<if test="orderBy!= null"> ORDER BY    ${orderBy} </if>
 		LIMIT #{fromPage},#{toPage} 
 	</select>
 
