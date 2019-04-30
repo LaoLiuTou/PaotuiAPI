@@ -113,20 +113,21 @@ function selectNews(id){
         }).on("fileuploaded", function(event,data, previewId, index) { //异步上传成功结果处理
             //console.log(JSON.stringify(data.response));
             //console.log(previewId);
-            //console.log(index);
             if(data.response.data.length>0){
-                imagesArray.push({'index':index,'image':data.response.data[0]});
+                imagesArray.push({'index':imagesArray.length+1,'image':data.response.data[0]});
             }
         }).on('filesuccessremove', function (event, previewId,index) {
-            /*console.log(JSON.stringify(event));
-            console.log(previewId);
-            console.log(index);*/
+
+
+
+        }).on('filedeleted', function(event, key) {
             for (var i = 0; i < imagesArray.length; i++) {
-                if (imagesArray[i].index== index) {
+                if (imagesArray[i].index== (key-1) ){
                     imagesArray.remove(imagesArray[i]);
                 }
             }
         });
+
         Array.prototype.remove = function(val) {
             var index = this.indexOf(val);
             if (index > -1) {

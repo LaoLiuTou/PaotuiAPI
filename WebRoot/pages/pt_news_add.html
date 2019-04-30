@@ -298,7 +298,10 @@
 
         //add
         $('#addBtn').click(function () {
-
+            if(headerImage==''){
+                alert("请选择标题图片！");
+                return;
+            }
             function compare(property){
                 return function(a,b){
                     var value1 = a[property];

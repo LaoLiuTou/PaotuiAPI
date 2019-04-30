@@ -218,6 +218,10 @@
         selectBanner(GetQueryString('id'));
         //add
         $('#addBtn').click(function () {
+            if(image==''){
+                alert("请选择标题图片！");
+                return;
+            }
             $('#addForm input').each(function () {
                 if($(this).val()!='')
                     params[$(this).attr('id')]=$(this).val();

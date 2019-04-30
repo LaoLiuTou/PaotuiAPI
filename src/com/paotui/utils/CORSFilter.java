@@ -29,7 +29,7 @@ public class CORSFilter implements Filter {
 		String source= request.getHeader("source") ;
 		String uri = request.getServletPath();
 		if((source!=null&&source.equals("APP"))
-				||uri.startsWith("/filesUpload")||uri.startsWith("/upload")){
+				||uri.startsWith("/filesUpload")||uri.startsWith("/filesDelete")||uri.startsWith("/upload")){
 			chain.doFilter(req, res);  
 		}
 		else{
