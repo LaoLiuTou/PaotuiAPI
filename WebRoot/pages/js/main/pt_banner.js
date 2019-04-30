@@ -38,7 +38,7 @@ function selectBanner(id){
             currentBanner=data;
             for (var item in data) {
                 $('#'+item).val(data[item]);
-                if(item=='img'){
+                if(item=='image'){
                     image=data[item];
                 }
             }
@@ -46,7 +46,46 @@ function selectBanner(id){
         }
     });
 }
+    function initFiles() {
+        //$("#files").fileinput("destroy");
+        $('#files').fileinput({
+            theme: 'fa',
+            language: 'zh',
+            uploadAsync: true,//异步上传
+            uploadUrl: url+'filesUpload',
+            allowedFileExtensions: ['jpg', 'png', 'gif','mp4'],
+            showUpload: true,
+            showCaption: false,
+            showRemove : false, //显示移除按钮
+            enctype: 'multipart/form-data',
+            maxFileSize:0,
+            maxFileCount:1,
+            dropZoneTitle: '拖拽文件到这里 &hellip;',
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
 
+            //overwriteInitial: false, //不覆盖已存在的图片
+            fileActionSettings:{showDrag:false},
+            initialPreviewAsData: true,
+            initialPreview: [
+                url+image
+            ],
+            initialPreviewConfig: [
+                {caption: "",  width: "120px", url: url+"filesDelete", key: 1}
+            ]
+
+        }).on("filebatchselected", function(event, files) {
+            //$(this).fileinput("upload");
+        }).on("fileuploaded", function(event,data, previewId, index) { //异步上传成功结果处理
+            if(data.response.data.length>0){
+                image=data.response.data[0];
+            }
+        }).on('filesuccessremove', function (event, previewId,index) {
+            image='';
+        }).on('filepredelete', function(event, key, jqXHR, data) {
+            image='';
+        }) ;
+
+    }
 
 /**
  * 修改资讯
