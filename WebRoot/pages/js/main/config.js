@@ -1,7 +1,7 @@
 //后台服务地址
 //var url = 'http://192.168.101.11/Paotui/';
-//var url = 'http://192.168.1.144/Paotui/';
-var url = 'http://app.dongsheng.club:8888/';
+var url = 'http://192.168.1.144/Paotui/';
+//var url = 'http://app.dongsheng.club:8888/';
 
 //secret key
 var sk = 'TTILY';
@@ -333,6 +333,7 @@ function setMenu(par,sub){
         '                        <li id="menu5-1"><a href="pt_user.html">账号管理</a></li>\n' +
         '                        <li id="menu5-2"><a href="pt_config.html">APP设置</a></li>\n' +
         '                        <li id="menu5-3"><a href="pt_install.html">安装统计</a></li>\n' +
+        '                        <li id="menu5-4"><a href="pt_banner.html">轮播图设置</a></li>\n' +
         '                    </ul>\n' +
         '                </li>\n' +
         '            </ul>';

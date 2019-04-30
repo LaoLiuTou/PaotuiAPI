@@ -7,7 +7,7 @@
   <meta name="author" content="ThemeBucket">
   <link rel="shortcut icon" href="#" type="image/png">
 
-  <title>资讯管理</title>
+  <title>轮播图管理</title>
 
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
@@ -110,7 +110,7 @@
                 <li>
                     <a href="#">系统设置</a>
                 </li>
-                <li class="active">资讯管理</li>
+                <li class="active">轮播图管理</li>
             </ul>
 
         </div>
@@ -128,7 +128,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            资讯管理
+                            轮播图管理
 
                             <span class="tools pull-right">
                             <button type="button" class="btn btn-info popovers"  id="newBtn" >新建</button>
@@ -138,42 +138,17 @@
                          </span>
                         </header>
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form">
-                                <div class="form-group col-md-3 mr10">
-                                    <div class="col-md-12 pdnone">
-                                        <select class="form-control m-bot15"   id="type">
-                                            <option value="">全部</option>
-                                            <option value="1">电信资讯</option>
-                                            <option value="2">免费领手机</option>
-                                            <option value="3">政府资讯</option>
-                                            <option value="5">优惠套餐</option>
-                                            <option value="6">手机报价</option>
-                                            <option value="7">二手机收售</option>
-                                            <option value="11">靓号收售</option>
-                                            <option value="21">房屋信息</option>
-                                            <option value="22">招聘求职</option>
-                                            <option value="23">二手物品</option>
-                                            <option value="24">教育培训</option>
-                                            <option value="25">饮食</option>
-                                            <option value="26">出兑出售</option>
-                                            <option value="27">便民信息港</option>
 
-                                        </select>
-                                    </div>
-                                </div>
-                                <button id="searchBtn" type="button" class="btn btn-info popovers mb10">搜索</button>
-                            </form>
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                     <tr>
                                         <th>编号</th>
-                                        <th>标题图片</th>
+                                        <th>图片</th>
                                         <th>标题</th>
-                                        <th>类型</th>
                                         <th>创建者</th>
                                         <th>创建时间</th>
-                                        <th>置顶</th>
+                                        <th>状态</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -241,40 +216,40 @@
 
 <script src="js/main/config.js"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_news.js"></script>
+<script src="js/main/pt_banner.js"></script>
 
 <script>
     $(document).ready(function () {
 
-        setMenu("2","1");
+        setMenu("5","4");
         //搜索
         $('#searchBtn').click(function () {
-            queryNews($('#type').val(),currentPage,pageSize);
+            queryBanner($('#type').val(),currentPage,pageSize);
         });
 
         //列表
         var currentPage=1;
         var pageSize=10;
-        queryNews($('#type').val(),currentPage,pageSize);
+        queryBanner($('#type').val(),currentPage,pageSize);
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            queryNews($('#type').val(),currentPage,pageSize);
+            queryBanner($('#type').val(),currentPage,pageSize);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            queryNews($('#type').val(),currentPage,pageSize);
+            queryBanner($('#type').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            queryNews($('#type').val(),currentPage,pageSize);
+            queryBanner($('#type').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','#jumpBtn',function(){
             var reg=/^[1-9]\d*$|^0$/;
             if(reg.test($('#jumpPageText').val())==true){
-                queryNews($('#searchText').val(),$('#jumpPageText').val(),pageSize);
+                queryBanner($('#searchText').val(),$('#jumpPageText').val(),pageSize);
             }else{
                 alert("页码输入有误！");
                 return false;
@@ -283,31 +258,19 @@
 
         //新建
         $('#newBtn').click(function () {
-            window.location.href="pt_news_add.html";
+            window.location.href="pt_banner_add.html";
         });
 
 
         //删除
-        $('#contentTbody').on('click','.deleteNews',function () {
-            newsIndex=$(this).attr('index');
-            currentNews=newsList[newsIndex];
+        $('#contentTbody').on('click','.deleteBanner',function () {
+            bannerIndex=$(this).attr('index');
+            currentBanner=bannerList[bannerIndex];
         });
         $('#deleteBtn').click(function () {
-            deleteNews(currentNews.id);
+            deleteBanner(currentBanner.id);
         });
-        //置顶
-        $('#contentTbody').on('click','.topNews',function () {
-            newsIndex=$(this).attr('index');
-            currentNews=newsList[newsIndex];
-            var bodyParam={'id':currentNews.id,'state':'1'};
-            updateNews(bodyParam);
-        });
-        $('#contentTbody').on('click','.unTopNews',function () {
-            newsIndex=$(this).attr('index');
-            currentNews=newsList[newsIndex];
-            var bodyParam={'id':currentNews.id,'state':'0'};
-            updateNews(bodyParam);
-        });
+
     });
 
 </script>

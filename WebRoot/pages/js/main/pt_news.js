@@ -177,7 +177,7 @@ function  queryNews (searchText,currentPage,pageSize) {
                 else{
                     html+='<td style="line-height: 50px;"><a class="topNews" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">置顶</span></a></td>\n' ;
                 }
-                html+='<td style="line-height: 50px;"><a class="updateNews" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +
+                html+='<td style="line-height: 50px;"><a class="updateNews" href="pt_news_detail.html" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +
                     '<a class="deleteNews" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';
                 html+='</tr>';
             }

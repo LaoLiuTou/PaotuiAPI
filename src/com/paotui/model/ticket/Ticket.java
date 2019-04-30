@@ -88,6 +88,21 @@ public class Ticket {
 	public void setType(String type) {
 		this.type = type;
 	}
+	private String price;
+	private Long ispay;
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public Long getIspay() {
+		return ispay;
+	}
+	public void setIspay(Long ispay) {
+		this.ispay = ispay;
+	}
+	
 	
 
 }

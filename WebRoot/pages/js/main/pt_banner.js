@@ -1,7 +1,7 @@
-    //选取的Ticket
-    var ticketList;
-    var ticketIndex;
-    var currentTicket;
+    //选取的Banner
+    var bannerList;
+    var bannerIndex;
+    var currentBanner;
 
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -10,8 +10,8 @@
 /**
  * 添加资讯
  */
-function addTicket(bodyParam){
-    var httpR = new createHttpR(url+'addTicket','post','text',bodyParam,'callBack');
+function addBanner(bodyParam){
+    var httpR = new createHttpR(url+'addBanner','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -26,16 +26,16 @@ function addTicket(bodyParam){
 /**
  * 查询单条资讯
  */
-function selectTicket(id){
+function selectBanner(id){
     var bodyParam={'id':id};
-    var httpR = new createHttpR(url+'selectTicket','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'selectBanner','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
         //var msg = obj['msg'];
         if(status=='0'){
             var data = obj['msg'];
-            currentTicket=data;
+            currentBanner=data;
             for (var item in data) {
                 $('#'+item).val(data[item]);
                 if(item=='img'){
@@ -43,7 +43,6 @@ function selectTicket(id){
                 }
             }
             initFiles();
-            allGoods();
         }
     });
 }
@@ -53,9 +52,9 @@ function selectTicket(id){
  * 修改资讯
  * @param id
  */
-function updateTicket(bodyParam){
+function updateBanner(bodyParam){
 
-    var httpR = new createHttpR(url+'updateTicket','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'updateBanner','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -72,9 +71,9 @@ function updateTicket(bodyParam){
  * 删除资讯
  * @param id
  */
-function deleteTicket(id){
+function deleteBanner(id){
     var bodyParam={'id':id};
-    var httpR = new createHttpR(url+'deleteTicket','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'deleteBanner','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -87,11 +86,11 @@ function deleteTicket(id){
 }
 /**
  * 查询资讯
- * @param ticketname
+ * @param bannername
  * @param currentPage
  * @param pageSize
  */
-function  queryTicket (searchText,currentPage,pageSize) {
+function  queryBanner (searchText,currentPage,pageSize) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
@@ -102,89 +101,34 @@ function  queryTicket (searchText,currentPage,pageSize) {
         var bodyParam={'page':currentPage,'size':pageSize,'type':searchText};
     }
 
-    var httpR = new createHttpR(url+'listTicket','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'listBanner','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
         var msg = obj['msg'];
         if(status=='0'){
             var data=msg['data'];
-            ticketList=msg['data'];
+            bannerList=msg['data'];
             var html='';
-
 
             for(var o in data){
                 html+='<tr index='+o+' class="gradeX">\n' +
-                    '<td >'+data[o].id+'</td>\n' +
-                    '<td >'+data[o].phone+'</td>\n' ;
-                if(data[o].type=='10'){
-                    html+='<td >购票</td>\n' ;
-                }
-                else if(data[o].type=='1'){
-                    html+='<td >电信资讯</td>\n' ;
-                }
-                else if(data[o].type=='2'){
-                    html+='<td >免费领手机</td>\n' ;
-                }
-                else if(data[o].type=='5'){
-                    html+='<td >优惠套餐</td>\n' ;
-                }
-                else if(data[o].type=='6'){
-                    html+='<td >手机报价</td>\n' ;
-                }
-                else if(data[o].type=='7'){
-                    html+='<td >二手机收售</td>\n' ;
-                }
-                else if(data[o].type=='11'){
-                    html+='<td >靓号收集</td>\n' ;
-                }
-                else if(data[o].type=='21'){
-                    html+='<td >房屋信息</td>\n' ;
-                }
-                else if(data[o].type=='22'){
-                    html+='<td >招聘求职</td>\n' ;
-                }
-                else if(data[o].type=='23'){
-                    html+='<td >二手物品</td>\n' ;
-                }
-                else if(data[o].type=='24'){
-                    html+='<td >教育培训</td>\n' ;
-                }
-                else if(data[o].type=='25'){
-                    html+='<td >饮食</td>\n' ;
-                }
-                else if(data[o].type=='26'){
-                    html+='<td >出兑出售</td>\n' ;
-                }
-                else if(data[o].type=='27'){
-                    html+='<td >便民信息港</td>\n' ;
-                }
+                    '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
+                    '<td style="line-height: 50px;width:120px"><img src="'+url+data[o].image+'" width="100px" height="50px"></td>\n' +
+                    '<td style="line-height: 50px;">'+data[o].title+'</td>\n' ;
 
 
 
-                html+='<td >'+data[o].note+'</td>\n' +
-                    '<td >'+data[o].resume+'</td>\n'+
-                    '<td >'+data[o].price+'</td>\n';
-                if(data[o].ispay=='1'){
-                    html+='<td >已支付</td>\n' ;
+                html+='<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
+                    '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
+                if(data[o].state=='0'){
+                    html+= '<td style="line-height: 50px;">使用中</td>\n' ;
                 }
                 else{
-                    html+='<td >未支付</td>\n' ;
+                    html+= '<td style="line-height: 50px;">停用</td>\n' ;
                 }
-                if(data[o].state=='1'){
-                    html+='<td >已完成</td>\n' ;
-                    html+='<td >';
-
-                }
-                else{
-                    html+='<td >未完成</td>\n' ;
-                    html+='<td >';
-                    html+='<a class="completeTicket" href="" index='+o+' data-toggle="modal" data-target="#complete-box"><span class="label label-info label-mini">完成</span></a>   ' ;
-
-                }
-                html+='<a class="deleteTicket" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';
-                //html+='<td style="line-height: 50px;"><a class="updateTicket" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +
-                //    '<a class="deleteTicket" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
+                html+='<td style="line-height: 50px;"><a class="updateBanner" href="pt_banner_detail.html?id='+data[o].id+'" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +
+                    '<a class="deleteBanner" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';
                 html+='</tr>';
             }
             $('#contentTbody').html(html);

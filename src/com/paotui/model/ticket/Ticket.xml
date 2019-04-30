@@ -19,6 +19,8 @@
 			<if test="cus_id != null"> AND a.CUS_ID =#{cus_id} </if>
 			<if test="note != null"> AND a.NOTE =#{note} </if>
 			<if test="resume != null"> AND a.RESUME =#{resume} </if>
+			<if test="price != null"> AND a.PRICE =#{price} </if>
+			<if test="ispay != null"> AND a.ISPAY =#{ispay} </if>
 			<if test="c_dtFrom != null"> AND unix_timestamp(a.C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
 			<if test="c_dtTo != null"> AND unix_timestamp(a.C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
 			<if test="c_dt != null"> AND a.C_DT =#{c_dt} </if>
@@ -40,6 +42,8 @@
 			<if test="cus_id != null"> AND CUS_ID =#{cus_id} </if>
 			<if test="note != null"> AND NOTE =#{note} </if>
 			<if test="resume != null"> AND RESUME =#{resume} </if>
+			<if test="price != null"> AND PRICE =#{price} </if>
+			<if test="ispay != null"> AND ISPAY =#{ispay} </if>
 			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
 			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
 			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
@@ -58,6 +62,8 @@
 			<if test="cus_id != null">CUS_ID=#{cus_id}, </if>
 			<if test="note != null">NOTE=#{note}, </if>
 			<if test="resume != null">RESUME=#{resume}, </if>
+			<if test="price != null">PRICE=#{price}, </if>
+			<if test="ispay != null">ISPAY=#{ispay}, </if>
 			<if test="c_dt != null">C_DT=#{c_dt}, </if>
 			<if test="u_dt != null">U_DT=#{u_dt}, </if>
 			<if test="state != null">STATE=#{state}, </if>
@@ -72,6 +78,8 @@
 			<if test="cus_id != null">CUS_ID, </if>
 			<if test="note != null">NOTE, </if>
 			<if test="resume != null">RESUME, </if>
+			<if test="price != null">PRICE, </if>
+			<if test="ispay != null">ISPAY, </if>
 			<if test="c_dt != null">C_DT, </if>
 			<if test="u_dt != null">U_DT, </if>
 			<if test="state != null">STATE, </if>
@@ -81,6 +89,8 @@
 			<if test="cus_id != null">#{cus_id}, </if>
 			<if test="note != null">#{note}, </if>
 			<if test="resume != null">#{resume}, </if>
+			<if test="price != null">#{price}, </if>
+			<if test="ispay != null">#{ispay}, </if>
 			<if test="c_dt != null">#{c_dt}, </if>
 			<if test="u_dt != null">#{u_dt}, </if>
 			<if test="state != null">#{state}, </if>
@@ -97,6 +107,8 @@
 				<if test="item.cus_id != null">CUS_ID, </if>
 				<if test="item.note != null">NOTE, </if>
 				<if test="item.resume != null">RESUME, </if>
+				<if test="item.price != null">PRICE, </if>
+				<if test="item.ispay != null">ISPAY, </if>
 				<if test="item.c_dt != null">C_DT, </if>
 				<if test="item.u_dt != null">U_DT, </if>
 				<if test="item.state != null">STATE, </if>
@@ -107,6 +119,8 @@
 				<if test="item.cus_id != null">#{item.cus_id}, </if>
 				<if test="item.note != null">#{item.note}, </if>
 				<if test="item.resume != null">#{item.resume}, </if>
+				<if test="item.price != null">#{item.price}, </if>
+				<if test="item.ispay != null">#{item.ispay}, </if>
 				<if test="item.c_dt != null">#{item.c_dt}, </if>
 				<if test="item.u_dt != null">#{item.u_dt}, </if>
 				<if test="item.state != null">#{item.state}, </if>
