@@ -206,8 +206,6 @@ function  queryNews (searchText,currentPage,pageSize) {
                     '<td style="line-height: 50px;width:120px"><img src="'+url+data[o].image+'" width="100px" height="50px"></td>\n' +
                     '<td style="line-height: 50px;">'+data[o].title+'</td>\n' ;
 
-
-
                 if(data[o].type=='1'){
                     html+='<td style="line-height: 50px;">电信资讯</td>\n' ;
                 }
@@ -225,6 +223,12 @@ function  queryNews (searchText,currentPage,pageSize) {
                 }
                 else if(data[o].type=='7'){
                 	html+='<td style="line-height: 50px;">二手机收售</td>\n' ;
+                }
+                else if(data[o].type=='8'){
+                	html+='<td style="line-height: 50px;">电信营业厅</td>\n' ;
+                }
+                else if(data[o].type=='9'){
+                	html+='<td style="line-height: 50px;">购票</td>\n' ;
                 }
                 else if(data[o].type=='11'){
                 	html+='<td style="line-height: 50px;">靓号收售</td>\n' ;
