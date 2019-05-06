@@ -156,7 +156,12 @@ function  queryBanner (searchText,currentPage,pageSize) {
                     '<td style="line-height: 50px;width:120px"><img src="'+url+data[o].image+'" width="100px" height="50px"></td>\n' +
                     '<td style="line-height: 50px;">'+data[o].title+'</td>\n' ;
 
-
+                if(data[o].type=='0'){
+                    html+= '<td style="line-height: 50px;">顶部轮播图</td>\n' ;
+                }
+                else{
+                    html+= '<td style="line-height: 50px;">底部轮播图</td>\n' ;
+                }
 
                 html+='<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
                     '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;

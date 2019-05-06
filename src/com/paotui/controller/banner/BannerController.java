@@ -167,6 +167,7 @@ public class BannerController {
 				if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 				paramMap.put("state",banner.getState());
+				paramMap.put("type",banner.getType());
 				List<Banner> list=iBannerService.selectBannerByParam(paramMap);
 				int totalnumber=iBannerService.selectCountBannerByParam(paramMap);
 				Map tempMap=new HashMap();

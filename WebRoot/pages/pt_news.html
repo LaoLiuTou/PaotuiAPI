@@ -173,6 +173,7 @@
                                         <th>类型</th>
                                         <th>创建者</th>
                                         <th>创建时间</th>
+                                        <th>首页显示</th>
                                         <th>置顶</th>
                                         <th>操作</th>
                                     </tr>
@@ -306,6 +307,18 @@
             newsIndex=$(this).attr('index');
             currentNews=newsList[newsIndex];
             var bodyParam={'id':currentNews.id,'state':'0'};
+            updateNews(bodyParam);
+        });
+        $('#contentTbody').on('click','.showMain',function () {
+            newsIndex=$(this).attr('index');
+            currentNews=newsList[newsIndex];
+            var bodyParam={'id':currentNews.id,'ismain':'1'};
+            updateNews(bodyParam);
+        });
+        $('#contentTbody').on('click','.hideMain',function () {
+            newsIndex=$(this).attr('index');
+            currentNews=newsList[newsIndex];
+            var bodyParam={'id':currentNews.id,'ismain':'0'};
             updateNews(bodyParam);
         });
     });

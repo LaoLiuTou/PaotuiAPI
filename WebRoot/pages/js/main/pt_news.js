@@ -263,6 +263,12 @@ function  queryNews (searchText,currentPage,pageSize) {
 
                 html+='<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
                     '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
+                if(data[o].ismain=='1'){
+                    html+='<td style="line-height: 50px;"><a class="hideMain" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">取消</span></a></td>\n' ;
+                }
+                else{
+                    html+='<td style="line-height: 50px;"><a class="showMain" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">首页显示</span></a></td>\n' ;
+                }
                 if(data[o].state=='1'){
                     html+='<td style="line-height: 50px;"><a class="unTopNews" href="" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">取消置顶</span></a></td>\n' ;
                 }
