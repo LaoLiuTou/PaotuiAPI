@@ -1,4 +1,4 @@
-package com.paotui.controller.news;
+package com.paotui.controller.awards;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,24 +16,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.paotui.service.news.INewsService;
-import com.paotui.model.news.News;
+import com.paotui.service.awards.IAwardsService;
+import com.paotui.model.awards.Awards;
 @Controller
-public class NewsController {
+public class AwardsController {
 	@Autowired
-	private INewsService iNewsService;
+	private IAwardsService iAwardsService;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Logger logger = Logger.getLogger("PaotuiLogger");
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/addNews")
+	@RequestMapping("/addAwards")
 	@ResponseBody
-	public Map add(News news){
+	public Map add(Awards awards){
 		Map resultMap=new HashMap();
 		try {
-			iNewsService.addNews(news);
+			iAwardsService.addAwards(awards);
 			resultMap.put("status", "0");
-			resultMap.put("msg", news.getId());
-			logger.info("新建成功，主键："+news.getId());
+			resultMap.put("msg", awards.getId());
+			logger.info("新建成功，主键："+awards.getId());
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "新建失败！");
@@ -43,19 +43,19 @@ public class NewsController {
 		return resultMap;
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/muladdNews")
+	@RequestMapping("/muladdAwards")
 	@ResponseBody
-	public Map muladd(HttpServletRequest request,News news){
+	public Map muladd(HttpServletRequest request,Awards awards){
 		Map resultMap=new HashMap();
 		try {
 			String data=request.getParameter("data");
 			ObjectMapper objectMapper = new ObjectMapper();
-			JavaType javaType = objectMapper.getTypeFactory().constructParametricType(ArrayList.class, News.class);
-			List<News> list = (List<News>)objectMapper.readValue(data, javaType);
-			iNewsService.muladdNews(list);
+			JavaType javaType = objectMapper.getTypeFactory().constructParametricType(ArrayList.class, Awards.class);
+			List<Awards> list = (List<Awards>)objectMapper.readValue(data, javaType);
+			iAwardsService.muladdAwards(list);
 			resultMap.put("status", "0");
 			resultMap.put("msg", "新建成功");
-			logger.info("新建成功，主键："+news.getId());
+			logger.info("新建成功，主键："+awards.getId());
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "新建失败！");
@@ -65,20 +65,20 @@ public class NewsController {
 		return resultMap;
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/deleteNews")
+	@RequestMapping("/deleteAwards")
 	@ResponseBody
-	public Map delete(News news){
+	public Map delete(Awards awards){
 		Map resultMap=new HashMap();
 		try {
-			if(news.getId()==null){
+			if(awards.getId()==null){
 				resultMap.put("status", "-1");
 				resultMap.put("msg", "参数不能为空！");
 			}
 			else{
-				int resultDelete=iNewsService.deleteNews(news.getId()+"");
+				int resultDelete=iAwardsService.deleteAwards(awards.getId()+"");
 				resultMap.put("status", "0");
 				resultMap.put("msg", "删除成功！");
-				logger.info("删除成功，主键："+news.getId());
+				logger.info("删除成功，主键："+awards.getId());
 			}
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
@@ -89,17 +89,17 @@ public class NewsController {
 		return resultMap;
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/selectNews")
+	@RequestMapping("/selectAwards")
 	@ResponseBody
-	public Map select(News news){
+	public Map select(Awards awards){
 		Map resultMap=new HashMap();
 		try {
-			if(news.getId()==null){
+			if(awards.getId()==null){
 				resultMap.put("status", "-1");
 				resultMap.put("msg", "参数不能为空！");
 			}
 			else{
-				News resultSelect=iNewsService.selectNewsById(news.getId()+"");
+				Awards resultSelect=iAwardsService.selectAwardsById(awards.getId()+"");
 				resultMap.put("status", "0");
 				resultMap.put("msg", resultSelect);
 			}
@@ -112,20 +112,20 @@ public class NewsController {
 		return resultMap;
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/updateNews")
+	@RequestMapping("/updateAwards")
 	@ResponseBody
-	public Map update(News news){
+	public Map update(Awards awards){
 		Map resultMap=new HashMap();
 		try {
-			if(news.getId()==null){
+			if(awards.getId()==null){
 				resultMap.put("status", "-1");
 				resultMap.put("msg", "参数不能为空！");
 			}
 			else{
-				int resultUpdate=iNewsService.updateNews(news);
+				int resultUpdate=iAwardsService.updateAwards(awards);
 				resultMap.put("status", "0");
 				resultMap.put("msg", "更新成功！");
-				logger.info("更新成功，主键："+news.getId());
+				logger.info("更新成功，主键："+awards.getId());
 			}
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
@@ -136,9 +136,9 @@ public class NewsController {
 		return resultMap;
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/listNews")
+	@RequestMapping("/listAwards")
 	@ResponseBody
-	public Map list(HttpServletRequest request, HttpServletResponse response,News news)
+	public Map list(HttpServletRequest request, HttpServletResponse response,Awards awards)
 		throws ServletException, IOException {
 		Map resultMap=new HashMap();
 		try {
@@ -148,13 +148,12 @@ public class NewsController {
 				Map paramMap=new HashMap();
 				paramMap.put("fromPage",(Integer.parseInt(page)-1)*Integer.parseInt(size));
 				paramMap.put("toPage",Integer.parseInt(size)); 
-				paramMap.put("orderBy","a.STATE DESC ,a.ID DESC "); 
-				paramMap.put("id",news.getId());
-				paramMap.put("title",news.getTitle());
-				paramMap.put("image",news.getImage());
-				paramMap.put("content",news.getContent());
-				paramMap.put("type",news.getType());
-				paramMap.put("c_id",news.getC_id());
+				paramMap.put("orderBy","ID DESC"); 
+				paramMap.put("id",awards.getId());
+				paramMap.put("drawname",awards.getDrawname());
+				paramMap.put("image",awards.getImage());
+				paramMap.put("rate",awards.getRate());
+				paramMap.put("status",awards.getStatus());
 				String c_dtFrom=request.getParameter("c_dtFrom");
 				String c_dtTo=request.getParameter("c_dtTo");
 				if(c_dtFrom!=null&&!c_dtFrom.equals(""))
@@ -167,10 +166,9 @@ public class NewsController {
 				paramMap.put("u_dtFrom", sdf.parse(u_dtFrom));
 				if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
-				paramMap.put("state",news.getState());
-				paramMap.put("ismain",news.getIsmain());
-				List<News> list=iNewsService.selectNewsByParam(paramMap);
-				int totalnumber=iNewsService.selectCountNewsByParam(paramMap);
+				paramMap.put("state",awards.getState());
+				List<Awards> list=iAwardsService.selectAwardsByParam(paramMap);
+				int totalnumber=iAwardsService.selectCountAwardsByParam(paramMap);
 				Map tempMap=new HashMap();
 				resultMap.put("status", "0");
 				tempMap.put("num", totalnumber);

@@ -1,11 +1,11 @@
-package com.paotui.model.news;
+package com.paotui.model.awards;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 /**
  * @author LT
  */
-public class News {
+public class Awards {
 
 	/**  */
 	private  Long id;
@@ -15,15 +15,15 @@ public class News {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	/** 标题 */
-	private  String title;
-	public String getTitle() {
-		return title;
+	/**  */
+	private  String drawname;
+	public String getDrawname() {
+		return drawname;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setDrawname(String drawname) {
+		this.drawname = drawname;
 	}
-	/** 显示图片 */
+	/**  */
 	private  String image;
 	public String getImage() {
 		return image;
@@ -31,29 +31,21 @@ public class News {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	/** 内容 */
-	private  String content;
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	/** 类型 */
-	private  Long type;
-	public Long getType() {
-		return type;
-	}
-	public void setType(Long type) {
-		this.type = type;
-	}
 	/**  */
-	private  Long c_id;
-	public Long getC_id() {
-		return c_id;
+	private  String rate;
+	public String getRate() {
+		return rate;
 	}
-	public void setC_id(Long c_id) {
-		this.c_id = c_id;
+	public void setRate(String rate) {
+		this.rate = rate;
+	}
+	/** 状态 */
+	private  String status;
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	/**  */
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -81,23 +73,7 @@ public class News {
 	public void setState(Long state) {
 		this.state = state;
 	}
-	private String creater;
-	public String getCreater() {
-		return creater;
-	}
-	public void setCreater(String creater) {
-		this.creater = creater;
-	}
-	
 
-	private String ismain;
-	public String getIsmain() {
-		return ismain;
-	}
-	public void setIsmain(String ismain) {
-		this.ismain = ismain;
-	}
-	
 
 
 }

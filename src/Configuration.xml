@@ -35,6 +35,7 @@
 		<typeAlias alias="Orderspt" type="com.paotui.model.orderspt.Orderspt" /> 
 		<typeAlias alias="Ticket" type="com.paotui.model.ticket.Ticket" /> 
 		<typeAlias alias="Prize" type="com.paotui.model.prize.Prize" /> 
+		<typeAlias alias="Awards" type="com.paotui.model.awards.Awards" /> 
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/paotui/model/addresses/Addresses.xml"/> 
@@ -52,5 +53,6 @@
 		<mapper resource="com/paotui/model/orderspt/Orderspt.xml"/> 
 		<mapper resource="com/paotui/model/ticket/Ticket.xml"/> 
 		<mapper resource="com/paotui/model/prize/Prize.xml"/> 
+		<mapper resource="com/paotui/model/awards/Awards.xml"/> 
 	</mappers>  
 </configuration>

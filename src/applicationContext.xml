@@ -128,4 +128,9 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 </bean>
 <bean id="iPrizeService" class="com.paotui.service.prize.PrizeServiceImpl"></bean>
+<bean id="iAwardsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.awards.IAwardsMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iAwardsService" class="com.paotui.service.awards.AwardsServiceImpl"></bean>
 </beans>
