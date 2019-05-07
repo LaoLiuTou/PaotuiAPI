@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>砸金蛋</title>
     <link rel="stylesheet" href="common/css/common_mobile.css?version=1.0.0">
     <link rel="stylesheet" href="css/index.css?version=1.0.0">
@@ -224,6 +227,7 @@
 
         /*砸蛋事件的处理*/
         function eggChange(i) {
+            getAwards();
             //砸蛋次数的变化
             data.count--;
             $change.html(data.count);
@@ -260,10 +264,11 @@
                     arr.push(i);//存入每个砸开蛋的下标
                     //$.cookie("eggIndex", arr, {expires: 1});//存入cookie
                     //addPrize();
+
                 }, 600);
             }, 600);
             $egg.eq(i).data("mark", false);//更改金蛋状态为已砸开
-            getAwards();
+
         }
 
 
@@ -300,7 +305,7 @@
             $.ajax({
                 url : url+'addPrize',
                 type : 'POST',
-                async:false,
+                async:true,
                 data : {
                     'cus_id' : GetQueryString('cus_id'),
                     'type' : type,

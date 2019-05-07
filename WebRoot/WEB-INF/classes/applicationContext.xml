@@ -103,4 +103,34 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 </bean>
 <bean id="iDialrecordService" class="com.paotui.service.dialrecord.DialrecordServiceImpl"></bean>
+<bean id="iInstallinfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.installinfo.IInstallinfoMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iInstallinfoService" class="com.paotui.service.installinfo.InstallinfoServiceImpl"></bean>
+<bean id="iDriversMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.drivers.IDriversMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iDriversService" class="com.paotui.service.drivers.DriversServiceImpl"></bean>
+<bean id="iOrdersptMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.orderspt.IOrdersptMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iOrdersptService" class="com.paotui.service.orderspt.OrdersptServiceImpl"></bean>
+<bean id="iTicketMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.ticket.ITicketMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iTicketService" class="com.paotui.service.ticket.TicketServiceImpl"></bean>
+<bean id="iPrizeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.prize.IPrizeMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iPrizeService" class="com.paotui.service.prize.PrizeServiceImpl"></bean>
+<bean id="iAwardsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.awards.IAwardsMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iAwardsService" class="com.paotui.service.awards.AwardsServiceImpl"></bean>
 </beans>

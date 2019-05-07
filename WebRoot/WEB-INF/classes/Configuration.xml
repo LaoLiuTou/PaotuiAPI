@@ -30,6 +30,12 @@
 		<typeAlias alias="Scores" type="com.paotui.model.scores.Scores" /> 
 		<typeAlias alias="User" type="com.paotui.model.user.User" /> 
 		<typeAlias alias="Dialrecord" type="com.paotui.model.dialrecord.Dialrecord" /> 
+		<typeAlias alias="Installinfo" type="com.paotui.model.installinfo.Installinfo" /> 
+		<typeAlias alias="Drivers" type="com.paotui.model.drivers.Drivers" /> 
+		<typeAlias alias="Orderspt" type="com.paotui.model.orderspt.Orderspt" /> 
+		<typeAlias alias="Ticket" type="com.paotui.model.ticket.Ticket" /> 
+		<typeAlias alias="Prize" type="com.paotui.model.prize.Prize" /> 
+		<typeAlias alias="Awards" type="com.paotui.model.awards.Awards" /> 
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/paotui/model/addresses/Addresses.xml"/> 
@@ -42,5 +48,11 @@
 		<mapper resource="com/paotui/model/scores/Scores.xml"/> 
 		<mapper resource="com/paotui/model/user/User.xml"/> 
 		<mapper resource="com/paotui/model/dialrecord/Dialrecord.xml"/> 
+		<mapper resource="com/paotui/model/installinfo/Installinfo.xml"/> 
+		<mapper resource="com/paotui/model/drivers/Drivers.xml"/> 
+		<mapper resource="com/paotui/model/orderspt/Orderspt.xml"/> 
+		<mapper resource="com/paotui/model/ticket/Ticket.xml"/> 
+		<mapper resource="com/paotui/model/prize/Prize.xml"/> 
+		<mapper resource="com/paotui/model/awards/Awards.xml"/> 
 	</mappers>  
 </configuration>
