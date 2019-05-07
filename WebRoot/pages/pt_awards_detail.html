@@ -8,7 +8,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="#" type="image/png">
 
-    <title>新建轮播图</title>
+    <title>修改奖品</title>
 
 
     <!--common-->
@@ -99,7 +99,7 @@
                     <a href="#">系统设置</a>
                 </li>
                 <li>
-                    <a href="#" onclick="window.history.go(-1)">新建轮播图</a>
+                    <a href="#" onclick="window.history.go(-1)">修改奖品</a>
                 </li>
             </ul>
 
@@ -118,44 +118,50 @@
                         <div class="col-sm-12">
                             <section class="panel">
                                 <header class="panel-heading">
-                                    新建轮播图
+                                    修改奖品
                                 </header>
                                 <div class="panel-body">
                                     <form class="form-horizontal adminex-form" id="addForm" >
                                         <div class="form-group">
-                                            <label class="col-sm-2 col-sm-2 control-label">标题</label>
+                                            <label class="col-sm-2 col-sm-2 control-label">奖品名称</label>
                                             <div class="col-sm-9">
-                                                <input type="text"   id="title" class="form-control" placeholder="请输入标题">
+                                                <input type="text"   id="drawname" class="form-control" placeholder="请输入奖品名称">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-sm-2 col-sm-2 control-label">图片</label>
+                                            <label class="col-sm-2 col-sm-2 control-label">奖品图片</label>
                                             <div class="col-sm-9">
                                                 <input id="files" type="file" name="files" multiple>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-sm-2 col-sm-2 control-label">内容</label>
+                                            <label class="col-sm-2 col-sm-2 control-label">中奖率(‰)</label>
                                             <div class="col-sm-9">
-                                                <textarea class="form-control textarea-line" rows="5" id="content" placeholder="请输入内容"></textarea>
+                                                <input type="text"   id="rate"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" class="form-control" placeholder="请输入奖品中奖率">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">类型</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control m-bot15"   id="type">
-                                                    <option value="0">顶部轮播图</option>
-                                                    <option value="1">底部轮播图</option>
+                                                    <option value="1">代金券</option>
+                                                    <option value="2">实物</option>
                                                 </select>
 
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">金额</label>
+                                            <div class="col-sm-9">
+                                                <input type="text"   id="money" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d.]/g,'')" class="form-control" placeholder="请输入奖品金额">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">状态</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control m-bot15"   id="state">
+                                                <select class="form-control m-bot15"   id="status">
                                                     <option value="0">使用中</option>
                                                     <option value="1">停用</option>
                                                 </select>
@@ -218,36 +224,12 @@
 
 <script src="js/main/config.js"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_banner.js"></script>
+<script src="js/main/pt_awards.js"></script>
 <script>
     var params={};
-    var headerImage;
+    var image='';
     $(document).ready(function(){
-        setMenu("5","4");
-        $('#files').fileinput({
-            theme: 'fa',
-            language: 'zh',
-            uploadAsync: true,//异步上传
-            uploadUrl: url+'filesUpload',
-            allowedFileExtensions: ['jpg', 'png', 'gif','mp4'],
-            showUpload: true,
-            showCaption: false,
-            showRemove : false, //显示移除按钮
-            enctype: 'multipart/form-data',
-            maxFileSize:0,
-            maxFileCount:1,
-            dropZoneTitle: '拖拽文件到这里 &hellip;',
-            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！"
-        }).on("filebatchselected", function(event, files) {
-            //$(this).fileinput("upload");
-        }).on("fileuploaded", function(event,data, previewId, index) { //异步上传成功结果处理
-            if(data.response.data.length>0){
-                headerImage=data.response.data[0];
-            }
-        }).on('filesuccessremove', function (event, previewId,index) {
-            headerImage='';
-        });
-
+        setMenu("5","5");
 
         Array.prototype.remove = function(val) {
             var index = this.indexOf(val);
@@ -257,9 +239,19 @@
         };
 
 
+        //select
+        selectAwards(GetQueryString('id'));
         //add
         $('#addBtn').click(function () {
-            if(headerImage==''){
+            if($('#drawname').val()==''){
+                alert("请输入奖品名称！");
+                return;
+            }
+            if($('#rate').val()>100){
+                alert("中奖率不能高于100！");
+                return;
+            }
+            if(image==''){
                 alert("请选择标题图片！");
                 return;
             }
@@ -273,9 +265,9 @@
             });
             var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
             params['c_id']=userinfo['id'];
-            params['content']=$('#content').val();
-            params['image']=headerImage;
-            addBanner(params);
+            params['id']=GetQueryString('id');
+            params['image']=image;
+            updateAwards(params);
         });
 
 

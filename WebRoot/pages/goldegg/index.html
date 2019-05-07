@@ -106,7 +106,7 @@
             <div id="card">
                 <a href="" target="_self" class="win"></a>
             </div>
-            <a href="javascript:;"   class="btn"></a>
+            <!--<a href="javascript:;"   class="btn"></a>-->
             <span id="close"></span>
         </div>
     </div>
@@ -128,12 +128,6 @@
             $(this).click();
 
         });
-        $('.btn').click(function(){
-            $(this).prop('href','my.html?cus_id='+GetQueryString('cus_id'));
-            $(this).click();
-
-        });
-
 
         var $hammer = $("#hammer"),
             $tips = $(".info"),
@@ -146,15 +140,7 @@
             openArr,//记录被砸开的蛋的下标数组
             rem = 75;
 
-        var randomPrize=[{"prize":"0.1","image":url+"upload/prize/prize0.1.png"},
-            {"prize":"0.2","image":url+"upload/prize/prize0.2.png"},
-            {"prize":"0.3","image":url+"upload/prize/prize0.3.png"},
-            {"prize":"0.4","image":url+"upload/prize/prize0.4.png"},
-            {"prize":"0.5","image":url+"upload/prize/prize0.5.png"},
-            {"prize":"0.6","image":url+"upload/prize/prize0.6.png"},
-            {"prize":"0.7","image":url+"upload/prize/prize0.7.png"},
-            {"prize":"0.8","image":url+"upload/prize/prize0.8.png"},
-            {"prize":"0.9","image":url+"upload/prize/prize0.9.png"}];
+
         $.ajax({
             url : url+'selectCustomer',
             type : 'POST',
@@ -273,26 +259,52 @@
                     //记录被砸开的蛋
                     arr.push(i);//存入每个砸开蛋的下标
                     //$.cookie("eggIndex", arr, {expires: 1});//存入cookie
-                    addPrize();
+                    //addPrize();
                 }, 600);
             }, 600);
             $egg.eq(i).data("mark", false);//更改金蛋状态为已砸开
+            getAwards();
         }
 
 
-        function addPrize(){
+        function getAwards(){
+            $.ajax({
+                url : url+'getAwards',
+                type : 'POST',
+                async:true,
+                data : {'cus_id' : GetQueryString('cus_id'),},
+                headers : {
+                    'source' : 'APP'
+                },
+                success : function(response) {
+                    var status = response['status'];
+                    if(status=='0'){
+                        var msg = response['msg'];
+                        $('.win').css('background-image','url('+url+msg['image']+')');
+                        $('.red-body').css('background-image','url('+url+"upload/prize/prized.png"+')');
+                        addPrize(msg['id'],msg['type']);
+                    }
+                    else{
+                        $('.win').css('background-image','url('+url+"upload/prize/xxhg.png"+')');
+                    }
 
-            var num =Math.floor(Math.random()*10);
-            var item=randomPrize[num];
-            $('.win').css('background-image','url('+item['image']+')');
+                },
+                error : function(response) {
+                    $('.win').css('background-image','url('+url+"upload/prize/xxhg.png"+')');
+                }
+            });
+        }
+
+        function addPrize(awards_id,type){
+
             $.ajax({
                 url : url+'addPrize',
                 type : 'POST',
                 async:false,
                 data : {
                     'cus_id' : GetQueryString('cus_id'),
-                    'type' : '1',
-                    'details' : item['prize'],
+                    'type' : type,
+                    'awards_id' : awards_id,
                     'state' : '0'
                 },
                 headers : {
@@ -304,12 +316,12 @@
 
                     }
                     else{
-                        alert("保存记录失败！");
+                        //alert("保存记录失败！");
                     }
 
                 },
                 error : function(response) {
-                    alert("保存记录失败！");
+                   // alert("保存记录失败！");
                 }
             });
         }

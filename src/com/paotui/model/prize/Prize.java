@@ -66,6 +66,36 @@ public class Prize {
 		this.state = state;
 	}
 
+	private Long awards_id;
+	public Long getAwards_id() {
+		return awards_id;
+	}
+	public void setAwards_id(Long awards_id) {
+		this.awards_id = awards_id;
+	}
 
-
+	/**  */
+	private  String drawname;
+	public String getDrawname() {
+		return drawname;
+	}
+	public void setDrawname(String drawname) {
+		this.drawname = drawname;
+	}
+	/**  */
+	private  String image;
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	private String money;
+	public String getMoney() {
+		return money;
+	}
+	public void setMoney(String money) {
+		this.money = money;
+	}
+	
 }

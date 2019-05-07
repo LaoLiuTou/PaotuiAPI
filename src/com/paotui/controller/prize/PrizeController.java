@@ -148,7 +148,7 @@ public class PrizeController {
 				Map paramMap=new HashMap();
 				paramMap.put("fromPage",(Integer.parseInt(page)-1)*Integer.parseInt(size));
 				paramMap.put("toPage",Integer.parseInt(size)); 
-				paramMap.put("orderBy","ID DESC"); 
+				paramMap.put("orderBy","a.ID DESC"); 
 				paramMap.put("id",prize.getId());
 				paramMap.put("cus_id",prize.getCus_id());
 				paramMap.put("type",prize.getType());
@@ -166,6 +166,7 @@ public class PrizeController {
 				if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 				paramMap.put("state",prize.getState());
+				paramMap.put("awards_id",prize.getAwards_id());
 				List<Prize> list=iPrizeService.selectPrizeByParam(paramMap);
 				int totalnumber=iPrizeService.selectCountPrizeByParam(paramMap);
 				Map tempMap=new HashMap();

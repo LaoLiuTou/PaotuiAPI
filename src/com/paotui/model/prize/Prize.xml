@@ -3,7 +3,10 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.paotui.dao.prize.IPrizeMapper"> 
 	<select id="selectprizeById" parameterType="String" resultType="Prize">
-		SELECT * FROM prize WHERE ID=#{id}
+		SELECT a.*,b.drawname as drawname,b.image as image,b.money as money 
+		FROM prize a 
+		LEFT JOIN awards b ON a.awards_id=b.id 
+		WHERE a.ID=#{id}
 	</select>
 
 	<delete id="deleteprize" parameterType="String"> 
@@ -11,20 +14,22 @@
 	</delete>
 
 	<select id="selectprizeByParam" parameterType="java.util.Map" resultType="Prize">
-		SELECT *
-		FROM prize
+		SELECT a.*,b.drawname as drawname,b.image as image,b.money as money 
+		FROM prize a 
+		LEFT JOIN awards b ON a.awards_id=b.id 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test="id != null"> AND ID =#{id} </if>
-			<if test="cus_id != null"> AND CUS_ID =#{cus_id} </if>
-			<if test="type != null"> AND TYPE =#{type} </if>
-			<if test="details != null"> AND DETAILS =#{details} </if>
-			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
-			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
-			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
-			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
-			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
-			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
-			<if test="state != null"> AND STATE =#{state} </if>
+			<if test="id != null"> AND a.ID =#{id} </if>
+			<if test="cus_id != null"> AND a.CUS_ID =#{cus_id} </if>
+			<if test="type != null"> AND a.TYPE =#{type} </if>
+			<if test="details != null"> AND a.DETAILS =#{details} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(a.C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(a.C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND a.C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(a.U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(a.U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
+			<if test="state != null"> AND a.STATE =#{state} </if>
+			<if test="awards_id != null"> AND a.AWARDS_ID =#{awards_id} </if>
 		</trim>  
 			<if test="orderBy!= null"> ORDER BY    ${orderBy} </if>
 		LIMIT #{fromPage},#{toPage} 
@@ -45,6 +50,7 @@
 			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
 			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
 			<if test="state != null"> AND STATE =#{state} </if>
+			<if test="awards_id != null"> AND AWARDS_ID =#{awards_id} </if>
 		</trim>  
 	</select>
 
@@ -58,6 +64,7 @@
 			<if test="c_dt != null">C_DT=#{c_dt}, </if>
 			<if test="u_dt != null">U_DT=#{u_dt}, </if>
 			<if test="state != null">STATE=#{state}, </if>
+			<if test="awards_id != null">AWARDS_ID=#{awards_id}, </if>
 		</trim>
 		WHERE ID=#{id}
 	</update>
@@ -71,6 +78,7 @@
 			<if test="c_dt != null">C_DT, </if>
 			<if test="u_dt != null">U_DT, </if>
 			<if test="state != null">STATE, </if>
+			<if test="awards_id != null">AWARDS_ID, </if>
 		</trim>
 		<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
 			<if test="cus_id != null">#{cus_id}, </if>
@@ -79,6 +87,7 @@
 			<if test="c_dt != null">#{c_dt}, </if>
 			<if test="u_dt != null">#{u_dt}, </if>
 			<if test="state != null">#{state}, </if>
+			<if test="awards_id != null">#{awards_id}, </if>
 		</trim>
 	</insert>
 
@@ -94,6 +103,7 @@
 				<if test="item.c_dt != null">C_DT, </if>
 				<if test="item.u_dt != null">U_DT, </if>
 				<if test="item.state != null">STATE, </if>
+				<if test="item.awards_id != null">AWARDS_ID, </if>
 			</trim>
 			<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
 				<if test="item.id != null">#{item.id}, </if>
@@ -103,6 +113,7 @@
 				<if test="item.c_dt != null">#{item.c_dt}, </if>
 				<if test="item.u_dt != null">#{item.u_dt}, </if>
 				<if test="item.state != null">#{item.state}, </if>
+				<if test="item.awards_id != null">#{item.awards_id}, </if>
 			</trim>
 		</foreach>
 	</insert>

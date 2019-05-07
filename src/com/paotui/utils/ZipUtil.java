@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -75,7 +76,7 @@ public class ZipUtil {
     }
     public static void main(String[] args){
     	//test code
-    	List<String> listKey = new ArrayList<String>();
+    	/*List<String> listKey = new ArrayList<String>();
         listKey.add("D:/2Dcode/dest.gif");
         listKey.add("D:/2Dcode/dest.jpg");
         
@@ -84,6 +85,14 @@ public class ZipUtil {
         System.out.println("zipFile size: " + zipFile.length());
         packageZip(zipFile,listKey);
         System.out.println("zipFile exists2: " + zipFile.exists());
-        System.out.println("zipFile size: " + zipFile.length());
+        System.out.println("zipFile size: " + zipFile.length());*/
+    	System.out.println(new Random().nextInt(1000));
+    	System.out.println(new Random().nextInt(1000));
+    	System.out.println(new Random().nextInt(1000));
+    	System.out.println(new Random().nextInt(1000));
+    	System.out.println(new Random().nextInt(1000));
+    	System.out.println(new Random().nextInt(1000));
+    	System.out.println(new Random().nextInt(1000));
+    	System.out.println(new Random().nextInt(1000));
     }
 }

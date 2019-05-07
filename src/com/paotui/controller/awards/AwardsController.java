@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +18,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paotui.service.awards.IAwardsService;
+import com.paotui.service.customer.ICustomerService;
 import com.paotui.model.awards.Awards;
+import com.paotui.model.customer.Customer;
 @Controller
 public class AwardsController {
 	@Autowired
 	private IAwardsService iAwardsService;
+	@Autowired
+	private ICustomerService iCustomerService;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Logger logger = Logger.getLogger("PaotuiLogger");
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -167,6 +172,7 @@ public class AwardsController {
 				if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 				paramMap.put("state",awards.getState());
+				paramMap.put("type",awards.getType());
 				List<Awards> list=iAwardsService.selectAwardsByParam(paramMap);
 				int totalnumber=iAwardsService.selectCountAwardsByParam(paramMap);
 				Map tempMap=new HashMap();
@@ -179,6 +185,66 @@ public class AwardsController {
 				resultMap.put("status", "-1");
 				resultMap.put("msg", "分页参数不能为空！");
 			}
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "查询失败！");
+			logger.info("查询失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/getAwards")
+	@ResponseBody
+	public Map get(HttpServletRequest request){
+		Map resultMap=new HashMap();
+		try {
+			String cus_id=request.getParameter("cus_id"); 
+			if(cus_id!=null){
+				Map paramMap=new HashMap();
+				paramMap.put("orderBy","ID DESC"); 
+				paramMap.put("status","0");
+				int totalnumber=iAwardsService.selectCountAwardsByParam(paramMap);
+				paramMap.put("fromPage",0);
+				paramMap.put("toPage",totalnumber); 
+				List<Awards> list=iAwardsService.selectAwardsByParam(paramMap);
+				String resultId="0";
+				List<String> randoms=new ArrayList<String>();
+				for(Awards item:list){
+					int rateValue=Integer.parseInt(item.getRate());
+					List<String> tempList=new ArrayList<String>();
+					for(int i=0;i<rateValue;i++){
+						tempList.add(item.getId()+"");
+					}
+					randoms.addAll(tempList);
+				}
+				int index=new Random().nextInt(1000);
+				if(index>(randoms.size()+1)){
+					resultMap.put("status", "-1");
+					resultMap.put("msg", "未中奖！");
+				}
+				else{
+					resultId=randoms.get(index);
+					Awards resultSelect=iAwardsService.selectAwardsById(resultId+"");
+					resultMap.put("status", "0");
+					resultMap.put("msg", resultSelect);
+				}
+				
+				
+				Customer customer= new Customer();
+				customer.setId(Long.parseLong(cus_id));
+				customer.setIsprize("0");
+				iCustomerService.updateCustomer(customer);	
+			}
+			else{
+				resultMap.put("status", "-1");
+				resultMap.put("msg", "参数不能为空！");
+			}
+			
+			
+			 
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "查询失败！");

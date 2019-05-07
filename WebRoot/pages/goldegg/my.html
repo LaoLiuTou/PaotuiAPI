@@ -73,13 +73,25 @@
                 var data=response['msg']['data'];
                 var html='';
                 for(var o in data) {
-                    html+= "<li>\n" ;
-                    html+="            <img class='prize-img' src='"+url+"upload/prize/prize"+data[o].details+".png'>\n";
-                    html+="            <div>\n" +
-                        "                <p>恭喜您获得了<span >"+data[o].details+"元代金券</span></p>\n" +
-                        "                <p>中奖日期：  <span>"+data[o].c_dt.substr(0,10)+"</span></p>\n" +
-                        "            </div>\n" +
-                        "        </li>";
+                    if(data[o].type=='1'){
+                        html+= "<li>\n" ;
+                        html+="            <img class='prize-img' src='"+url+data[o].image+"'>\n";
+                        html+="            <div>\n" +
+                            "                <p>恭喜您获得了<span >"+data[o].money+"元代金券</span></p>\n" +
+                            "                <p>中奖日期：  <span>"+data[o].c_dt.substr(0,10)+"</span></p>\n" +
+                            "            </div>\n" +
+                            "        </li>";
+                    }
+                    else{
+                        html+= "<li>\n" ;
+                        html+="            <img class='prize-img' src='"+url+data[o].image+"'>\n";
+                        html+="            <div>\n" +
+                            "                <p>恭喜您获得了<span >"+data[o].drawname+"</span></p>\n" +
+                            "                <p>中奖日期：  <span>"+data[o].c_dt.substr(0,10)+"</span></p>\n" +
+                            "            </div>\n" +
+                            "        </li>";
+                    }
+
                 }
                 $(".main").html(html);
             }
