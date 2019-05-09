@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="zh_CN" >
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport"
+  content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes">
+<title>资讯详情</title>
+<meta name="keywords" content=""/>
+<meta name="description" content=""/>
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<link href="css/style.css" rel="stylesheet">
+<style>
+    p{ word-wrap:break-word; word-break:normal; }
+</style>
+
+</head>
+<body>
+<div class="col-md-12">
+    <div class="wrapper">
+        <div class="row blog">
+            <div class="panel">
+                <div class="panel-body">
+                    <h1 class="text-center mtop35"><a id="title" href="javascript:;"> 标题</a></h1>
+                    <p class="text-center auth-row">
+                         <a href="javascript:;">创建时间</a>   ：  <a id="c_dt" href="javascript:;"></a>
+                    </p>
+                    <div class="blog-img-wide">
+                        <img id="image" src="" alt="">
+                    </div>
+                    <p id="content">
+                        内容
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--footer-end-->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/main/config.js"></script>
+<script src="js/main/md5.js"></script>
+<script src="js/main/pt_news.js"></script>
+<script>
+    $(document).ready(function(){
+
+
+
+        $.ajax({
+            url : url+'selectNews',
+            type : 'POST',
+            data : {
+                'id' : GetQueryString('id')
+            },
+            headers: {
+                'source' : 'APP'
+            },
+            success : function(response) {
+                if(response['status']=='0'){
+                    var data = response['msg'];
+                    console.log(data);
+                    $('#title').text(data['title']);
+                    $('#c_dt').text(data['c_dt']);
+                    $('#image').prop("src",url+data['image']);
+                    $('#content').html(data['content']);
+                }
+
+
+            },
+            error : function(response) {
+
+            }
+        });
+
+
+    });
+</script>
+
+</body>
+</html>
