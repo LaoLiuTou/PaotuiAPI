@@ -36,10 +36,17 @@ function selectNews(id){
         if(status=='0'){
             var data = obj['msg'];
             currentNews=data;
-            $('#title').val(data['title']);
-            $('#type').val(data['type']);
-            image=data['image'];
-            tempImages=JSON.parse(data['content']);
+            //$('#title').val(data['title']);
+            //$('#type').val(data['type']);
+            //$('#content').val(data['content']);
+            for (var item in data) {
+                $('#'+item).val(data[item]);
+                if(item=='image'){
+                    image=data['image'];
+                }
+            }
+            //image=data['image'];
+            //tempImages=JSON.parse(data['content']);
 
             initFiles();
         }
@@ -84,7 +91,7 @@ function selectNews(id){
             image='';
         }) ;
 
-        var prevconfig=new Array();
+        /*var prevconfig=new Array();
         for (var i = 0; i < tempImages.length; i++) {
             imagesArray.push({'index':i,'image':tempImages[i]});
             tempImagesArray.push(url+tempImages[i]);
@@ -133,7 +140,7 @@ function selectNews(id){
             if (index > -1) {
                 this.splice(index, 1);
             }
-        };
+        };*/
 
     }
 
