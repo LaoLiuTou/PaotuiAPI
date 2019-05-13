@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paotui.service.customer.ICustomerService;
+import com.paotui.service.drivers.IDriversService;
 import com.paotui.service.orders.IOrdersService;
+import com.paotui.utils.HttpRequestUtil;
 import com.paotui.model.customer.Customer;
+import com.paotui.model.drivers.Drivers;
 import com.paotui.model.orders.Orders;
 @Controller
 public class OrdersController {
@@ -26,7 +31,10 @@ public class OrdersController {
 	private IOrdersService iOrdersService;
 	@Autowired
 	private ICustomerService iCustomerService;
+	@Autowired
+	private IDriversService iDriversService;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	SimpleDateFormat sdf2 = new SimpleDateFormat("MM月dd日HH时mm分");
 	Logger logger = Logger.getLogger("PaotuiLogger");
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/addOrders")
@@ -50,6 +58,9 @@ public class OrdersController {
 					resultMap.put("status", "0");
 					resultMap.put("msg", orders.getId());
 					logger.info("新建成功，主键："+orders.getId());
+					SendThread sendThread = new SendThread(customer,orders.getDriver()+"",orders.getPrice()); 
+					sendThread.start();      
+					
 				}
 				else{
 					resultMap.put("status", "-1");
@@ -64,6 +75,53 @@ public class OrdersController {
 			e.printStackTrace();
 		}
 		return resultMap;
+	}
+	public class SendThread extends Thread{
+		private Customer customer;
+		private String driverId;
+		private String price;
+	    public SendThread(Customer customer,String driverId,String price){
+	    	this.customer=customer;
+	    	this.driverId=driverId;
+	    	this.price=price;
+	    }
+	    public void run(){
+	    	Drivers drivers=iDriversService.selectDriversById(driverId);
+			if(drivers!=null){
+				String mobile=drivers.getPhone();
+				String content="【便民一号线】尊敬的司机"+drivers.getDrivername()+
+						"，用户（"+customer.getPhone()+"）已经于"+sdf2.format(new Date())+
+						"使用"+price+"元代金券支付本次乘车费用。";
+				sendSms(mobile,content);
+			}
+	    }
+	 
+	}
+ 
+	public void sendSms(String mobile,String content){
+		try {
+			
+			String url="http://sms.37037.com/sms.aspx";
+			String param="action=send&userid=8609&account=huili&password=huili123&mobile="+mobile+"&content="+content+"&sendTime=&checkcontent=1";
+			//发送 POST 请求
+			System.out.println(url+param);
+			String result=HttpRequestUtil.sendPostRequest(url,param);
+			String returnStr="Faild";
+			Pattern p=Pattern.compile("<returnstatus>(\\w+)</returnstatus>");
+		    Matcher m=p.matcher(result);
+		    while(m.find()){
+		    	returnStr=m.group(1);
+		    }
+		    if(returnStr.equals("Success")){
+				logger.info("发送成功，号码："+mobile);
+		    }
+		    else{ 
+				logger.info("发送失败，号码："+mobile);
+		    }
+		} catch (Exception e) { 
+			logger.info("发送失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/muladdOrders")
