@@ -334,7 +334,7 @@ function setMenu(par,sub){
         '                        <li id="menu5-2"><a href="pt_config.html">APP设置</a></li>\n' +
         '                        <li id="menu5-3"><a href="pt_install.html">安装统计</a></li>\n' +
         '                        <li id="menu5-4"><a href="pt_banner.html">轮播图设置</a></li>\n' +
-        '                        <li id="menu5-4"><a href="pt_banner.html">轮播图设置</a></li>\n' +
+        '                        <li id="menu5-5"><a href="pt_awards.html">奖品设置</a></li>\n' +
         '                    </ul>\n' +
         '                </li>\n' +
         '            </ul>';
