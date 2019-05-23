@@ -30,14 +30,14 @@
         display: flex;
         align-items: center
     }
-    .tempDiv img{width: 100%;align-items: center;}
+
 
 </style>
 
 </head>
 <body>
 <div  class="tempDiv" >
-    <img class="tempImage"  >
+    <!--<img class="tempImage"  >-->
 </div>
 <div class="col-md-12">
     <div class="wrapper">
@@ -102,19 +102,19 @@
         $('.panel-body').on('click','img',function () {
 
             $('.tempDiv').show();
-            $('.tempImage').prop('src',$(this).prop('src'));
+            /*$('.tempImage').prop('src',$(this).prop('src'));*/
 
-            //$('.tempDiv').html('<img class="tempImage" src="'+$(this).prop('src')+'">');
-            //new RTP.PinchZoom($('.tempImage'), {});
+            $('.tempDiv').html('<img class="tempImage" src="'+$(this).prop('src')+'">');
+            new RTP.PinchZoom($('.tempImage'), {});
 
 
         });
         $('.tempDiv').click(function () {
             $('.tempDiv').hide();
-            //$('.tempDiv').empty();
+            $('.tempDiv').empty();
         });
 
-        new RTP.PinchZoom($('.tempImage'), {});
+        //new RTP.PinchZoom($('.tempImage'), {});
 
 
 
