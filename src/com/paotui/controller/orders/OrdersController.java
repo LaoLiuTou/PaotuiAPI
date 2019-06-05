@@ -197,6 +197,7 @@ public class OrdersController {
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 				paramMap.put("status",orders.getStatus());
 				paramMap.put("state",orders.getState());
+				paramMap.put("balance",orders.getBalance());
 				String searchText=request.getParameter("searchText");
 				if(searchText!=null&&!searchText.equals(""))
 				paramMap.put("searchText",searchText);
