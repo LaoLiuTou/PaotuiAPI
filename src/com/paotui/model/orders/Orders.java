@@ -90,7 +90,13 @@ public class Orders {
 	public void setState(Long state) {
 		this.state = state;
 	}
-
+	private String balance;
+	public String getBalance() {
+		return balance;
+	}
+	public void setBalance(String balance) {
+		this.balance = balance;
+	}
 	private String ordernum;
 	private String cusname;
 	private String phone;
