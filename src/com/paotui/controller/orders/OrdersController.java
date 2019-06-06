@@ -58,8 +58,14 @@ public class OrdersController {
 					resultMap.put("status", "0");
 					resultMap.put("msg", orders.getId());
 					logger.info("新建成功，主键："+orders.getId());
-					SendThread sendThread = new SendThread(customer,orders.getDriver()+"",orders.getPrice()); 
-					sendThread.start();      
+					if(orders.getNote()!=null&&orders.getNote().equals("考生免单")){
+						
+					}
+					else{
+						SendThread sendThread = new SendThread(customer,orders.getDriver()+"",orders.getPrice()); 
+						sendThread.start(); 
+					}
+					     
 					
 				}
 				else{
