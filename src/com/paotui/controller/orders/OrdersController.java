@@ -46,19 +46,19 @@ public class OrdersController {
 				resultMap.put("status", "-1");
 				resultMap.put("msg", "用户ID不能为空！");
 			}
-			else if(orders.getPrice()==null){
+			/*else if(orders.getPrice()==null){
 				resultMap.put("status", "-1");
 				resultMap.put("msg", "金额不能为空！");
-			}
+			}*/
 			else{
 				Customer customer=iCustomerService.selectCustomerById(orders.getCus_id()+"");
-				String balance=customer.getBalance();
-				if(Float.parseFloat(balance)>=Float.parseFloat(orders.getPrice())){
+				//String balance=customer.getBalance();
+				//if(Float.parseFloat(balance)>=Float.parseFloat(orders.getPrice())){
 					iOrdersService.addOrders(orders);
 					resultMap.put("status", "0");
 					resultMap.put("msg", orders.getId());
 					logger.info("新建成功，主键："+orders.getId());
-					if(orders.getNote()!=null&&orders.getNote().equals("考生免单")){
+					if(orders.getNote()!=null&&orders.getNote().equals("免单")){
 						
 					}
 					else{
@@ -67,11 +67,11 @@ public class OrdersController {
 					}
 					     
 					
-				}
+				/*}
 				else{
 					resultMap.put("status", "-1");
 					resultMap.put("msg", "您的余额已不足！");
-				}
+				}*/
 				
 			}
 		} catch (Exception e) {
@@ -262,6 +262,7 @@ public class OrdersController {
 				paramMap.put("status",orders.getStatus());
 				paramMap.put("state",orders.getState());
 				paramMap.put("balance",orders.getBalance());
+				paramMap.put("ordernum",orders.getOrdernum());
 				String searchText=request.getParameter("searchText");
 				if(searchText!=null&&!searchText.equals(""))
 				paramMap.put("searchText",searchText);

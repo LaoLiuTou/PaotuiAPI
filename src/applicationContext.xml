@@ -133,4 +133,6 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 </bean>
 <bean id="iAwardsService" class="com.paotui.service.awards.AwardsServiceImpl"></bean>
+ 
+<bean id="wxPayService" class="com.paotui.service.wxpay.WXserviceImpl"></bean>
 </beans>

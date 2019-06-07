@@ -167,10 +167,13 @@ function  queryTicket (searchText,currentPage,pageSize) {
                     '<td >'+data[o].price+'</td>\n';
                 if(data[o].ispay=='1'){
                     html+='<td >已支付</td>\n' ;
+                    html+='<td >'+data[o].c_dt+'</td>\n' ;
                 }
                 else{
                     html+='<td >未支付</td>\n' ;
+                    html+='<td >'+data[o].c_dt+'</td>\n' ;
                 }
+
                 if(data[o].state=='1'){
                     html+='<td >已完成</td>\n' ;
                     html+='<td >';

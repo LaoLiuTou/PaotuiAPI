@@ -30,7 +30,8 @@ public class CORSFilter implements Filter {
 		String uri = request.getServletPath();
 		if((source!=null&&source.equals("APP"))
 				||uri.startsWith("/filesUpload")||uri.startsWith("/filesDelete")
-				||uri.startsWith("/upload")||uri.startsWith("/jsp")){
+				||uri.startsWith("/upload")||uri.startsWith("/jsp")
+				||uri.startsWith("/wxPay")||uri.startsWith("/wxPayNotify")){
 			chain.doFilter(req, res);  
 		}
 		else{

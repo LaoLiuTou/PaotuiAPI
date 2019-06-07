@@ -92,6 +92,24 @@
 		</trim>
 		WHERE ID=#{id}
 	</update>
+	<update id="updateordersBynum" parameterType="Orders">
+		UPDATE orders 
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="id != null">ID=#{id}, </if>
+			<if test="cus_id != null">CUS_ID=#{cus_id}, </if>
+			<if test="price != null">PRICE=#{price}, </if>
+			<if test="driver != null">DRIVER=#{driver}, </if>
+			<if test="note != null">NOTE=#{note}, </if>
+			<if test="c_dt != null">C_DT=#{c_dt}, </if>
+			<if test="pay_dt != null">PAY_DT=#{pay_dt}, </if>
+			<if test="u_dt != null">U_DT=#{u_dt}, </if>
+			<if test="status != null">STATUS=#{status}, </if>
+			<if test="state != null">STATE=#{state}, </if>
+			<if test="ordernum != null">ORDERNUM=#{ordernum}, </if>
+			<if test="balance != null">BALANCE=#{balance}, </if>
+		</trim>
+		WHERE ORDERNUM=#{ordernum}
+	</update>
 
 	<insert id="addorders" parameterType="Orders" keyProperty="id" useGeneratedKeys="true">
 		INSERT INTO orders 

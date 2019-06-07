@@ -25,6 +25,7 @@ import com.paotui.model.orders.Orders;
  	* @return 
  */ 
 	public  int updateorders(Orders orders);
+	public  int updateordersBynum(Orders orders);
 	/**
  	* 添加 
  	* @return

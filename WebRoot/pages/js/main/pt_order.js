@@ -117,6 +117,7 @@ function  queryOrder (searchText,currentPage,pageSize) {
                     '<td >'+data[o].id+'</td>\n' +
                     '<td >'+data[o].ordernum+'</td>\n' +
                     '<td >'+data[o].price+'</td>\n' +
+                    '<td >'+(Number(data[o].price) -Number(data[o].balance))+'</td>\n' +
                     '<td >'+data[o].phone+'</td>\n' +
                     '<td >'+data[o].drivername+'</td>\n' +
                     '<td >'+data[o].driverphone+'</td>\n' +
@@ -127,7 +128,7 @@ function  queryOrder (searchText,currentPage,pageSize) {
                     html+='<td >已完成</td>\n' ;
                 }
                 else{
-                    html+='<td >未完成</td>\n' ;
+                    html+='<td >代付款</td>\n' ;
                 }
                 html+='<td >' +
                     '<a class="deleteOrder" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';

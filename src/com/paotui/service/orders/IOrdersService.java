@@ -28,6 +28,7 @@ public interface IOrdersService {
 	* @return 
 	*/ 
 	public int updateOrders(Orders orders);
+	public int updateordersBynum(Orders orders);
 
 	/**
 	* 添加 
