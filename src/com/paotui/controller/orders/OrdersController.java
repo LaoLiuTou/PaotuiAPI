@@ -51,20 +51,20 @@ public class OrdersController {
 				resultMap.put("msg", "金额不能为空！");
 			}*/
 			else{
-				Customer customer=iCustomerService.selectCustomerById(orders.getCus_id()+"");
+				//Customer customer=iCustomerService.selectCustomerById(orders.getCus_id()+"");
 				//String balance=customer.getBalance();
 				//if(Float.parseFloat(balance)>=Float.parseFloat(orders.getPrice())){
 					iOrdersService.addOrders(orders);
 					resultMap.put("status", "0");
 					resultMap.put("msg", orders.getId());
 					logger.info("新建成功，主键："+orders.getId());
-					if(orders.getNote()!=null&&orders.getNote().equals("免单")){
+					/*if(orders.getNote()!=null&&orders.getNote().equals("免单")){
 						
 					}
 					else{
 						SendThread sendThread = new SendThread(customer,orders.getDriver()+"",orders.getPrice()); 
 						sendThread.start(); 
-					}
+					}*/
 					     
 					
 				/*}

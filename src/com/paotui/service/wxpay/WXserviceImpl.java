@@ -3,8 +3,14 @@ package com.paotui.service.wxpay;
  
 import com.github.wxpay.sdk.WXPay;
 import com.github.wxpay.sdk.WXPayUtil; 
+import com.paotui.controller.orders.OrdersController.SendThread;
+import com.paotui.dao.customer.ICustomerMapper;
+import com.paotui.dao.drivers.IDriversMapper;
 import com.paotui.dao.orders.IOrdersMapper;
+import com.paotui.model.customer.Customer;
+import com.paotui.model.drivers.Drivers;
 import com.paotui.model.orders.Orders;
+import com.paotui.utils.HttpRequestUtil;
 import com.paotui.utils.wxpay.WXConfigUtil;
 import com.paotui.utils.wxpay.WxMD5Util;
 
@@ -12,18 +18,26 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
  
 public class WXserviceImpl implements WXservice {
 	Logger logger = Logger.getLogger("PaotuiLogger");
     public static final String SPBILL_CREATE_IP = "222.168.10.36";
     public static final String NOTIFY_URL = "http://app.dongsheng.club:8888/wxPayNotify";
     public static final String TRADE_TYPE_APP = "APP";
+    SimpleDateFormat sdf2 = new SimpleDateFormat("MM月dd日HH时mm分");
     @Autowired
 	private IOrdersMapper iOrdersMapper;
+    @Autowired
+    private IDriversMapper iDriversMapper;
+    @Autowired
+    private ICustomerMapper iCustomerMapper;
 
     /**
      * 调用官方SDK 获取预支付订单等参数
@@ -126,6 +140,25 @@ public class WXserviceImpl implements WXservice {
 	                        	orders.setPay_dt(new Date());
 	                        	orders.setStatus("1");
 	                        	iOrdersMapper.updateordersBynum(orders);
+	                        	
+	                        	//发送短信
+	                        	paramMap=new HashMap(); 
+	                        	paramMap.put("fromPage",0);
+	            				paramMap.put("toPage",1); 
+	            				paramMap.put("ordernum",out_trade_no);
+	            				List<Orders> tempList=iOrdersMapper.selectordersByParam(paramMap);
+	            				if(tempList.size()>0){ 
+	            					orders =tempList.get(0);
+		                        	if(orders.getNote()!=null&&orders.getNote().equals("免单")){
+		        						
+		        					}
+		        					else{
+		        						Customer customer=iCustomerMapper.selectcustomerById(orders.getCus_id()+"");
+		        						SendThread sendThread = new SendThread(customer,orders.getDriver()+"",orders.getPrice()); 
+		        						sendThread.start(); 
+		        					}
+	            				}
+	                        	
             				} 
             				
                     		
@@ -155,5 +188,51 @@ public class WXserviceImpl implements WXservice {
         }
         return xmlBack;
     }
-
+    public class SendThread extends Thread{
+		private Customer customer;
+		private String driverId;
+		private String price;
+	    public SendThread(Customer customer,String driverId,String price){
+	    	this.customer=customer;
+	    	this.driverId=driverId;
+	    	this.price=price;
+	    }
+	    public void run(){
+	    	Drivers drivers=iDriversMapper.selectdriversById(driverId);
+			if(drivers!=null){
+				String mobile=drivers.getPhone();
+				String content="【便民一号线】尊敬的司机"+drivers.getDrivername()+
+						"，用户（"+customer.getPhone()+"）已经于"+sdf2.format(new Date())+
+						"支付本次乘车费用"+price+"元。";
+				sendSms(mobile,content);
+			}
+	    }
+	 
+	}
+    
+    public void sendSms(String mobile,String content){
+		try {
+			
+			String url="http://sms.37037.com/sms.aspx";
+			String param="action=send&userid=8609&account=huili&password=huili123&mobile="+mobile+"&content="+content+"&sendTime=&checkcontent=1";
+			//发送 POST 请求
+			System.out.println(url+param);
+			String result=HttpRequestUtil.sendPostRequest(url,param);
+			String returnStr="Faild";
+			Pattern p=Pattern.compile("<returnstatus>(\\w+)</returnstatus>");
+		    Matcher m=p.matcher(result);
+		    while(m.find()){
+		    	returnStr=m.group(1);
+		    }
+		    if(returnStr.equals("Success")){
+				logger.info("发送成功，号码："+mobile);
+		    }
+		    else{ 
+				logger.info("发送失败，号码："+mobile);
+		    }
+		} catch (Exception e) { 
+			logger.info("发送失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+	}
 }
