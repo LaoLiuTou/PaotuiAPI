@@ -4159,7 +4159,8 @@ ul.labels-info li a:hover, ul.labels-info li a:focus {
 }
 
 .blog p {
-    padding-bottom: 15px;
+    /*padding-bottom: 15px;*/
+    padding-top: 8px;
     font-size: 14px;
 }
 
