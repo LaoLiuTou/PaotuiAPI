@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import com.paotui.service.wxpay.WXserviceImpl;
-import com.paotui.utils.wxpay.WxMD5Util;
+import com.paotui.service.wxpay.WXserviceImpl; 
+import com.paotui.utils.PayCommonUtil;
+import com.paotui.utils.wxpay.IWxPayConfig;
+import com.paotui.utils.wxpay.WXPayUtil;  
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,15 +39,17 @@ public class WXController {
 	@ResponseBody
     public Map  wxPay(@RequestParam(value = "userId") String user_id,
                               @RequestParam(value = "totalFee") String total_fee,
-                              @RequestParam(value = "out_trade_no") String out_trade_no)  {
+                              @RequestParam(value = "out_trade_no") String out_trade_no,
+                              HttpServletRequest request)  {
     	Map resultMap=new HashMap();
         try {
 			String attach = "{\"user_id\":\"" + user_id + "\"}";
+			String spbill_create_ip = PayCommonUtil.getIpAddr(request);
 			//请求预支付订单
-			Map<String, String> result = wxPayService.dounifiedOrder(attach, total_fee,out_trade_no);
+			Map<String, String> result = wxPayService.dounifiedOrder(attach, total_fee,out_trade_no,spbill_create_ip);
 			Map temp=new HashMap();
 
-			WxMD5Util md5Util = new WxMD5Util();
+			IWxPayConfig iWxPayConfig = new IWxPayConfig();
 			//返回APP端的数据
 			//参加调起支付的签名字段有且只能是6个，分别为appid、partnerid、prepayid、package、noncestr和timestamp，而且都必须是小写
 			temp.put("appid", result.get("appid"));
@@ -54,7 +58,8 @@ public class WXController {
 			temp.put("package", "Sign=WXPay");
 			temp.put("noncestr", result.get("nonce_str"));
 			temp.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));//单位为秒
-			temp.put("sign", md5Util.getSign(temp));
+			 String paySign = WXPayUtil.generateSignature(temp, iWxPayConfig.getKey());
+			temp.put("sign", paySign);
 			temp.put("extdata", attach);
 			
 			resultMap.put("status", "0");

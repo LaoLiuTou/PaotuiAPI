@@ -1,8 +1,5 @@
 package com.paotui.service.wxpay;
-
  
-import com.github.wxpay.sdk.WXPay;
-import com.github.wxpay.sdk.WXPayUtil; 
 import com.paotui.controller.orders.OrdersController.SendThread;
 import com.paotui.dao.customer.ICustomerMapper;
 import com.paotui.dao.drivers.IDriversMapper;
@@ -10,9 +7,11 @@ import com.paotui.dao.orders.IOrdersMapper;
 import com.paotui.model.customer.Customer;
 import com.paotui.model.drivers.Drivers;
 import com.paotui.model.orders.Orders;
-import com.paotui.utils.HttpRequestUtil;
-import com.paotui.utils.wxpay.WXConfigUtil;
-import com.paotui.utils.wxpay.WxMD5Util;
+import com.paotui.utils.HttpRequestUtil; 
+import com.paotui.utils.PayCommonUtil;
+import com.paotui.utils.wxpay.IWxPayConfig;
+import com.paotui.utils.wxpay.WXPay;
+import com.paotui.utils.wxpay.WXPayUtil;  
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
  
 public class WXserviceImpl implements WXservice {
-	Logger logger = Logger.getLogger("PaotuiLogger");
-    public static final String SPBILL_CREATE_IP = "222.168.10.36";
-    public static final String NOTIFY_URL = "http://app.dongsheng.club:8888/wxPayNotify";
+	Logger logger = Logger.getLogger("PaotuiLogger"); 
     public static final String TRADE_TYPE_APP = "APP";
     SimpleDateFormat sdf2 = new SimpleDateFormat("MM月dd日HH时mm分");
     @Autowired
@@ -46,32 +43,35 @@ public class WXserviceImpl implements WXservice {
      * @return
      * @throws Exception
      */
-    public Map<String, String> dounifiedOrder(String attach, String total_fee,String out_trade_no) throws Exception {
-        WxMD5Util md5Util = new WxMD5Util();
+    public Map<String, String> dounifiedOrder(String attach, String total_fee,String out_trade_no,
+    		String spbill_create_ip) throws Exception {
+        
         Map<String, String> returnMap = new HashMap<String, String>();
-        WXConfigUtil config = new WXConfigUtil();
-        WXPay wxpay = new WXPay(config);
+        String nonceStr=PayCommonUtil.getRandomString(32);
         Map<String, String> data = new HashMap<String, String>();
         //生成商户订单号，不可重复
         //String out_trade_no = "wxpay" + System.currentTimeMillis();
-
-        data.put("appid", config.getAppID());
-        data.put("mch_id", config.getMchID());
-        data.put("nonce_str", WXPayUtil.generateNonceStr());
+        IWxPayConfig iWxPayConfig = new IWxPayConfig();
+        WXPay wxpay = new WXPay(iWxPayConfig); 
+        data.put("appid", iWxPayConfig.getAppID());
+        data.put("mch_id", iWxPayConfig.getMchID());
+        data.put("nonce_str", nonceStr);
         String body = "订单支付";
         data.put("body", body);
         data.put("out_trade_no", out_trade_no);
         data.put("total_fee", total_fee);
         //自己的服务器IP地址
-        data.put("spbill_create_ip", SPBILL_CREATE_IP);
+        data.put("spbill_create_ip", spbill_create_ip);
         //异步通知地址（请注意必须是外网）
-        data.put("notify_url", NOTIFY_URL);
+        data.put("notify_url", iWxPayConfig.getNotify_url());
         //交易类型
         data.put("trade_type", TRADE_TYPE_APP);
         //附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
         data.put("attach", attach);
-        String sign1 = md5Util.getSign(data);
-        data.put("sign", sign1);
+       
+        String paySign = WXPayUtil.generateSignature(data, iWxPayConfig.getKey());
+
+        data.put("sign", paySign);
 
         try {
             //使用官方API请求预付订单
@@ -111,16 +111,12 @@ public class WXserviceImpl implements WXservice {
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	public String payBack(String notifyData) {
-        WXConfigUtil config = null;
-        try {
-            config = new WXConfigUtil();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        WXPay wxpay = new WXPay(config);
+    	
         String xmlBack = "";
         Map<String, String> notifyMap = null;
         try {
+        	IWxPayConfig iWxPayConfig = new IWxPayConfig();
+            WXPay wxpay = new WXPay(iWxPayConfig);
             notifyMap = WXPayUtil.xmlToMap(notifyData);         // 调用官方SDK转换成map类型数据
             if (wxpay.isPayResultNotifySignatureValid(notifyMap)) {//验证签名是否有效，有效则进一步处理
 
