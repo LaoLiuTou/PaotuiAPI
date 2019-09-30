@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.paotui.dao.coupon.ICouponMapper"> 
+	<select id="selectcouponById" parameterType="String" resultType="Coupon">
+		SELECT * FROM coupon WHERE ID=#{id}
+	</select>
+
+	<delete id="deletecoupon" parameterType="String"> 
+		DELETE FROM coupon WHERE ID=#{id}
+	</delete>
+
+	<select id="selectcouponByParam" parameterType="java.util.Map" resultType="Coupon">
+		SELECT *
+		FROM coupon
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND ID =#{id} </if>
+			<if test="title != null"> AND TITLE =#{title} </if>
+			<if test="image != null"> AND IMAGE =#{image} </if>
+			<if test="content != null"> AND CONTENT =#{content} </if>
+			<if test="type != null"> AND TYPE =#{type} </if>
+			<if test="c_id != null"> AND C_ID =#{c_id} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
+			<if test="ismain != null"> AND ISMAIN =#{ismain} </if>
+			<if test="quantity != null"> AND QUANTITY =#{quantity} </if>
+			<if test="state != null"> AND STATE =#{state} </if>
+		</trim>  
+			<if test="orderBy!= null"> ORDER BY   #{orderBy} </if>
+		LIMIT #{fromPage},#{toPage} 
+	</select>
+
+	<select id="selectCountcouponByParam" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(id) 
+		FROM coupon 
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND ID =#{id} </if>
+			<if test="title != null"> AND TITLE =#{title} </if>
+			<if test="image != null"> AND IMAGE =#{image} </if>
+			<if test="content != null"> AND CONTENT =#{content} </if>
+			<if test="type != null"> AND TYPE =#{type} </if>
+			<if test="c_id != null"> AND C_ID =#{c_id} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
+			<if test="ismain != null"> AND ISMAIN =#{ismain} </if>
+			<if test="quantity != null"> AND QUANTITY =#{quantity} </if>
+			<if test="state != null"> AND STATE =#{state} </if>
+		</trim>  
+	</select>
+
+	<update id="updatecoupon" parameterType="Coupon">
+		UPDATE coupon 
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="id != null">ID=#{id}, </if>
+			<if test="title != null">TITLE=#{title}, </if>
+			<if test="image != null">IMAGE=#{image}, </if>
+			<if test="content != null">CONTENT=#{content}, </if>
+			<if test="type != null">TYPE=#{type}, </if>
+			<if test="c_id != null">C_ID=#{c_id}, </if>
+			<if test="c_dt != null">C_DT=#{c_dt}, </if>
+			<if test="u_dt != null">U_DT=#{u_dt}, </if>
+			<if test="ismain != null">ISMAIN=#{ismain}, </if>
+			<if test="quantity != null">QUANTITY=#{quantity}, </if>
+			<if test="state != null">STATE=#{state}, </if>
+		</trim>
+		WHERE ID=#{id}
+	</update>
+
+	<insert id="addcoupon" parameterType="Coupon" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO coupon 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="title != null">TITLE, </if>
+			<if test="image != null">IMAGE, </if>
+			<if test="content != null">CONTENT, </if>
+			<if test="type != null">TYPE, </if>
+			<if test="c_id != null">C_ID, </if>
+			<if test="c_dt != null">C_DT, </if>
+			<if test="u_dt != null">U_DT, </if>
+			<if test="ismain != null">ISMAIN, </if>
+			<if test="quantity != null">QUANTITY, </if>
+			<if test="state != null">STATE, </if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
+			<if test="title != null">#{title}, </if>
+			<if test="image != null">#{image}, </if>
+			<if test="content != null">#{content}, </if>
+			<if test="type != null">#{type}, </if>
+			<if test="c_id != null">#{c_id}, </if>
+			<if test="c_dt != null">#{c_dt}, </if>
+			<if test="u_dt != null">#{u_dt}, </if>
+			<if test="ismain != null">#{ismain}, </if>
+			<if test="quantity != null">#{quantity}, </if>
+			<if test="state != null">#{state}, </if>
+		</trim>
+	</insert>
+
+	<insert id="muladdcoupon" parameterType="java.util.List" keyProperty="id" useGeneratedKeys="true">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			INSERT INTO coupon 
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+				<if test="item.id != null">ID, </if>
+				<if test="item.title != null">TITLE, </if>
+				<if test="item.image != null">IMAGE, </if>
+				<if test="item.content != null">CONTENT, </if>
+				<if test="item.type != null">TYPE, </if>
+				<if test="item.c_id != null">C_ID, </if>
+				<if test="item.c_dt != null">C_DT, </if>
+				<if test="item.u_dt != null">U_DT, </if>
+				<if test="item.ismain != null">ISMAIN, </if>
+				<if test="item.quantity != null">QUANTITY, </if>
+				<if test="item.state != null">STATE, </if>
+			</trim>
+			<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
+				<if test="item.id != null">#{item.id}, </if>
+				<if test="item.title != null">#{item.title}, </if>
+				<if test="item.image != null">#{item.image}, </if>
+				<if test="item.content != null">#{item.content}, </if>
+				<if test="item.type != null">#{item.type}, </if>
+				<if test="item.c_id != null">#{item.c_id}, </if>
+				<if test="item.c_dt != null">#{item.c_dt}, </if>
+				<if test="item.u_dt != null">#{item.u_dt}, </if>
+				<if test="item.ismain != null">#{item.ismain}, </if>
+				<if test="item.quantity != null">#{item.quantity}, </if>
+				<if test="item.state != null">#{item.state}, </if>
+			</trim>
+		</foreach>
+	</insert>
+</mapper>

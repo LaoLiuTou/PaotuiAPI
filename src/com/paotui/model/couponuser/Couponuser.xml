@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.paotui.dao.couponuser.ICouponuserMapper"> 
+	<select id="selectcouponuserById" parameterType="String" resultType="Couponuser">
+		SELECT * FROM couponuser WHERE ID=#{id}
+	</select>
+
+	<delete id="deletecouponuser" parameterType="String"> 
+		DELETE FROM couponuser WHERE ID=#{id}
+	</delete>
+
+	<select id="selectcouponuserByParam" parameterType="java.util.Map" resultType="Couponuser">
+		SELECT *
+		FROM couponuser
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND ID =#{id} </if>
+			<if test="couponid != null"> AND COUPONID =#{couponid} </if>
+			<if test="phone != null"> AND PHONE =#{phone} </if>
+			<if test="userid != null"> AND USERID =#{userid} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
+			<if test="state != null"> AND STATE =#{state} </if>
+		</trim>  
+			<if test="orderBy!= null"> ORDER BY   #{orderBy} </if>
+		LIMIT #{fromPage},#{toPage} 
+	</select>
+
+	<select id="selectCountcouponuserByParam" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(id) 
+		FROM couponuser 
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND ID =#{id} </if>
+			<if test="couponid != null"> AND COUPONID =#{couponid} </if>
+			<if test="phone != null"> AND PHONE =#{phone} </if>
+			<if test="userid != null"> AND USERID =#{userid} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
+			<if test="state != null"> AND STATE =#{state} </if>
+		</trim>  
+	</select>
+
+	<update id="updatecouponuser" parameterType="Couponuser">
+		UPDATE couponuser 
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="id != null">ID=#{id}, </if>
+			<if test="couponid != null">COUPONID=#{couponid}, </if>
+			<if test="phone != null">PHONE=#{phone}, </if>
+			<if test="userid != null">USERID=#{userid}, </if>
+			<if test="c_dt != null">C_DT=#{c_dt}, </if>
+			<if test="u_dt != null">U_DT=#{u_dt}, </if>
+			<if test="state != null">STATE=#{state}, </if>
+		</trim>
+		WHERE ID=#{id}
+	</update>
+
+	<insert id="addcouponuser" parameterType="Couponuser" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO couponuser 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="couponid != null">COUPONID, </if>
+			<if test="phone != null">PHONE, </if>
+			<if test="userid != null">USERID, </if>
+			<if test="c_dt != null">C_DT, </if>
+			<if test="u_dt != null">U_DT, </if>
+			<if test="state != null">STATE, </if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
+			<if test="couponid != null">#{couponid}, </if>
+			<if test="phone != null">#{phone}, </if>
+			<if test="userid != null">#{userid}, </if>
+			<if test="c_dt != null">#{c_dt}, </if>
+			<if test="u_dt != null">#{u_dt}, </if>
+			<if test="state != null">#{state}, </if>
+		</trim>
+	</insert>
+
+	<insert id="muladdcouponuser" parameterType="java.util.List" keyProperty="id" useGeneratedKeys="true">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			INSERT INTO couponuser 
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+				<if test="item.id != null">ID, </if>
+				<if test="item.couponid != null">COUPONID, </if>
+				<if test="item.phone != null">PHONE, </if>
+				<if test="item.userid != null">USERID, </if>
+				<if test="item.c_dt != null">C_DT, </if>
+				<if test="item.u_dt != null">U_DT, </if>
+				<if test="item.state != null">STATE, </if>
+			</trim>
+			<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
+				<if test="item.id != null">#{item.id}, </if>
+				<if test="item.couponid != null">#{item.couponid}, </if>
+				<if test="item.phone != null">#{item.phone}, </if>
+				<if test="item.userid != null">#{item.userid}, </if>
+				<if test="item.c_dt != null">#{item.c_dt}, </if>
+				<if test="item.u_dt != null">#{item.u_dt}, </if>
+				<if test="item.state != null">#{item.state}, </if>
+			</trim>
+		</foreach>
+	</insert>
+</mapper>
