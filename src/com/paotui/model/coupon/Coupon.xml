@@ -3,7 +3,10 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.paotui.dao.coupon.ICouponMapper"> 
 	<select id="selectcouponById" parameterType="String" resultType="Coupon">
-		SELECT * FROM coupon WHERE ID=#{id}
+		SELECT a.*,b.nickname as creater 
+		FROM coupon a 
+		LEFT JOIN user b  on a.c_id=b.id 
+		WHERE a.ID=#{id}
 	</select>
 
 	<delete id="deletecoupon" parameterType="String"> 
@@ -11,24 +14,25 @@
 	</delete>
 
 	<select id="selectcouponByParam" parameterType="java.util.Map" resultType="Coupon">
-		SELECT *
-		FROM coupon
+		SELECT a.*,b.nickname as creater 
+		FROM coupon a 
+		LEFT JOIN user b  on a.c_id=b.id 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test="id != null"> AND ID =#{id} </if>
-			<if test="title != null"> AND TITLE =#{title} </if>
-			<if test="image != null"> AND IMAGE =#{image} </if>
-			<if test="content != null"> AND CONTENT =#{content} </if>
-			<if test="type != null"> AND TYPE =#{type} </if>
-			<if test="c_id != null"> AND C_ID =#{c_id} </if>
-			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
-			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
-			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
-			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
-			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
-			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
-			<if test="ismain != null"> AND ISMAIN =#{ismain} </if>
-			<if test="quantity != null"> AND QUANTITY =#{quantity} </if>
-			<if test="state != null"> AND STATE =#{state} </if>
+			<if test="id != null"> AND a.ID =#{id} </if>
+			<if test="title != null"> AND a.TITLE =#{title} </if>
+			<if test="image != null"> AND a.IMAGE =#{image} </if>
+			<if test="content != null"> AND a.CONTENT =#{content} </if>
+			<if test="type != null"> AND a.TYPE =#{type} </if>
+			<if test="c_id != null"> AND a.C_ID =#{c_id} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(a.C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(a.C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND a.C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(a.U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(a.U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
+			<if test="ismain != null"> AND a.ISMAIN =#{ismain} </if>
+			<if test="quantity != null"> AND a.QUANTITY =#{quantity} </if>
+			<if test="state != null"> AND a.STATE =#{state} </if>
 		</trim>  
 			<if test="orderBy!= null"> ORDER BY   #{orderBy} </if>
 		LIMIT #{fromPage},#{toPage} 

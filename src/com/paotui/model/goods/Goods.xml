@@ -2,8 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.paotui.dao.goods.IGoodsMapper"> 
-	<select id="selectgoodsById" parameterType="String" resultType="Goods">
-		SELECT * FROM goods WHERE ID=#{id}
+	<select id="selectgoodsById" parameterType="String" resultType="Goods"> 
+		SELECT a.*,b.nickname as creater 
+		FROM goods a 
+		LEFT JOIN user b  on a.c_id=b.id 
+		WHERE a.ID=#{id}
 	</select>
 
 	<delete id="deletegoods" parameterType="String"> 
@@ -11,30 +14,31 @@
 	</delete>
 
 	<select id="selectgoodsByParam" parameterType="java.util.Map" resultType="Goods">
-		SELECT *
-		FROM goods
+		SELECT a.*,b.nickname as creater 
+		FROM goods a 
+		LEFT JOIN user b  on a.c_id=b.id 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test="id != null"> AND ID =#{id} </if>
-			<if test="title != null"> AND TITLE =#{title} </if>
-			<if test="image != null"> AND IMAGE =#{image} </if>
-			<if test="banners != null"> AND BANNERS =#{banners} </if>
-			<if test="brand != null"> AND BRAND =#{brand} </if>
-			<if test="model != null"> AND MODEL =#{model} </if>
-			<if test="condition != null"> AND CONDITION =#{condition} </if>
-			<if test="configure != null"> AND CONFIGURE =#{configure} </if>
-			<if test="network != null"> AND NETWORK =#{network} </if>
-			<if test="content != null"> AND CONTENT =#{content} </if>
-			<if test="type != null"> AND TYPE =#{type} </if>
-			<if test="c_id != null"> AND C_ID =#{c_id} </if>
-			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
-			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
-			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
-			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
-			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
-			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
-			<if test="state != null"> AND STATE =#{state} </if>
+			<if test="id != null"> AND a.ID =#{id} </if>
+			<if test="title != null"> AND a.TITLE =#{title} </if>
+			<if test="image != null"> AND a.IMAGE =#{image} </if>
+			<if test="banners != null"> AND a.BANNERS =#{banners} </if>
+			<if test="brand != null"> AND a.BRAND =#{brand} </if>
+			<if test="model != null"> AND a.MODEL =#{model} </if>
+			<if test="oldlevel != null"> AND a.OLDLEVEL =#{oldlevel} </if>
+			<if test="configure != null"> AND a.CONFIGURE =#{configure} </if>
+			<if test="network != null"> AND a.NETWORK =#{network} </if>
+			<if test="content != null"> AND a.CONTENT =#{content} </if>
+			<if test="type != null"> AND a.TYPE =#{type} </if>
+			<if test="c_id != null"> AND a.C_ID =#{c_id} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(a.C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(a.C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND a.C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(a.U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(a.U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
+			<if test="state != null"> AND a.STATE =#{state} </if>
 			
-			<if test="searchtext != null"> AND CONCAT(IFNULL(TITLE,''),' ',IFNULL(CONDITION,''),' ',IFNULL(CONFIGURE,''),' ',IFNULL(NETWORK,'')) like '%${searchtext}%' </if>
+			<if test="searchtext != null"> AND CONCAT(IFNULL(a.TITLE,''),' ',IFNULL(a.OLDLEVEL,''),' ',IFNULL(a.CONFIGURE,''),' ',IFNULL(a.NETWORK,'')) like '%${searchtext}%' </if>
 		
 		</trim>  
 			<if test="orderBy!= null"> ORDER BY   #{orderBy} </if>
@@ -51,7 +55,7 @@
 			<if test="banners != null"> AND BANNERS =#{banners} </if>
 			<if test="brand != null"> AND BRAND =#{brand} </if>
 			<if test="model != null"> AND MODEL =#{model} </if>
-			<if test="condition != null"> AND CONDITION =#{condition} </if>
+			<if test="oldlevel != null"> AND OLDLEVEL =#{oldlevel} </if>
 			<if test="configure != null"> AND CONFIGURE =#{configure} </if>
 			<if test="network != null"> AND NETWORK =#{network} </if>
 			<if test="content != null"> AND CONTENT =#{content} </if>
@@ -76,7 +80,7 @@
 			<if test="banners != null">BANNERS=#{banners}, </if>
 			<if test="brand != null">BRAND=#{brand}, </if>
 			<if test="model != null">MODEL=#{model}, </if>
-			<if test="condition != null">CONDITION=#{condition}, </if>
+			<if test="oldlevel != null">OLDLEVEL=#{oldlevel}, </if>
 			<if test="configure != null">CONFIGURE=#{configure}, </if>
 			<if test="network != null">NETWORK=#{network}, </if>
 			<if test="content != null">CONTENT=#{content}, </if>
@@ -97,7 +101,7 @@
 			<if test="banners != null">BANNERS, </if>
 			<if test="brand != null">BRAND, </if>
 			<if test="model != null">MODEL, </if>
-			<if test="condition != null">CONDITION, </if>
+			<if test="oldlevel != null">OLDLEVEL, </if>
 			<if test="configure != null">CONFIGURE, </if>
 			<if test="network != null">NETWORK, </if>
 			<if test="content != null">CONTENT, </if>
@@ -113,7 +117,7 @@
 			<if test="banners != null">#{banners}, </if>
 			<if test="brand != null">#{brand}, </if>
 			<if test="model != null">#{model}, </if>
-			<if test="condition != null">#{condition}, </if>
+			<if test="oldlevel != null">#{oldlevel}, </if>
 			<if test="configure != null">#{configure}, </if>
 			<if test="network != null">#{network}, </if>
 			<if test="content != null">#{content}, </if>
@@ -136,7 +140,7 @@
 				<if test="item.banners != null">BANNERS, </if>
 				<if test="item.brand != null">BRAND, </if>
 				<if test="item.model != null">MODEL, </if>
-				<if test="item.condition != null">CONDITION, </if>
+				<if test="item.oldlevel != null">OLDLEVEL, </if>
 				<if test="item.configure != null">CONFIGURE, </if>
 				<if test="item.network != null">NETWORK, </if>
 				<if test="item.content != null">CONTENT, </if>
@@ -153,7 +157,7 @@
 				<if test="item.banners != null">#{item.banners}, </if>
 				<if test="item.brand != null">#{item.brand}, </if>
 				<if test="item.model != null">#{item.model}, </if>
-				<if test="item.condition != null">#{item.condition}, </if>
+				<if test="item.oldlevel != null">#{item.oldlevel}, </if>
 				<if test="item.configure != null">#{item.configure}, </if>
 				<if test="item.network != null">#{item.network}, </if>
 				<if test="item.content != null">#{item.content}, </if>

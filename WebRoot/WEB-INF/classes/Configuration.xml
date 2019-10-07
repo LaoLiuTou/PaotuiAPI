@@ -36,6 +36,9 @@
 		<typeAlias alias="Ticket" type="com.paotui.model.ticket.Ticket" /> 
 		<typeAlias alias="Prize" type="com.paotui.model.prize.Prize" /> 
 		<typeAlias alias="Awards" type="com.paotui.model.awards.Awards" /> 
+		<typeAlias alias="Coupon" type="com.paotui.model.coupon.Coupon" /> 
+		<typeAlias alias="Couponuser" type="com.paotui.model.couponuser.Couponuser" /> 
+		<typeAlias alias="Goods" type="com.paotui.model.goods.Goods" /> 
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/paotui/model/addresses/Addresses.xml"/> 
@@ -54,5 +57,8 @@
 		<mapper resource="com/paotui/model/ticket/Ticket.xml"/> 
 		<mapper resource="com/paotui/model/prize/Prize.xml"/> 
 		<mapper resource="com/paotui/model/awards/Awards.xml"/> 
+		<mapper resource="com/paotui/model/coupon/Coupon.xml"/> 
+		<mapper resource="com/paotui/model/couponuser/Couponuser.xml"/> 
+		<mapper resource="com/paotui/model/goods/Goods.xml"/>
 	</mappers>  
 </configuration>

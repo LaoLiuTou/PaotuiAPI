@@ -56,12 +56,13 @@ public class Goods {
 		this.model = model;
 	}
 	/** 成色 */
-	private  String condition;
-	public String getCondition() {
-		return condition;
+	private  String oldlevel;
+	 
+	public String getOldlevel() {
+		return oldlevel;
 	}
-	public void setCondition(String condition) {
-		this.condition = condition;
+	public void setOldlevel(String oldlevel) {
+		this.oldlevel = oldlevel;
 	}
 	/** 配置 */
 	private  String configure;
@@ -129,7 +130,13 @@ public class Goods {
 	public void setState(Long state) {
 		this.state = state;
 	}
-
+	private String creater;
+	public String getCreater() {
+		return creater;
+	}
+	public void setCreater(String creater) {
+		this.creater = creater;
+	}
 
 
 }

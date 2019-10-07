@@ -133,4 +133,21 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 </bean>
 <bean id="iAwardsService" class="com.paotui.service.awards.AwardsServiceImpl"></bean>
+ <bean id="iCouponMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.coupon.ICouponMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iCouponService" class="com.paotui.service.coupon.CouponServiceImpl"></bean>
+<bean id="iCouponuserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.couponuser.ICouponuserMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iCouponuserService" class="com.paotui.service.couponuser.CouponuserServiceImpl"></bean>
+<bean id="iGoodsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.goods.IGoodsMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iGoodsService" class="com.paotui.service.goods.GoodsServiceImpl"></bean>
+
+<bean id="wxPayService" class="com.paotui.service.wxpay.WXserviceImpl"></bean>
 </beans>

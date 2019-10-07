@@ -155,7 +155,7 @@ public class GoodsController {
 				paramMap.put("banners",goods.getBanners());
 				paramMap.put("brand",goods.getBrand());
 				paramMap.put("model",goods.getModel());
-				paramMap.put("condition",goods.getCondition());
+				paramMap.put("oldlevel",goods.getOldlevel());
 				paramMap.put("configure",goods.getConfigure());
 				paramMap.put("network",goods.getNetwork());
 				paramMap.put("content",goods.getContent());

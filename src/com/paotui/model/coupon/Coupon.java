@@ -98,6 +98,12 @@ public class Coupon {
 		this.state = state;
 	}
 
-
+	private String creater;
+	public String getCreater() {
+		return creater;
+	}
+	public void setCreater(String creater) {
+		this.creater = creater;
+	}
 
 }
