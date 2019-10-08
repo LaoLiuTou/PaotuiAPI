@@ -160,6 +160,7 @@ public class GoodsController {
 				paramMap.put("network",goods.getNetwork());
 				paramMap.put("content",goods.getContent());
 				paramMap.put("type",goods.getType());
+				paramMap.put("subtype",goods.getSubtype());
 				paramMap.put("c_id",goods.getC_id());
 				String c_dtFrom=request.getParameter("c_dtFrom");
 				String c_dtTo=request.getParameter("c_dtTo");

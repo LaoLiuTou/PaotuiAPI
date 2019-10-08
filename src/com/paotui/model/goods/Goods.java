@@ -90,11 +90,19 @@ public class Goods {
 	}
 	/** 类型 */
 	private  Long type;
+	private  Long subtype;
 	public Long getType() {
 		return type;
 	}
 	public void setType(Long type) {
 		this.type = type;
+	}
+	
+	public Long getSubtype() {
+		return subtype;
+	}
+	public void setSubtype(Long subtype) {
+		this.subtype = subtype;
 	}
 	/**  */
 	private  Long c_id;

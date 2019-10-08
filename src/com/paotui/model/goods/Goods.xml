@@ -29,6 +29,7 @@
 			<if test="network != null"> AND a.NETWORK =#{network} </if>
 			<if test="content != null"> AND a.CONTENT =#{content} </if>
 			<if test="type != null"> AND a.TYPE =#{type} </if>
+			<if test="subtype != null"> AND a.SUBTYPE =#{subtype} </if>
 			<if test="c_id != null"> AND a.C_ID =#{c_id} </if>
 			<if test="c_dtFrom != null"> AND unix_timestamp(a.C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
 			<if test="c_dtTo != null"> AND unix_timestamp(a.C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
@@ -60,6 +61,7 @@
 			<if test="network != null"> AND NETWORK =#{network} </if>
 			<if test="content != null"> AND CONTENT =#{content} </if>
 			<if test="type != null"> AND TYPE =#{type} </if>
+			<if test="subtype != null"> AND SUBTYPE =#{subtype} </if>
 			<if test="c_id != null"> AND C_ID =#{c_id} </if>
 			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
 			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
@@ -85,6 +87,7 @@
 			<if test="network != null">NETWORK=#{network}, </if>
 			<if test="content != null">CONTENT=#{content}, </if>
 			<if test="type != null">TYPE=#{type}, </if>
+			<if test="subtype != null">SUBTYPE=#{subtype}, </if>
 			<if test="c_id != null">C_ID=#{c_id}, </if>
 			<if test="c_dt != null">C_DT=#{c_dt}, </if>
 			<if test="u_dt != null">U_DT=#{u_dt}, </if>
@@ -106,6 +109,7 @@
 			<if test="network != null">NETWORK, </if>
 			<if test="content != null">CONTENT, </if>
 			<if test="type != null">TYPE, </if>
+			<if test="subtype != null">SUBTYPE, </if>
 			<if test="c_id != null">C_ID, </if>
 			<if test="c_dt != null">C_DT, </if>
 			<if test="u_dt != null">U_DT, </if>
@@ -122,6 +126,7 @@
 			<if test="network != null">#{network}, </if>
 			<if test="content != null">#{content}, </if>
 			<if test="type != null">#{type}, </if>
+			<if test="subtype != null">#{subtype}, </if>
 			<if test="c_id != null">#{c_id}, </if>
 			<if test="c_dt != null">#{c_dt}, </if>
 			<if test="u_dt != null">#{u_dt}, </if>
@@ -145,6 +150,7 @@
 				<if test="item.network != null">NETWORK, </if>
 				<if test="item.content != null">CONTENT, </if>
 				<if test="item.type != null">TYPE, </if>
+				<if test="item.subtype != null">SUBTYPE, </if>
 				<if test="item.c_id != null">C_ID, </if>
 				<if test="item.c_dt != null">C_DT, </if>
 				<if test="item.u_dt != null">U_DT, </if>
@@ -162,6 +168,7 @@
 				<if test="item.network != null">#{item.network}, </if>
 				<if test="item.content != null">#{item.content}, </if>
 				<if test="item.type != null">#{item.type}, </if>
+				<if test="item.subtype != null">#{item.subtype}, </if>
 				<if test="item.c_id != null">#{item.c_id}, </if>
 				<if test="item.c_dt != null">#{item.c_dt}, </if>
 				<if test="item.u_dt != null">#{item.u_dt}, </if>
