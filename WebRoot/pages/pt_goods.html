@@ -148,8 +148,8 @@
                             </form>
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
-                                    <thead>
-                                    <tr>
+                                    <thead id="thead">
+                                    <!--<tr>
                                         <th>编号</th>
                                         <th>标题图片</th>
                                         <th>标题</th>
@@ -161,7 +161,7 @@
                                         <th>创建者</th>
                                         <th>创建时间</th>
                                         <th>操作</th>
-                                    </tr>
+                                    </tr>-->
                                     </thead>
                                     <tbody id="contentTbody">
 
@@ -233,6 +233,42 @@
     $(document).ready(function () {
 
         setMenu("6",GetQueryString('type'));
+        if(GetQueryString('type')=='1'){
+            $('#thead').html('<tr>\n' +
+                '  <th>编号</th>\n' +
+                '  <th>标题图片</th>\n' +
+                '  <th>标题</th>\n' +
+                '  <th>品牌</th>\n' +
+                '  <th>型号</th>\n' +
+                '  <th>成色</th>\n' +
+                '  <th>配置</th>\n' +
+                '  <th>网络类型</th>\n' +
+                '  <th>创建者</th>\n' +
+                '  <th>创建时间</th>\n' +
+                '  <th>操作</th>\n' +
+                '</tr>');
+        }
+        else if(GetQueryString('type')=='2'){
+            $('#thead').html('<tr>\n' +
+                '  <th>编号</th>\n' +
+                '  <th>标题图片</th>\n' +
+                '  <th>标题</th>\n' +
+                '  <th>靓号类型</th>\n' +
+                '  <th>创建者</th>\n' +
+                '  <th>创建时间</th>\n' +
+                '  <th>操作</th>\n' +
+                '</tr>');
+        }
+        else if(GetQueryString('type')=='3'){
+            $('#thead').html('<tr>\n' +
+                '  <th>编号</th>\n' +
+                '  <th>标题图片</th>\n' +
+                '  <th>标题</th>\n' +
+                '  <th>创建者</th>\n' +
+                '  <th>创建时间</th>\n' +
+                '  <th>操作</th>\n' +
+                '</tr>');
+        }
         //搜索
         $('#searchBtn').click(function () {
             queryGoods($('#searchText').val(),GetQueryString('type'),currentPage,pageSize);

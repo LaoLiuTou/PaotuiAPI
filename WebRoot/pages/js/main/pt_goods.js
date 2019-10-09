@@ -212,17 +212,58 @@ function  queryGoods (searchText,type,currentPage,pageSize) {
 
             for(var o in data){
                 var bannerArray=JSON.parse(data[o].banners);
-                html+='<tr index='+o+' class="gradeX">\n' +
-                    '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
-                    '<td style="line-height: 50px;width:100px;text-align: center;"><img src="'+url+bannerArray[0]+'"  height="50px"></td>\n' +
-                    '<td style="line-height: 50px;">'+data[o].title+'</td>\n' +
-                    '<td style="line-height: 50px;">'+data[o].brand+'</td>\n' +
-                    '<td style="line-height: 50px;">'+data[o].model+'</td>\n' +
-                    '<td style="line-height: 50px;">'+data[o].oldlevel+'</td>\n' +
-                    '<td style="line-height: 50px;">'+data[o].configure+'</td>\n' +
-                    '<td style="line-height: 50px;">'+data[o].network+'</td>\n' +
-                    '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
-                    '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
+                if(data[o].type=='1'){
+                    html+='<tr index='+o+' class="gradeX">\n' +
+                        '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
+                        '<td style="line-height: 50px;width:100px;text-align: center;"><img src="'+url+bannerArray[0]+'"  height="50px"></td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].title+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].brand+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].model+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].oldlevel+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].configure+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].network+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
+                }
+                else if(data[o].type=='2'){
+                    var subtype='';
+                    if(data[o].subtype=='21'){
+                        subtype='电信';
+                    }
+                    else if(data[o].subtype=='22'){
+                        subtype='移动';
+                    }
+                    else if(data[o].subtype=='23'){
+                        subtype='联通';
+                    }
+                    else if(data[o].subtype=='24'){
+                        subtype='小灵通';
+                    }
+                    else if(data[o].subtype=='25'){
+                        subtype='亲情号';
+                    }
+                    else if(data[o].subtype=='26'){
+                        subtype='优良号码';
+                    }
+
+                    html+='<tr index='+o+' class="gradeX">\n' +
+                        '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
+                        '<td style="line-height: 50px;width:100px;text-align: center;"><img src="'+url+bannerArray[0]+'"  height="50px"></td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].title+'</td>\n' +
+                        '<td style="line-height: 50px;">'+subtype+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
+                }
+                else if(data[o].type=='3'){
+                    html+='<tr index='+o+' class="gradeX">\n' +
+                        '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
+                        '<td style="line-height: 50px;width:100px;text-align: center;"><img src="'+url+bannerArray[0]+'"  height="50px"></td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].title+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
+                }
+
+
 
                 html+='<td style="line-height: 50px;"><a class="updateGoods" href="pt_goods_detail.html?id='+data[o].id+'&type='+GetQueryString('type')+'" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +
                     '<a class="deleteGoods" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';

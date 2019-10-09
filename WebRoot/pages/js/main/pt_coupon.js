@@ -190,11 +190,18 @@ function  queryCoupon (searchText,currentPage,pageSize) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
-    if(searchText==null||searchText==''){
-        var bodyParam={'page':currentPage,'size':pageSize};
+    var state='0';
+    if(GetQueryString('type')=='1'){
+        state='0';
     }
     else{
-        var bodyParam={'page':currentPage,'size':pageSize,'type':searchText};
+        state='1';
+    }
+    if(searchText==null||searchText==''){
+        var bodyParam={'page':currentPage,'size':pageSize,'state':state};
+    }
+    else{
+        var bodyParam={'page':currentPage,'size':pageSize,'type':searchText,'state':state};
     }
 
     var httpR = new createHttpR(url+'listCoupon','post','text',bodyParam,'callBack');
@@ -213,32 +220,8 @@ function  queryCoupon (searchText,currentPage,pageSize) {
                     '<td style="line-height: 50px;width:120px"><img src="'+url+data[o].image+'" width="100px" height="50px"></td>\n' +
                     '<td style="line-height: 50px;">'+data[o].title+'</td>\n' ;
 
-                if(data[o].type=='1'){
-                    html+='<td style="line-height: 50px;">电信资讯</td>\n' ;
-                }
-                else if(data[o].type=='2'){
-                    html+='<td style="line-height: 50px;">免费领手机</td>\n' ;
-                }
-                else if(data[o].type=='3'){
-                	html+='<td style="line-height: 50px;">政府资讯</td>\n' ;
-                }
-                else if(data[o].type=='5'){
-                	html+='<td style="line-height: 50px;">优惠套餐</td>\n' ;
-                }
-                else if(data[o].type=='6'){
-                	html+='<td style="line-height: 50px;">手机报价</td>\n' ;
-                }
-                else if(data[o].type=='7'){
-                	html+='<td style="line-height: 50px;">二手机收售</td>\n' ;
-                }
-                else if(data[o].type=='8'){
-                	html+='<td style="line-height: 50px;">电信营业厅</td>\n' ;
-                }
-                else if(data[o].type=='9'){
+                if(data[o].type=='9'){
                 	html+='<td style="line-height: 50px;">购票</td>\n' ;
-                }
-                else if(data[o].type=='11'){
-                	html+='<td style="line-height: 50px;">靓号收售</td>\n' ;
                 }
                 else if(data[o].type=='21'){
                 	html+='<td style="line-height: 50px;">房屋信息</td>\n' ;
@@ -258,8 +241,20 @@ function  queryCoupon (searchText,currentPage,pageSize) {
                 else if(data[o].type=='26'){
                 	html+='<td style="line-height: 50px;">出兑出售</td>\n' ;
                 }
-                else if(data[o].type=='27'){
-                	html+='<td style="line-height: 50px;">便民信息港</td>\n' ;
+                else if(data[o].type=='28'){
+                	html+='<td style="line-height: 50px;">二手车</td>\n' ;
+                }
+                else if(data[o].type=='29'){
+                	html+='<td style="line-height: 50px;">兼职</td>\n' ;
+                }
+                else if(data[o].type=='30'){
+                	html+='<td style="line-height: 50px;">惠民信息</td>\n' ;
+                }
+                else if(data[o].type=='31'){
+                	html+='<td style="line-height: 50px;">家政服务</td>\n' ;
+                }
+                else if(data[o].type=='33'){
+                	html+='<td style="line-height: 50px;">信用卡</td>\n' ;
                 }
                 else {
                     html+='<td style="line-height: 50px;">其他</td>\n' ;

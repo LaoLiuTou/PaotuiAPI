@@ -143,6 +143,7 @@
                                     <div class="col-md-12 pdnone">
                                         <select class="form-control m-bot15"   id="type">
                                             <option value="">全部</option>
+                                            <option value="9">购票</option>
                                             <option value="21">房屋信息</option>
                                             <option value="22">招聘求职</option>
                                             <option value="23">二手物品</option>
@@ -172,7 +173,7 @@
                                         <th>创建时间</th>
                                         <th>首页显示</th>
                                         <th>置顶</th>
-                                        <th>剩余数量</th>
+                                        <th>剩余优惠券</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -245,7 +246,7 @@
 <script>
     $(document).ready(function () {
 
-        setMenu("7","1");
+        setMenu("7",GetQueryString('type'));
         //搜索
         $('#searchBtn').click(function () {
             queryCoupon($('#type').val(),currentPage,pageSize);

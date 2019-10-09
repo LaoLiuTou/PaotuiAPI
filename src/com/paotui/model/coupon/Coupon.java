@@ -97,7 +97,16 @@ public class Coupon {
 	public void setState(Long state) {
 		this.state = state;
 	}
+	/**  */
+	private  Long iscoupon;
+ 
 
+	public Long getIscoupon() {
+		return iscoupon;
+	}
+	public void setIscoupon(Long iscoupon) {
+		this.iscoupon = iscoupon;
+	}
 	private String creater;
 	public String getCreater() {
 		return creater;

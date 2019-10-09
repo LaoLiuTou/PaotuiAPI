@@ -1,8 +1,8 @@
 //后台服务地址
 //var url = 'http://192.168.101.11/Paotui/';
-var url = 'http://192.168.1.144/Paotui/';
+//var url = 'http://192.168.1.144/Paotui/';
 //var url = 'http://192.168.43.172/Paotui/';
-//var url = 'http://app.dongsheng.club:8888/';
+var url = 'http://app.dongsheng.club:8888/';
 
 //secret key
 var sk = 'TTILY';
@@ -311,7 +311,7 @@ Date.prototype.format = function(fmt) {
 function setMenu(par,sub){
     var menuStr=' <ul class="nav nav-pills nav-stacked custom-nav">\n' +
         '                <li id="menu1" ><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>\n' +
-        '                <li id="menu2" class="menu-list"><a href="javascript:;"><i class="fa fa-desktop"></i> <span>电信资讯管理</span></a>\n' +
+        '                <li id="menu2" class="menu-list"><a href="javascript:;"><i class="fa fa-list-alt"></i> <span>电信资讯管理</span></a>\n' +
         '                    <ul class="sub-menu-list">\n' +
         '                        <li id="menu2-1"><a href="pt_news.html">电信资讯管理</a></li>\n' +
         '                    </ul>\n' +
@@ -322,10 +322,12 @@ function setMenu(par,sub){
         '                        <li id="menu7-2"><a href="pt_coupon.html?type=2">店铺优惠券</a></li>\n' +
         '                    </ul>\n' +
         '                </li>\n' +
-        '                <li id="menu6" class="menu-list"><a href="javascript:;"><i class="fa fa-desktop"></i> <span>商品管理</span></a>\n' +
+        '                <li id="menu6" class="menu-list"><a href="javascript:;"><i class="fa fa-rub"></i> <span>商品管理</span></a>\n' +
+
         '                    <ul class="sub-menu-list">\n' +
         '                        <li id="menu6-1"><a href="pt_goods.html?type=1">二手机收售</a></li>\n' +
-        '                        <li id="menu6-2"><a href="pt_goods.html?type=2">免费领手机</a></li>\n' +
+        '                        <li id="menu6-2"><a href="pt_goods.html?type=2">靓号收售</a></li>\n' +
+        '                        <li id="menu6-3"><a href="pt_goods.html?type=3">免费领手机</a></li>\n' +
         '                    </ul>\n' +
         '                </li>\n' +
 
@@ -336,7 +338,7 @@ function setMenu(par,sub){
         '                        <li id="menu3-3"><a href="pt_ticket.html">留言管理</a></li>\n' +
         '                    </ul>\n' +
         '                </li>\n' +
-        '                <li id="menu4" class="menu-list"><a href="javascript:;"><i class="fa fa-bar-chart-o"></i> <span>人员管理</span></a>\n' +
+        '                <li id="menu4" class="menu-list"><a href="javascript:;"><i class="fa fa-group"></i> <span>人员管理</span></a>\n' +
         '                    <ul class="sub-menu-list">\n' +
         '                        <li id="menu4-1"><a href="pt_cus_sta.html">客户管理</a></li>\n' +
         '                        <li id="menu4-2"><a href="pt_drivers.html">司机管理</a></li>\n' +

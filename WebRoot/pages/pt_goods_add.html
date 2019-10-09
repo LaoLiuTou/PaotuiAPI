@@ -22,7 +22,6 @@
     <script src="js/respond.min.js"></script>
     <![endif]-->
 </head>
-
 <body class="sticky-header">
 
 <section>
@@ -141,32 +140,61 @@
                                                 <input id="banners" type="file" name="files" multiple>
                                             </div>
                                         </div>
+
                                         <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">栏目类型</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control m-bot15"   id="type">
+                                                    <option value="1">二手机收售</option>
+                                                    <option value="3">靓号收售</option>
+                                                    <option value="2">免费领手机</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" id="subtype_group">
+                                            <label class="col-sm-2 col-sm-2 control-label">靓号类型</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control m-bot15"   id="subtype">
+                                                    <option value="21">电信</option>
+                                                    <option value="22">移动</option>
+                                                    <option value="23">联通</option>
+                                                    <option value="24">小灵通</option>
+                                                    <option value="25">亲情号</option>
+                                                    <option value="26">优良号码</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group config_group" >
                                             <label class="col-sm-2 col-sm-2 control-label">品牌</label>
                                             <div class="col-sm-9">
                                                 <input type="text"   id="brand" class="form-control" placeholder="请输入品牌">
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group config_group">
                                             <label class="col-sm-2 col-sm-2 control-label">型号</label>
                                             <div class="col-sm-9">
                                                 <input type="text"   id="model" class="form-control" placeholder="请输入型号">
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group config_group">
                                             <label class="col-sm-2 col-sm-2 control-label">成色</label>
                                             <div class="col-sm-9">
                                                 <input type="text"   id="oldlevel" class="form-control" placeholder="请输入成色">
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group config_group">
                                             <label class="col-sm-2 col-sm-2 control-label">配置</label>
                                             <div class="col-sm-9">
                                                 <input type="text"   id="configure" class="form-control" placeholder="请输入配置">
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-group config_group">
                                             <label class="col-sm-2 col-sm-2 control-label">网络类型</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control m-bot15"   id="network">
@@ -178,12 +206,9 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <!--<div class="form-group">
-                                            <label class="col-sm-2 col-sm-2 control-label">内容图片</label>
-                                            <div class="col-sm-9">
-                                                <input id="content" type="file" name="files" multiple>
-                                            </div>
-                                        </div>-->
+
+
+
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">内容</label>
                                             <div class="col-sm-9">
@@ -261,6 +286,22 @@
     var headerImage;
     $(document).ready(function(){
         setMenu("6",GetQueryString('type'));
+
+        $('#type').change(function () {
+            if($(this).val()=='1'){
+                $('#subtype_group').hide();
+                $('.config_group').show();
+            }
+            else if($(this).val()=='2'){
+                $('#subtype_group').show();
+                $('.config_group').hide();
+            }
+            else if($(this).val()=='3'){
+                $('#subtype_group').hide();
+                $('.config_group').hide();
+            }
+
+        });
 
         /*$('#files').fileinput({
             theme: 'fa',
