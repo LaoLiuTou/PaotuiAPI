@@ -146,8 +146,8 @@
                                             <div class="col-sm-9">
                                                 <select class="form-control m-bot15"   id="type">
                                                     <option value="1">二手机收售</option>
-                                                    <option value="3">靓号收售</option>
                                                     <option value="2">免费领手机</option>
+                                                    <option value="3">靓号收售</option>
                                                 </select>
 
                                             </div>
@@ -293,11 +293,11 @@
                 $('.config_group').show();
             }
             else if($(this).val()=='2'){
-                $('#subtype_group').show();
+                $('#subtype_group').hide();
                 $('.config_group').hide();
             }
             else if($(this).val()=='3'){
-                $('#subtype_group').hide();
+                $('#subtype_group').show();
                 $('.config_group').hide();
             }
 
