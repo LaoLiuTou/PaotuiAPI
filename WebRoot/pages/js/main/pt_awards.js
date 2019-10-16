@@ -163,6 +163,7 @@ function  queryAwards (searchText,currentPage,pageSize) {
                     html+= '<td style="line-height: 50px;">实物</td>\n' ;
                 }
                 html+= '<td style="line-height: 50px;">'+data[o].money+'</td>\n'+
+                    '<td style="line-height: 50px;">'+data[o].quantity+'</td>\n'+
                     '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
                 if(data[o].status=='0'){
                     html+= '<td style="line-height: 50px;">使用中</td>\n' ;

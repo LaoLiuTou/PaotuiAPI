@@ -206,6 +206,7 @@ public class AwardsController {
 				Map paramMap=new HashMap();
 				paramMap.put("orderBy","ID DESC"); 
 				paramMap.put("status","0");
+				paramMap.put("surplus","0");
 				int totalnumber=iAwardsService.selectCountAwardsByParam(paramMap);
 				paramMap.put("fromPage",0);
 				paramMap.put("toPage",totalnumber); 
@@ -228,6 +229,9 @@ public class AwardsController {
 				else{
 					resultId=randoms.get(index);
 					Awards resultSelect=iAwardsService.selectAwardsById(resultId+"");
+					resultSelect.setQuantity(resultSelect.getQuantity()-1);
+					iAwardsService.updateAwards(resultSelect);
+					
 					resultMap.put("status", "0");
 					resultMap.put("msg", resultSelect);
 				}

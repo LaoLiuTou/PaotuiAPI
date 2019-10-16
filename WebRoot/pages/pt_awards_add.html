@@ -159,6 +159,12 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">数量</label>
+                                            <div class="col-sm-9">
+                                                <input type="text"   id="quantity"  onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d.]/g,'')" class="form-control" placeholder="请输入奖品数量">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">状态</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control m-bot15"   id="status">
@@ -224,7 +230,7 @@
 
 <script src="js/main/config.js"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_awards.js"></script>
+<script src="js/main/pt_awards.js?v=1.0"></script>
 <script>
     var params={};
     var headerImage='';
@@ -270,8 +276,8 @@
                 alert("请输入奖品名称！");
                 return;
             }
-            if($('#rate').val()>100){
-                alert("中奖率不能高于100！");
+            if($('#rate').val()>1000){
+                alert("中奖率不能高于1！");
                 return;
             }
             if(headerImage==''){
