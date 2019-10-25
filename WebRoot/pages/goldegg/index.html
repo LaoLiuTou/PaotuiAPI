@@ -301,6 +301,10 @@
         }
 
         function addPrize(awards_id,type){
+            var state='0';
+            if(type=='1'){
+                state='1';
+            }
 
             $.ajax({
                 url : url+'addPrize',
@@ -310,7 +314,7 @@
                     'cus_id' : GetQueryString('cus_id'),
                     'type' : type,
                     'awards_id' : awards_id,
-                    'state' : '0'
+                    'state' : state
                 },
                 headers : {
                     'source' : 'APP'

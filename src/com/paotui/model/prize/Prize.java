@@ -66,6 +66,21 @@ public class Prize {
 		this.state = state;
 	}
 
+	private String cusname; 
+	public String getCusname() {
+		return cusname;
+	}
+	public void setCusname(String cusname) {
+		this.cusname = cusname;
+	}
+	private String phone; 
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	private Long awards_id;
 	public Long getAwards_id() {
 		return awards_id;

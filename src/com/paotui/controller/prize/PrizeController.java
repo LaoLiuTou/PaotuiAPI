@@ -167,6 +167,9 @@ public class PrizeController {
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 				paramMap.put("state",prize.getState());
 				paramMap.put("awards_id",prize.getAwards_id());
+				String searchText=request.getParameter("searchText");
+				if(searchText!=null&&!searchText.equals(""))
+					paramMap.put("searchText",searchText);
 				List<Prize> list=iPrizeService.selectPrizeByParam(paramMap);
 				int totalnumber=iPrizeService.selectCountPrizeByParam(paramMap);
 				Map tempMap=new HashMap();

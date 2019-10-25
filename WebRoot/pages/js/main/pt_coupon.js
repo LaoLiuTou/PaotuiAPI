@@ -256,6 +256,9 @@ function  queryCoupon (searchText,currentPage,pageSize) {
                 else if(data[o].type=='33'){
                 	html+='<td style="line-height: 50px;">信用卡</td>\n' ;
                 }
+                else if(data[o].type=='100'){
+                    html+='<td style="line-height: 50px;">翼家超市</td>\n' ;
+                }
                 else {
                     html+='<td style="line-height: 50px;">其他</td>\n' ;
                 }

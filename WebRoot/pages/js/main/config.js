@@ -344,13 +344,19 @@ function setMenu(par,sub){
         '                        <li id="menu4-2"><a href="pt_drivers.html">司机管理</a></li>\n' +
         '                    </ul>\n' +
         '                </li>\n' +
+        '                <li id="menu8" class="menu-list"><a href="javascript:;"><i class="fa fa-group"></i> <span>奖品设置</span></a>\n' +
+        '                    <ul class="sub-menu-list">\n' +
+        '                        <li id="menu8-1"><a href="pt_awards.html">奖品设置</a></li>\n' +
+        '                        <li id="menu8-2"><a href="pt_prize.html">中奖记录</a></li>\n' +
+        '                    </ul>\n' +
+        '                </li>\n' +
         '                <li id="menu5" class="menu-list"><a href="javascript:;"><i class="fa fa-cogs"></i> <span>系统设置</span></a>\n' +
         '                    <ul class="sub-menu-list">\n' +
         '                        <li id="menu5-1"><a href="pt_user.html">账号管理</a></li>\n' +
         '                        <li id="menu5-2"><a href="pt_config.html">APP设置</a></li>\n' +
         '                        <li id="menu5-3"><a href="pt_install.html">安装统计</a></li>\n' +
         '                        <li id="menu5-4"><a href="pt_banner.html">轮播图设置</a></li>\n' +
-        '                        <li id="menu5-5"><a href="pt_awards.html">奖品设置</a></li>\n' +
+
         '                    </ul>\n' +
         '                </li>\n' +
         '            </ul>';

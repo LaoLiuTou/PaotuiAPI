@@ -7,7 +7,7 @@
   <meta name="author" content="ThemeBucket">
   <link rel="shortcut icon" href="#" type="image/png">
 
-  <title>奖品管理</title>
+  <title>中奖记录</title>
 
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
@@ -108,9 +108,9 @@
         <div class="page-heading">
             <ul class="breadcrumb">
                 <li>
-                    <a href="#">系统设置</a>
+                    <a href="#">奖品设置</a>
                 </li>
-                <li class="active">奖品管理</li>
+                <li class="active">中奖记录</li>
             </ul>
 
         </div>
@@ -128,31 +128,47 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            奖品管理
+                            中奖记录
 
                             <span class="tools pull-right">
-                            <button type="button" class="btn btn-info popovers"  id="newBtn" >新建</button>
-                                <!--<span class="tools pull-right">-->
-                                <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
-                                <!--<a href="javascript:;" class="fa fa-times"></a>-->
+                            <!--<button type="button" class="btn btn-info popovers"  id="newBtn" >新建</button>-->
+                            <!--<span class="tools pull-right">-->
+                            <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
+                            <!--<a href="javascript:;" class="fa fa-times"></a>-->
                          </span>
                         </header>
                         <div class="panel-body">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group col-md-3 mr10">
+                                    <div class="col-md-11 pdnone">
+                                        <input class="form-control" id="searchText" size="16" type="text" placeholder="输入手机号码..." />
+                                    </div>
 
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+
+                                    <div class="col-md-11 pdnone">
+                                        <select class="form-control m-bot15"   id="type">
+                                            <option value="2">实物</option>
+                                            <option value="1">代金券</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <button id="searchBtn" type="button" class="btn btn-info popovers mb10">搜索</button>
+                            </form>
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                     <tr>
                                         <th>编号</th>
                                         <th>奖品图片</th>
-                                        <th>奖品名称</th>
-                                        <th>中奖率(‰)</th>
+                                        <th>用户</th>
+                                        <th>手机号码</th>
+                                        <th>标题</th>
                                         <th>类型</th>
-                                        <th>金额</th>
-                                        <th>剩余</th>
-                                        <th>创建时间</th>
-                                        <th>状态</th>
-                                        <th>操作</th>
+                                        <th>中奖时间</th>
+                                        <th>领奖</th>
                                     </tr>
                                     </thead>
                                     <tbody id="contentTbody">
@@ -189,22 +205,21 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">删除</h4>
+                <h4 class="modal-title">领奖确认</h4>
             </div>
             <div class="modal-body">
-                确定要删除记录吗？
+                确定要领奖吗？
             </div>
             <div class="clearfix"></div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                <button class="btn btn-info popovers" type="button" id="deleteBtn">确定</button>
+                <button class="btn btn-info popovers" type="button" id="updateBtn">确定</button>
             </div>
         </div>
     </div>
 </div>
 
 
-<!-- modal -->
 
 
 <!-- Placed js at the end of the document so the pages load faster -->
@@ -220,72 +235,59 @@
 
 <script src="js/main/config.js"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_awards.js?v=1.0"></script>
+<script src="js/main/pt_prize.js"></script>
 
 <script>
     $(document).ready(function () {
 
-        setMenu("8","1");
-
+        setMenu("8","2");
         //搜索
         $('#searchBtn').click(function () {
-            queryAwards($('#type').val(),currentPage,pageSize);
+            queryPrize($('#searchText').val(),$('#type').val(),currentPage,pageSize);
         });
 
         //列表
         var currentPage=1;
         var pageSize=10;
-        queryAwards($('#type').val(),currentPage,pageSize);
+        queryPrize($('#searchText').val(),$('#type').val(),currentPage,pageSize);
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            queryAwards($('#type').val(),currentPage,pageSize);
+            queryPrize($('#searchText').val(),$('#type').val(),currentPage,pageSize);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            queryAwards($('#type').val(),currentPage,pageSize);
+            queryPrize($('#searchText').val(),$('#type').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            queryAwards($('#type').val(),currentPage,pageSize);
+            queryPrize($('#searchText').val(),$('#type').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','#jumpBtn',function(){
             var reg=/^[1-9]\d*$|^0$/;
             if(reg.test($('#jumpPageText').val())==true){
-                queryAwards($('#searchText').val(),$('#jumpPageText').val(),pageSize);
+                queryPrize($('#searchText').val(),$('#searchText').val(),$('#jumpPageText').val(),pageSize);
             }else{
                 alert("页码输入有误！");
                 return false;
             }
         });
 
-        //新建
-        $('#newBtn').click(function () {
-            window.location.href="pt_awards_add.html";
+
+        //领奖
+        $('#contentTbody').on('click','.getPrize',function () {
+            prizeIndex=$(this).attr('index');
+            currentPrize=prizeList[prizeIndex];
+        });
+        $('#updateBtn').click(function () {
+            var bodyParam={'id':currentPrize.id,'state':'1'};
+            updatePrize(bodyParam);
         });
 
 
 
-        //删除
-        $('#contentTbody').on('click','.deleteAwards',function () {
-            awardsIndex=$(this).attr('index');
-            currentAwards=awardsList[awardsIndex];
-        });
-        $('#deleteBtn').click(function () {
-            deleteAwards(currentAwards.id);
-        });
-        //完成
-        $('#contentTbody').on('click','.completeAwards',function () {
-            awardsIndex=$(this).attr('index');
-            currentAwards=awardsList[awardsIndex];
-        });
-        $('#completeBtn').click(function () {
-
-            var bodyParam={'id':currentAwards.id,'resume':$('#resume').val(),'state':'1'};
-            updateAwards(bodyParam);
-        });
     });
 
 </script>
