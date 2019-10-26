@@ -240,7 +240,7 @@
 <script type="text/javascript" charset="utf-8" src="js/ueditor/lang/zh-cn/zh-cn.js"></script>
 <script src="js/main/config.js"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_news.js"></script>
+<script src="js/main/pt_coupon.js"></script>
 <script>
     var params={};
     var imagesArray= new Array();
@@ -266,7 +266,7 @@
             }
         });
         //select
-        selectNews(GetQueryString('id'));
+        selectCoupon(GetQueryString('id'));
 
         var ue = UE.getEditor('content',{serverUrl:url+"jsp/controller.jsp",initialFrameHeight:200});
         //add
@@ -302,7 +302,7 @@
             params['id']=GetQueryString('id');
             params['content']=ue.getContent();
             params['image']=image;
-            updateNews(params);
+            updateCoupon(params);
         });
 
 
