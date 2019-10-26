@@ -146,8 +146,9 @@
                                             <div class="col-sm-9">
                                                 <select class="form-control m-bot15"   id="type">
                                                     <option value="1">二手机收售</option>
-                                                    <option value="2">免费领手机</option>
-                                                    <option value="3">靓号收售</option>
+                                                    <option value="2">靓号收售</option>
+                                                    <option value="3">免费领手机</option>
+                                                    <option value="4">扶贫专区</option>
                                                 </select>
 
                                             </div>
@@ -286,18 +287,39 @@
     var headerImage;
     $(document).ready(function(){
         setMenu("6",GetQueryString('type'));
+        $('#type').val(GetQueryString('type'));
+        if(GetQueryString('type')=='1'){
+            $('#subtype_group').hide();
+            $('.config_group').show();
+        }
+        else if(GetQueryString('type')=='3'){
+            $('#subtype_group').hide();
+            $('.config_group').hide();
+        }
+        else if(GetQueryString('type')=='2'){
+            $('#subtype_group').show();
+            $('.config_group').hide();
+        }
+        else if(GetQueryString('type')=='4'){
+            $('#subtype_group').hide();
+            $('.config_group').hide();
+        }
 
         $('#type').change(function () {
             if($(this).val()=='1'){
                 $('#subtype_group').hide();
                 $('.config_group').show();
             }
-            else if($(this).val()=='2'){
+            else if($(this).val()=='3'){
                 $('#subtype_group').hide();
                 $('.config_group').hide();
             }
-            else if($(this).val()=='3'){
+            else if($(this).val()=='2'){
                 $('#subtype_group').show();
+                $('.config_group').hide();
+            }
+            else if($(this).val()=='4'){
+                $('#subtype_group').hide();
                 $('.config_group').hide();
             }
 

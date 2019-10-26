@@ -262,7 +262,14 @@ function  queryGoods (searchText,type,currentPage,pageSize) {
                         '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
                         '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
                 }
-
+                else {
+                    html+='<tr index='+o+' class="gradeX">\n' +
+                        '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
+                        '<td style="line-height: 50px;width:100px;text-align: center;"><img src="'+url+bannerArray[0]+'"  height="50px"></td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].title+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
+                }
 
 
                 html+='<td style="line-height: 50px;"><a class="updateGoods" href="pt_goods_detail.html?id='+data[o].id+'&type='+GetQueryString('type')+'" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +

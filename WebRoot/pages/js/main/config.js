@@ -328,6 +328,7 @@ function setMenu(par,sub){
         '                        <li id="menu6-1"><a href="pt_goods.html?type=1">二手机收售</a></li>\n' +
         '                        <li id="menu6-2"><a href="pt_goods.html?type=2">靓号收售</a></li>\n' +
         '                        <li id="menu6-3"><a href="pt_goods.html?type=3">免费领手机</a></li>\n' +
+        '                        <li id="menu6-4"><a href="pt_goods.html?type=4">扶贫专区</a></li>\n' +
         '                    </ul>\n' +
         '                </li>\n' +
 
