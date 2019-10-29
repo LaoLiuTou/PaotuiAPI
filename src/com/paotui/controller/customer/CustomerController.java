@@ -307,7 +307,52 @@ public class CustomerController {
 		}
 		return resultMap;
 	}
-	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/passwordCustomer")
+	@ResponseBody
+	public Map password(Customer customer){
+		Map resultMap=new HashMap();
+		try {
+			if(customer.getPhone()==null||customer.getPassword()==null){
+				resultMap.put("status", "-1");
+				resultMap.put("msg", "参数不能为空！");
+			}
+			else{
+				Map paramMap=new HashMap();
+				paramMap.put("fromPage",0);
+				paramMap.put("toPage",1); 
+				paramMap.put("phone",customer.getPhone());
+				//paramMap.put("audit_status","已审核");
+				List<Customer> list=iCustomerService.selectCustomerByParam(paramMap);
+				if(list.size()==0){
+					resultMap.put("status", "-1");
+					resultMap.put("msg", "用户不存在！");
+				}
+				else{
+					 
+					if(list.get(0).getState()!=null&&list.get(0).getState()==0){
+						customer.setId(list.get(0).getId());
+						iCustomerService.updateCustomer(customer);
+						resultMap.put("status", "0");
+						resultMap.put("msg", list.get(0));
+						logger.info("用户登录："+list.get(0).getPhone());
+					}
+					else if(list.get(0).getState()!=null&&list.get(0).getState()==1){
+						resultMap.put("status", "-1");
+						resultMap.put("msg", "该账号正在审核！");
+						
+					}
+					 
+				}
+			}
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "更新失败！");
+			logger.info("更新失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/statisticCustomer")
 	@ResponseBody
