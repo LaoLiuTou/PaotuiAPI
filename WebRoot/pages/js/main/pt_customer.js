@@ -128,6 +128,7 @@ function  queryCustomer (searchText,currentPage,pageSize) {
                 }
 
                 html+='<td style="line-height: 50px;">' +
+                    '<a class="passwordUser" href="" index='+o+' data-toggle="modal" data-target="#password-box"><span class="label label-info label-mini">重置密码</span></a>   ' +
                     '<a class="deleteCustomer" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';
                 html+='</tr>';
             }

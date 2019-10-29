@@ -233,7 +233,34 @@
         </div>
     </div>
 </div>
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="password-box" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">重置密码</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
 
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input type="text" class="form-control" id="pass_password" placeholder="请输入密码">
+                    </div>
+                    <div class="form-group">
+                        <label>确认密码</label>
+                        <input type="text" class="form-control" id="pass_repassword" placeholder="请输入密码">
+                    </div>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                <button class="btn btn-info popovers" type="button" id="passwordBtn">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="balance-box" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -267,7 +294,7 @@
 
 <script src="js/main/config.js"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_customer.js"></script>
+<script src="js/main/pt_customer.js?v=1.0"></script>
 
 <script>
     $(document).ready(function () {
@@ -321,6 +348,26 @@
             deleteCustomer(currentCustomer.id);
         });
 
+        $('#contentTbody').on('click','.passwordUser',function () {
+            customerIndex=$(this).attr('index');
+            currentCustomer=customerList[customerIndex];
+        });
+        $('#passwordBtn').click(function () {
+            if($('#pass_password').val()==''){
+                alert('密码不能为空！');
+                return false;
+            }
+            if($('#pass_repassword').val()==''){
+                alert('确认密码不能为空！');
+                return false;
+            }
+            if($('#pass_repassword').val()!=$('#pass_password').val()){
+                alert('两次输入密码不一致！');
+                return false;
+            }
+            var bodyParam={'id':currentCustomer.id,'password':md5($('#pass_password').val())};
+            updateCustomer(bodyParam);
+        });
         //修改余额
         $('#contentTbody').on('click','.balanceCustomer',function () {
             customerIndex=$(this).attr('index');

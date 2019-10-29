@@ -458,7 +458,7 @@
                 alert('两次输入密码不一致！');
                 return false;
             }
-            var bodyParam={'id':currentUser.id,'password':$('#pass_password').val()};
+            var bodyParam={'id':currentUser.id,'password':md5($('#pass_password').val())};
             updateUser(bodyParam);
         });
 
