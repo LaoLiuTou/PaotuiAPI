@@ -117,6 +117,10 @@ function  queryTicket (searchText,currentPage,pageSize) {
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td >'+data[o].id+'</td>\n' +
                     '<td >'+data[o].phone+'</td>\n' ;
+
+
+
+
                 if(data[o].type=='10'){
                     html+='<td >购票</td>\n' ;
                 }
@@ -132,11 +136,12 @@ function  queryTicket (searchText,currentPage,pageSize) {
                 else if(data[o].type=='6'){
                     html+='<td >手机报价</td>\n' ;
                 }
+
                 else if(data[o].type=='7'){
                     html+='<td >二手机收售</td>\n' ;
                 }
-                else if(data[o].type=='11'){
-                    html+='<td >靓号收集</td>\n' ;
+                else if(data[o].type=='9'){
+                    html+='<td >购票</td>\n' ;
                 }
                 else if(data[o].type=='21'){
                     html+='<td >房屋信息</td>\n' ;
@@ -158,6 +163,27 @@ function  queryTicket (searchText,currentPage,pageSize) {
                 }
                 else if(data[o].type=='27'){
                     html+='<td >便民信息港</td>\n' ;
+                }
+                else if(data[o].type=='28'){
+                    html+='<td >二手车</td>\n' ;
+                }
+                else if(data[o].type=='29'){
+                    html+='<td >兼职</td>\n' ;
+                }
+                else if(data[o].type=='30'){
+                    html+='<td >惠民信息</td>\n' ;
+                }
+                else if(data[o].type=='31'){
+                    html+='<td >家政服务</td>\n' ;
+                }
+                else if(data[o].type=='33'){
+                    html+='<td >信用卡</td>\n' ;
+                }
+                else if(data[o].type=='100'){
+                    html+='<td >翼家超市</td>\n' ;
+                }
+                else{
+                    html+='<td ></td>\n' ;
                 }
 
 
