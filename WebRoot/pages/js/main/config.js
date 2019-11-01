@@ -72,7 +72,7 @@ websocket.onmessage = function (event) {
 
         var pop=new Pop("叫车订单提醒",
             "pt_order.html",
-            "您有一条新的叫车订单，订单编号为：20191025793925，请尽快处理...");
+            "您有一条新的叫车订单，订单编号为："+msg['NO']+"，请尽快处理...");
     }
     else if(msg['T']=='7') {//跑腿订单
         var txAudio = new Audio();
@@ -83,7 +83,7 @@ websocket.onmessage = function (event) {
 
         var pop=new Pop("跑腿订单提醒",
             "pt_orderpt.html",
-            "您有一条新的跑腿订单，订单编号为：20191025793925，请尽快处理...");
+            "您有一条新的跑腿订单，订单编号为："+msg['NO']+"，请尽快处理...");
     }
     else if(msg['T']=='8') {//留言
         var txAudio = new Audio();
@@ -94,7 +94,7 @@ websocket.onmessage = function (event) {
 
         var pop=new Pop("留言提醒",
             "pt_ticket.html",
-            "收到新的{家政服务}留言信息：{饮食饮食饮食饮食}，请尽快处理...");
+            "收到新的留言信息："+msg['NOTE']+"，请尽快处理...");
     }
 
 

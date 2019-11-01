@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.paotui.dao.orderspt.IOrdersptMapper;
 import com.paotui.model.customer.Customer;
 import com.paotui.model.orderspt.Orderspt;
+import com.paotui.utils.SendChatMessageUtil;
 public class OrdersptServiceImpl  implements IOrdersptService {
 
 	@Autowired
@@ -61,6 +62,10 @@ public class OrdersptServiceImpl  implements IOrdersptService {
 		orderspt.setState(Long.parseLong("0"));
 		orderspt.setOrdernum(sdf.format(new Date())+((int)((Math.random()*9+1)*100000)));
 		result=iOrdersptMapper.addorderspt(orderspt);
+		if(result>0){
+			//发送推送消息
+			SendChatMessageUtil.send("7", orderspt.getOrdernum(), "");
+		}
 		return result;
 	}
 

@@ -14,6 +14,7 @@ import com.paotui.dao.orders.IOrdersMapper;
 import com.paotui.model.configure.Configure;
 import com.paotui.model.customer.Customer;
 import com.paotui.model.orders.Orders;
+import com.paotui.utils.SendChatMessageUtil;
 public class OrdersServiceImpl  implements IOrdersService {
 
 	@Autowired
@@ -109,6 +110,9 @@ public class OrdersServiceImpl  implements IOrdersService {
 			String cus_balance=decimalFormat.format(Float.parseFloat(balance)-Float.parseFloat(orders.getBalance()));//format 返回的是字符串
 			temp.setBalance(cus_balance);
 			iCustomerMapper.updatecustomer(temp);
+			
+			//发送推送消息
+			SendChatMessageUtil.send("3", orders.getOrdernum(), "");
 		} 
 		
 		return result;

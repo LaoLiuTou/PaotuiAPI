@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.paotui.dao.ticket.ITicketMapper;
 import com.paotui.model.ticket.Ticket;
+import com.paotui.utils.SendChatMessageUtil;
 public class TicketServiceImpl  implements ITicketService {
 
 	@Autowired
@@ -53,6 +54,10 @@ public class TicketServiceImpl  implements ITicketService {
 		int result=0;
 		ticket.setState(Long.parseLong("0"));
 		result=iTicketMapper.addticket(ticket);
+		if(result>0){
+			//发送推送消息
+			SendChatMessageUtil.send("8", "", ticket.getNote());
+		}
 		return result;
 	}
 
