@@ -2,10 +2,10 @@
 //var url = 'http://192.168.101.11/Paotui/';
 //var url = 'http://192.168.1.144/Paotui/';
 //var url = 'http://192.168.43.172/Paotui/';
-//var url = 'http://app.dongsheng.club:8888/';
-//var socketurl = 'ws://app.dongsheng.club:8887/';
-var url = 'http://192.168.1.144/Paotui/';
-var socketurl = 'ws://192.168.1.144:8887/';
+var url = 'http://app.dongsheng.club:8888/';
+var socketurl = 'ws://app.dongsheng.club:8887/';
+//var url = 'http://192.168.1.144/Paotui/';
+//var socketurl = 'ws://192.168.1.144:8887/';
 //secret key
 var sk = 'TTILY';
 
