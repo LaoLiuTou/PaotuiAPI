@@ -330,19 +330,12 @@ public class CustomerController {
 				}
 				else{
 					 
-					if(list.get(0).getState()!=null&&list.get(0).getState()==0){
-						customer.setId(list.get(0).getId());
-						iCustomerService.updateCustomer(customer);
-						resultMap.put("status", "0");
-						resultMap.put("msg", list.get(0));
-						logger.info("用户登录："+list.get(0).getPhone());
-					}
-					else if(list.get(0).getState()!=null&&list.get(0).getState()==1){
-						resultMap.put("status", "-1");
-						resultMap.put("msg", "该账号正在审核！");
-						
-					}
-					 
+					customer.setId(list.get(0).getId());
+					iCustomerService.updateCustomer(customer);
+					resultMap.put("status", "0");
+					resultMap.put("msg", "更新成功！");
+					logger.info("用户登录："+list.get(0).getPhone());
+					
 				}
 			}
 		} catch (Exception e) {
