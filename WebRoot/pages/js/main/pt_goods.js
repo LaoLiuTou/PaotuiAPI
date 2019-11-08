@@ -212,7 +212,7 @@ function  queryGoods (searchText,type,currentPage,pageSize) {
 
             for(var o in data){
                 var bannerArray=JSON.parse(data[o].banners);
-                if(data[o].type=='1'){
+                if(data[o].type=='1'){//二手机
                     html+='<tr index='+o+' class="gradeX">\n' +
                         '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
                         '<td style="line-height: 50px;width:100px;text-align: center;"><img src="'+url+bannerArray[0]+'"  height="50px"></td>\n' +
@@ -225,7 +225,7 @@ function  queryGoods (searchText,type,currentPage,pageSize) {
                         '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
                         '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
                 }
-                else if(data[o].type=='2'){
+                else if(data[o].type=='2'){//靓号
                     var subtype='';
                     if(data[o].subtype=='21'){
                         subtype='电信';
@@ -254,7 +254,7 @@ function  queryGoods (searchText,type,currentPage,pageSize) {
                         '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
                         '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
                 }
-                else if(data[o].type=='3'){
+                else if(data[o].type=='3'){//免费领手机
                     html+='<tr index='+o+' class="gradeX">\n' +
                         '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
                         '<td style="line-height: 50px;width:100px;text-align: center;"><img src="'+url+bannerArray[0]+'"  height="50px"></td>\n' +
@@ -262,7 +262,7 @@ function  queryGoods (searchText,type,currentPage,pageSize) {
                         '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
                         '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
                 }
-                else {
+                else if(data[o].type=='4'){//扶贫
                     html+='<tr index='+o+' class="gradeX">\n' +
                         '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
                         '<td style="line-height: 50px;width:100px;text-align: center;"><img src="'+url+bannerArray[0]+'"  height="50px"></td>\n' +
@@ -270,7 +270,49 @@ function  queryGoods (searchText,type,currentPage,pageSize) {
                         '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
                         '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
                 }
+                else if(data[o].type=='5'){//5G
+                    var subtype='';
+                    if(data[o].subtype=='501'){
+                        subtype='智能家居';
+                    }
+                    else if(data[o].subtype=='502'){
+                        subtype='智能穿戴';
+                    }
+                    else if(data[o].subtype=='503'){
+                        subtype='5G物联';
+                    }
+                    else if(data[o].subtype=='504'){
+                        subtype='智慧教育';
+                    }
+                    else if(data[o].subtype=='505'){
+                        subtype='智慧农村';
+                    }
+                    else if(data[o].subtype=='506'){
+                        subtype='平安小区';
+                    }
+                    else if(data[o].subtype=='507'){
+                        subtype='智慧医疗';
+                    }
+                    else if(data[o].subtype=='508'){
+                        subtype='智慧老人儿童';
+                    }
+                    else if(data[o].subtype=='509'){
+                        subtype='远程监控';
+                    }
+                    else if(data[o].subtype=='510'){
+                        subtype='最新手机5G';
+                    }
 
+                    html+='<tr index='+o+' class="gradeX">\n' +
+                        '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
+                        '<td style="line-height: 50px;width:100px;text-align: center;"><img src="'+url+bannerArray[0]+'"  height="50px"></td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].title+'</td>\n' +
+                        '<td style="line-height: 50px;">'+subtype+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].brand+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].model+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
+                }
 
                 html+='<td style="line-height: 50px;"><a class="updateGoods" href="pt_goods_detail.html?id='+data[o].id+'&type='+GetQueryString('type')+'" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +
                     '<a class="deleteGoods" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';

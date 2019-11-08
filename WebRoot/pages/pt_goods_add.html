@@ -128,12 +128,6 @@
                                             </div>
                                         </div>
 
-                                        <!--<div class="form-group">
-                                            <label class="col-sm-2 col-sm-2 control-label">显示图片</label>
-                                            <div class="col-sm-9">
-                                                <input id="files" type="file" name="files" multiple>
-                                            </div>
-                                        </div>-->
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">图片</label>
                                             <div class="col-sm-9">
@@ -149,65 +143,16 @@
                                                     <option value="2">靓号收售</option>
                                                     <option value="3">免费领手机</option>
                                                     <option value="4">扶贫专区</option>
+                                                    <option value="5">5G生活</option>
                                                 </select>
 
                                             </div>
                                         </div>
 
-                                        <div class="form-group" id="subtype_group">
-                                            <label class="col-sm-2 col-sm-2 control-label">靓号类型</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control m-bot15"   id="subtype">
-                                                    <option value="21">电信</option>
-                                                    <option value="22">移动</option>
-                                                    <option value="23">联通</option>
-                                                    <option value="24">小灵通</option>
-                                                    <option value="25">亲情号</option>
-                                                    <option value="26">优良号码</option>
-                                                </select>
-
-                                            </div>
-                                        </div>
+                                        <div  id="differArea" style="border-bottom: 1px solid #eff2f7;padding-bottom: 5px;margin-bottom: 15px;">
 
 
-                                        <div class="form-group config_group" >
-                                            <label class="col-sm-2 col-sm-2 control-label">品牌</label>
-                                            <div class="col-sm-9">
-                                                <input type="text"   id="brand" class="form-control" placeholder="请输入品牌">
-                                            </div>
                                         </div>
-                                        <div class="form-group config_group">
-                                            <label class="col-sm-2 col-sm-2 control-label">型号</label>
-                                            <div class="col-sm-9">
-                                                <input type="text"   id="model" class="form-control" placeholder="请输入型号">
-                                            </div>
-                                        </div>
-                                        <div class="form-group config_group">
-                                            <label class="col-sm-2 col-sm-2 control-label">成色</label>
-                                            <div class="col-sm-9">
-                                                <input type="text"   id="oldlevel" class="form-control" placeholder="请输入成色">
-                                            </div>
-                                        </div>
-                                        <div class="form-group config_group">
-                                            <label class="col-sm-2 col-sm-2 control-label">配置</label>
-                                            <div class="col-sm-9">
-                                                <input type="text"   id="configure" class="form-control" placeholder="请输入配置">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group config_group">
-                                            <label class="col-sm-2 col-sm-2 control-label">网络类型</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control m-bot15"   id="network">
-                                                    <option value=""></option>
-                                                    <option value="电信">电信</option>
-                                                    <option value="移动联通">移动联通</option>
-                                                    <option value="小灵通">小灵通</option>
-                                                    <option value="全网通">全网通</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
 
 
                                         <div class="form-group">
@@ -282,7 +227,7 @@
 <script src="js/main/reconnecting-websocket.js"></script>
 <script src="js/main/config.js?v=1.1"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_goods.js"></script>
+<script src="js/main/pt_goods.js?v=1.0"></script>
 <script>
     var params={};
     var imagesArray= new Array();
@@ -290,39 +235,119 @@
     $(document).ready(function(){
         setMenu("6",GetQueryString('type'));
         $('#type').val(GetQueryString('type'));
+
+        var html1='<div class="form-group config_group" >\n' +
+            '<label class="col-sm-2 col-sm-2 control-label">品牌</label>\n' +
+            '<div class="col-sm-9">\n' +
+            '    <input type="text"   id="brand" class="form-control" placeholder="请输入品牌">\n' +
+            '</div>\n' +
+            '</div>\n' +
+            '<div class="form-group config_group">\n' +
+            '<label class="col-sm-2 col-sm-2 control-label">型号</label>\n' +
+            '<div class="col-sm-9">\n' +
+            '    <input type="text"   id="model" class="form-control" placeholder="请输入型号">\n' +
+            '</div>\n' +
+            '</div>\n' +
+            '<div class="form-group config_group">\n' +
+            '<label class="col-sm-2 col-sm-2 control-label">成色</label>\n' +
+            '<div class="col-sm-9">\n' +
+            '    <input type="text"   id="oldlevel" class="form-control" placeholder="请输入成色">\n' +
+            '</div>\n' +
+            '</div>\n' +
+            '<div class="form-group config_group">\n' +
+            '<label class="col-sm-2 col-sm-2 control-label">配置</label>\n' +
+            '<div class="col-sm-9">\n' +
+            '    <input type="text"   id="configure" class="form-control" placeholder="请输入配置">\n' +
+            '</div>\n' +
+            '</div>\n' +
+            '\n' +
+            '<div class="form-group config_group">\n' +
+            '<label class="col-sm-2 col-sm-2 control-label">网络类型</label>\n' +
+            '<div class="col-sm-9">\n' +
+            '    <select class="form-control m-bot15"   id="network">\n' +
+            '        <option value=""></option>\n' +
+            '        <option value="电信">电信</option>\n' +
+            '        <option value="移动联通">移动联通</option>\n' +
+            '        <option value="小灵通">小灵通</option>\n' +
+            '        <option value="全网通">全网通</option>\n' +
+            '    </select>\n' +
+            '</div>\n' +
+            '</div>';
+        var html2='<div class="form-group" >\n' +
+            '<label class="col-sm-2 col-sm-2 control-label">靓号类型</label>\n' +
+            '<div class="col-sm-9">\n' +
+            '    <select class="form-control m-bot15"   id="subtype">\n' +
+            '        <option value="21">电信</option>\n' +
+            '        <option value="22">移动</option>\n' +
+            '        <option value="23">联通</option>\n' +
+            '        <option value="24">小灵通</option>\n' +
+            '        <option value="25">亲情号</option>\n' +
+            '        <option value="26">优良号码</option>\n' +
+            '    </select> \n' +
+            '</div>\n' +
+            '</div>';
+        var html5='<div class="form-group" id="subtype_group">\n' +
+            '    <label class="col-sm-2 col-sm-2 control-label">靓号类型</label>\n' +
+            '    <div class="col-sm-9">\n' +
+            '        <select class="form-control m-bot15"   id="subtype">\n' +
+            '            <option value="501">智能家居</option>\n' +
+            '            <option value="502">智能穿戴</option>\n' +
+            '            <option value="503">5G物联</option>\n' +
+            '            <option value="504">智慧教育</option>\n' +
+            '            <option value="505">智慧农村</option>\n' +
+            '            <option value="506">平安小区</option>\n' +
+            '            <option value="507">智慧医疗</option>\n' +
+            '            <option value="508">智慧老人儿童</option>\n' +
+            '            <option value="509">远程监控</option>\n' +
+            '            <option value="510">最新手机5G</option>\n' +
+            '        </select>\n' +
+            '    </div>\n' +
+            '</div>\n' +
+            '<div class="form-group config_group" >\n' +
+            '    <label class="col-sm-2 col-sm-2 control-label">简介</label>\n' +
+            '    <div class="col-sm-9">\n' +
+            '        <input type="text"   id="brand" class="form-control" placeholder="请输入简介品牌型号等">\n' +
+            '    </div>\n' +
+            '</div>\n' +
+            '<div class="form-group config_group">\n' +
+            '    <label class="col-sm-2 col-sm-2 control-label">价格</label>\n' +
+            '    <div class="col-sm-9">\n' +
+            '        <input type="text"   id="model" class="form-control" placeholder="请输入价格">\n' +
+            '    </div>\n' +
+            '</div>';
+
+
         if(GetQueryString('type')=='1'){
-            $('#subtype_group').hide();
-            $('.config_group').show();
-        }
-        else if(GetQueryString('type')=='3'){
-            $('#subtype_group').hide();
-            $('.config_group').hide();
+            $('#differArea').html(html1);
         }
         else if(GetQueryString('type')=='2'){
-            $('#subtype_group').show();
-            $('.config_group').hide();
+            $('#differArea').html(html2);
+        }
+        else if(GetQueryString('type')=='3'){
+            $('#differArea').html("");
         }
         else if(GetQueryString('type')=='4'){
-            $('#subtype_group').hide();
-            $('.config_group').hide();
+            $('#differArea').html("");
+        }
+        else if(GetQueryString('type')=='5'){
+            $('#differArea').html(html5);
         }
 
         $('#type').change(function () {
             if($(this).val()=='1'){
-                $('#subtype_group').hide();
-                $('.config_group').show();
-            }
-            else if($(this).val()=='3'){
-                $('#subtype_group').hide();
-                $('.config_group').hide();
+                $('#differArea').html(html1);
             }
             else if($(this).val()=='2'){
-                $('#subtype_group').show();
-                $('.config_group').hide();
+                $('#differArea').html(html2);
+            }
+            else if($(this).val()=='3'){
+                $('#differArea').html("");
             }
             else if($(this).val()=='4'){
-                $('#subtype_group').hide();
-                $('.config_group').hide();
+                $('#differArea').html("");
+            }
+            else if($(this).val()=='5'){
+                $('#differArea').html(html5);
             }
 
         });
