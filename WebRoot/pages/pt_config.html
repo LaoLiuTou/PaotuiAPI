@@ -284,7 +284,7 @@
                 return false;
             }
             if(currentConfigure.type=='int'){
-                if (!(/(^[1-9]\d*$)/.test($('#update_value').val()))) {
+                if (!(/(^[0-9]\d*$)/.test($('#update_value').val()))) {
                     alert('请输入正整数！');
                     return false;
                 }

@@ -211,7 +211,7 @@
 <script src="js/main/reconnecting-websocket.js"></script>
 <script src="js/main/config.js?v=1.1"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_goods.js?v=1.0"></script>
+<script src="js/main/pt_goods.js?v=1.1"></script>
 <script>
     var params={};
     var imagesArray= new Array();
@@ -271,6 +271,17 @@
             '    </select> \n' +
             '</div>\n' +
             '</div>';
+        var html4='<div class="form-group" >\n' +
+            '<label class="col-sm-2 col-sm-2 control-label">扶贫类型</label>\n' +
+            '<div class="col-sm-9">\n' +
+            '    <select class="form-control m-bot15"   id="subtype">\n' +
+            '        <option value="41">扶贫产品</option>\n' +
+            '        <option value="42">帮扶商家</option>\n' +
+            '        <option value="43">扶贫展示</option>\n' +
+            '        <option value="44">扶贫头条</option>\n' +
+            '    </select> \n' +
+            '</div>\n' +
+            '</div>';
         var html5='<div class="form-group" id="subtype_group">\n' +
             '    <label class="col-sm-2 col-sm-2 control-label">靓号类型</label>\n' +
             '    <div class="col-sm-9">\n' +
@@ -312,7 +323,7 @@
             $('#differArea').html("");
         }
         else if(GetQueryString('type')=='4'){
-            $('#differArea').html("");
+            $('#differArea').html(html4);
         }
         else if(GetQueryString('type')=='5'){
             $('#differArea').html(html5);

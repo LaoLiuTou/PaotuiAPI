@@ -263,10 +263,24 @@ function  queryGoods (searchText,type,currentPage,pageSize) {
                         '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
                 }
                 else if(data[o].type=='4'){//扶贫
+                    var subtype='';
+                    if(data[o].subtype=='41'){
+                        subtype='扶贫产品';
+                    }
+                    else if(data[o].subtype=='42'){
+                        subtype='帮扶商家';
+                    }
+                    else if(data[o].subtype=='43'){
+                        subtype='扶贫展示';
+                    }
+                    else if(data[o].subtype=='44'){
+                        subtype='扶贫头条';
+                    }
                     html+='<tr index='+o+' class="gradeX">\n' +
                         '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
                         '<td style="line-height: 50px;width:100px;text-align: center;"><img src="'+url+bannerArray[0]+'"  height="50px"></td>\n' +
                         '<td style="line-height: 50px;">'+data[o].title+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].subtype+'</td>\n' +
                         '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
                         '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
                 }
