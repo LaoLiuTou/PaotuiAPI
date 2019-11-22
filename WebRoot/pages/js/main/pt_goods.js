@@ -327,7 +327,53 @@ function  queryGoods (searchText,type,currentPage,pageSize) {
                         '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
                         '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
                 }
+                else if(data[o].type=='6'){//翼家超市
+                    var subtype='';
+                    if(data[o].subtype=='601'){
+                        subtype='瓜果蔬菜';
+                    }
+                    else if(data[o].subtype=='602'){
+                        subtype='粮油';
+                    }
+                    else if(data[o].subtype=='603'){
+                        subtype='手机配件';
+                    }
+                    else if(data[o].subtype=='604'){
+                        subtype='手机专区';
+                    }
+                    else if(data[o].subtype=='605'){
+                        subtype='干果土特产';
+                    }
+                    else if(data[o].subtype=='606'){
+                        subtype='家电专区';
+                    }
+                    else if(data[o].subtype=='607'){
+                        subtype='农村家禽类';
+                    }
+                    else if(data[o].subtype=='608'){
+                        subtype='延百超市';
+                    }
+                    else if(data[o].subtype=='609'){
+                        subtype='翼支付专区';
+                    }
+                    else if(data[o].subtype=='610'){
+                        subtype='优惠专区';
+                    }
+                    else if(data[o].subtype=='611'){
+                        subtype='商圈代购区';
+                    }
 
+
+                    html+='<tr index='+o+' class="gradeX">\n' +
+                        '<td style="line-height: 50px;">'+data[o].id+'</td>\n' +
+                        '<td style="line-height: 50px;width:100px;text-align: center;"><img src="'+url+bannerArray[0]+'"  height="50px"></td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].title+'</td>\n' +
+                        '<td style="line-height: 50px;">'+subtype+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].brand+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].model+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].creater+'</td>\n' +
+                        '<td style="line-height: 50px;">'+data[o].c_dt+'</td>\n' ;
+                }
                 html+='<td style="line-height: 50px;"><a class="updateGoods" href="pt_goods_detail.html?id='+data[o].id+'&type='+GetQueryString('type')+'" index='+o+' data-toggle="modal" ><span class="label label-info label-mini">修改</span></a>   ' +
                     '<a class="deleteGoods" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';
                 html+='</tr>';

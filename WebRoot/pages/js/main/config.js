@@ -430,6 +430,7 @@ function setMenu(par,sub){
         '                    <ul class="sub-menu-list">\n' +
         '                        <li id="menu7-1"><a href="pt_coupon.html?type=1">便民服务</a></li>\n' +
         '                        <li id="menu7-2"><a href="pt_coupon.html?type=2">店铺优惠券</a></li>\n' +
+        '                        <li id="menu7-3"><a href="pt_hotline.html">便民服务热线</a></li>\n' +
         '                    </ul>\n' +
         '                </li>\n' +
         '                <li id="menu6" class="menu-list"><a href="javascript:;"><i class="fa fa-rub"></i> <span>商品管理</span></a>\n' +
@@ -440,6 +441,7 @@ function setMenu(par,sub){
         '                        <li id="menu6-3"><a href="pt_goods.html?type=3">免费领手机</a></li>\n' +
         '                        <li id="menu6-4"><a href="pt_goods.html?type=4">扶贫专区</a></li>\n' +
         '                        <li id="menu6-5"><a href="pt_goods.html?type=5">5G生活</a></li>\n' +
+        '                        <li id="menu6-6"><a href="pt_goods.html?type=6">翼家超市</a></li>\n' +
         '                    </ul>\n' +
         '                </li>\n' +
 

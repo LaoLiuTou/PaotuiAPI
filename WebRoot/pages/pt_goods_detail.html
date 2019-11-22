@@ -211,7 +211,7 @@
 <script src="js/main/reconnecting-websocket.js"></script>
 <script src="js/main/config.js?v=1.1"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_goods.js?v=1.1"></script>
+<script src="js/main/pt_goods.js?v=1.2"></script>
 <script>
     var params={};
     var imagesArray= new Array();
@@ -311,7 +311,36 @@
             '        <input type="text"   id="model" class="form-control" placeholder="请输入价格">\n' +
             '    </div>\n' +
             '</div>';
-
+        var html6='<div class="form-group" id="subtype_group">\n' +
+            '    <label class="col-sm-2 col-sm-2 control-label">超市类型</label>\n' +
+            '    <div class="col-sm-9">\n' +
+            '        <select class="form-control m-bot15"   id="subtype">\n' +
+            '            <option value="601">瓜果蔬菜</option>\n' +
+            '            <option value="602">粮油</option>\n' +
+            '            <option value="603">手机配件</option>\n' +
+            '            <option value="604">手机专区</option>\n' +
+            '            <option value="605">干果土特产</option>\n' +
+            '            <option value="606">家电专区</option>\n' +
+            '            <option value="607">农村家禽类</option>\n' +
+            '            <option value="608">延百超市</option>\n' +
+            '            <option value="609">翼支付专区</option>\n' +
+            '            <option value="610">优惠专区</option>\n' +
+            '            <option value="611">商圈代购区</option>\n' +
+            '        </select>\n' +
+            '    </div>\n' +
+            '</div>\n' +
+            '<div class="form-group config_group" >\n' +
+            '    <label class="col-sm-2 col-sm-2 control-label">简介</label>\n' +
+            '    <div class="col-sm-9">\n' +
+            '        <input type="text"   id="brand" class="form-control" placeholder="请输入简介品牌型号等">\n' +
+            '    </div>\n' +
+            '</div>\n' +
+            '<div class="form-group config_group">\n' +
+            '    <label class="col-sm-2 col-sm-2 control-label">价格</label>\n' +
+            '    <div class="col-sm-9">\n' +
+            '        <input type="text"   id="model" class="form-control" placeholder="请输入价格">\n' +
+            '    </div>\n' +
+            '</div>';
 
         if(GetQueryString('type')=='1'){
             $('#differArea').html(html1);
@@ -327,6 +356,9 @@
         }
         else if(GetQueryString('type')=='5'){
             $('#differArea').html(html5);
+        }
+        else if(GetQueryString('type')=='6'){
+            $('#differArea').html(html6);
         }
         //select
         selectGoods(GetQueryString('id'));

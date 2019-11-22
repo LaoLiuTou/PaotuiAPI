@@ -150,4 +150,9 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 <bean id="iGoodsService" class="com.paotui.service.goods.GoodsServiceImpl"></bean>
 
 <bean id="wxPayService" class="com.paotui.service.wxpay.WXserviceImpl"></bean>
+<bean id="iHotlineMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.paotui.dao.hotline.IHotlineMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iHotlineService" class="com.paotui.service.hotline.HotlineServiceImpl"></bean>
 </beans>

@@ -39,6 +39,7 @@
 		<typeAlias alias="Coupon" type="com.paotui.model.coupon.Coupon" /> 
 		<typeAlias alias="Couponuser" type="com.paotui.model.couponuser.Couponuser" /> 
 		<typeAlias alias="Goods" type="com.paotui.model.goods.Goods" /> 
+		<typeAlias alias="Hotline" type="com.paotui.model.hotline.Hotline" /> 
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/paotui/model/addresses/Addresses.xml"/> 
@@ -60,5 +61,6 @@
 		<mapper resource="com/paotui/model/coupon/Coupon.xml"/> 
 		<mapper resource="com/paotui/model/couponuser/Couponuser.xml"/> 
 		<mapper resource="com/paotui/model/goods/Goods.xml"/>
+		<mapper resource="com/paotui/model/hotline/Hotline.xml"/> 
 	</mappers>  
 </configuration>

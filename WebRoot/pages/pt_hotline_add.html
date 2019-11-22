@@ -8,7 +8,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="#" type="image/png">
 
-    <title>新建轮播图</title>
+    <title>新建便民服务热线</title>
 
 
     <!--common-->
@@ -96,10 +96,10 @@
         <div class="page-heading">
             <ul class="breadcrumb">
                 <li>
-                    <a href="#">系统设置</a>
+                    <a href="#">便民服务管理</a>
                 </li>
                 <li>
-                    <a href="#" onclick="window.history.go(-1)">新建轮播图</a>
+                    <a href="#" onclick="window.history.go(-1)">新建便民服务热线</a>
                 </li>
             </ul>
 
@@ -118,7 +118,7 @@
                         <div class="col-sm-12">
                             <section class="panel">
                                 <header class="panel-heading">
-                                    新建轮播图
+                                    新建便民服务热线
                                 </header>
                                 <div class="panel-body">
                                     <form class="form-horizontal adminex-form" id="addForm" >
@@ -137,21 +137,12 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-sm-2 col-sm-2 control-label">内容</label>
+                                            <label class="col-sm-2 col-sm-2 control-label">电话</label>
                                             <div class="col-sm-9">
-                                                <textarea id="content" ></textarea>
+                                                <input type="text"   id="phone" class="form-control" placeholder="请输入电话">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 col-sm-2 control-label">类型</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control m-bot15"   id="type">
-                                                    <option value="0">顶部轮播图</option>
-                                                    <option value="1">底部轮播图</option>
-                                                </select>
 
-                                            </div>
-                                        </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">状态</label>
                                             <div class="col-sm-9">
@@ -224,14 +215,14 @@
 
 <script src="js/main/yanue.pop.js"></script>
 <script src="js/main/reconnecting-websocket.js"></script>
-<script src="js/main/config.js?v=1.2"></script>
+<script src="js/main/config.js?v=1.1"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_banner.js"></script>
+<script src="js/main/pt_hotline.js?v=1.0"></script>
 <script>
     var params={};
     var headerImage;
     $(document).ready(function(){
-        setMenu("5","4");
+        setMenu("7","3");
         $('#files').fileinput({
             theme: 'fa',
             language: 'zh',
@@ -264,7 +255,7 @@
             }
         };
 
-        var ue = UE.getEditor('content',{serverUrl:url+"jsp/controller.jsp",initialFrameHeight:200});
+
         //add
         $('#addBtn').click(function () {
             params={};
@@ -283,9 +274,9 @@
             var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
             params['c_id']=userinfo['id'];
             //params['content']=$('#content').val();
-            params['content']=ue.getContent();
+            //params['content']=ue.getContent();
             params['image']=headerImage;
-            addBanner(params);
+            addHotline(params);
         });
 
 

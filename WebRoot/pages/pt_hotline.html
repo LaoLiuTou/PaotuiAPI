@@ -7,7 +7,7 @@
   <meta name="author" content="ThemeBucket">
   <link rel="shortcut icon" href="#" type="image/png">
 
-  <title>APP设置</title>
+  <title>便民服务热线管理</title>
 
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
@@ -108,9 +108,9 @@
         <div class="page-heading">
             <ul class="breadcrumb">
                 <li>
-                    <a href="#">系统设置</a>
+                    <a href="#">便民服务管理</a>
                 </li>
-                <li class="active">APP设置</li>
+                <li class="active">便民服务热线管理</li>
             </ul>
 
         </div>
@@ -128,27 +128,28 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            APP设置
+                            便民服务热线管理
 
+                            <span class="tools pull-right">
+                            <button type="button" class="btn btn-info popovers"  id="newBtn" >新建</button>
+                            <!--<span class="tools pull-right">-->
+                            <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
+                            <!--<a href="javascript:;" class="fa fa-times"></a>-->
+                         </span>
                         </header>
                         <div class="panel-body">
-                            <!--<form class="form-horizontal" role="form">
-                                <div class="form-group col-md-3 mr10">
-                                    <div class="col-md-12 pdnone">
-                                        <input class="form-control" id="searchText" size="16" type="text" placeholder="请输入您要搜索的用户名..." />
-                                    </div>
-                                </div>
-                                <button id="searchBtn" type="button" class="btn btn-info popovers mb10">搜索</button>
-                            </form>-->
+
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                     <tr>
                                         <th>编号</th>
-                                        <th>备注</th>
-                                        <!--<th>属性</th>-->
-                                        <th>值</th>
+                                        <th>图片</th>
+                                        <th>标题</th>
+                                        <th>电话</th>
+                                        <th>创建者</th>
                                         <th>创建时间</th>
+                                        <th>状态</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -181,36 +182,24 @@
     <!-- main content end-->
 </section>
 
-<!-- Modal -->
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="update-box" class="modal fade">
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="delete-box" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">修改</h4>
+                <h4 class="modal-title">删除</h4>
             </div>
             <div class="modal-body">
-
-                <form role="form">
-                   <h4 id="update_note"></h4>
-                    <div class="form-group">
-                        <label>编辑属性的值</label>
-                        <textarea class="form-control textarea-line" id="update_value" placeholder=""></textarea>
-
-                    </div>
-
-
-                </form>
+                确定要删除记录吗？
             </div>
             <div class="clearfix"></div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                <button class="btn btn-info popovers" type="button" id="updateBtn">提交</button>
+                <button class="btn btn-info popovers" type="button" id="deleteBtn">确定</button>
             </div>
         </div>
     </div>
 </div>
-
 
 
 
@@ -225,75 +214,65 @@
 
 <!--common scripts for all pages-->
 <script src="js/scripts.js"></script>
-
 <script src="js/main/yanue.pop.js"></script>
 <script src="js/main/reconnecting-websocket.js"></script>
-<script src="js/main/config.js?v=1.2"></script>
+<script src="js/main/config.js?v=1.1"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_config.js"></script>
+<script src="js/main/pt_hotline.js?v=1.0"></script>
 
 <script>
     $(document).ready(function () {
-        setMenu("5","2");
+
+        setMenu("7","3");
         //搜索
         $('#searchBtn').click(function () {
-            queryConfigure($('#searchText').val(),currentPage,pageSize);
+            queryHotline($('#type').val(),currentPage,pageSize);
         });
 
         //列表
         var currentPage=1;
         var pageSize=10;
-        queryConfigure($('#searchText').val(),currentPage,pageSize);
+        queryHotline($('#type').val(),currentPage,pageSize);
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            queryConfigure($('#searchText').val(),currentPage,pageSize);
+            queryHotline($('#type').val(),currentPage,pageSize);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            queryConfigure($('#searchText').val(),currentPage,pageSize);
+            queryHotline($('#type').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            queryConfigure($('#searchText').val(),currentPage,pageSize);
+            queryHotline($('#type').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','#jumpBtn',function(){
             var reg=/^[1-9]\d*$|^0$/;
             if(reg.test($('#jumpPageText').val())==true){
-                queryConfigure($('#searchText').val(),$('#jumpPageText').val(),pageSize);
+                queryHotline($('#searchText').val(),$('#jumpPageText').val(),pageSize);
             }else{
                 alert("页码输入有误！");
                 return false;
             }
         });
 
-  
-        //修改
-        $('#contentTbody').on('click','.updateConfigure',function () {
-            configureIndex=$(this).attr('index');
-            currentConfigure=configureList[configureIndex];
-
-            $('#update_note').text(currentConfigure.note);
-            $('#update_value').val(currentConfigure.value);
+        //新建
+        $('#newBtn').click(function () {
+            window.location.href="pt_hotline_add.html";
         });
-        $('#updateBtn').click(function () {
-            if($('#update_value').val()==''){
-                alert('值不能为空！');
-                return false;
-            }
-            if(currentConfigure.type=='int'){
-                if (!(/(^[0-9]\d*$)/.test($('#update_value').val()))) {
-                    alert('请输入正整数！');
-                    return false;
-                }
-            }
 
-            var bodyParam={'id':currentConfigure.id,'value':$('#update_value').val()};
-            updateConfigure(bodyParam);
+
+        //删除
+        $('#contentTbody').on('click','.deleteHotline',function () {
+            hotlineIndex=$(this).attr('index');
+            currentHotline=hotlineList[hotlineIndex];
         });
-    
+        $('#deleteBtn').click(function () {
+            deleteHotline(currentHotline.id);
+        });
+
     });
 
 </script>

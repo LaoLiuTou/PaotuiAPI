@@ -179,9 +179,32 @@ function  queryTicket (searchText,currentPage,pageSize) {
                 else if(data[o].type=='33'){
                     html+='<td >信用卡</td>\n' ;
                 }
-                else if(data[o].type=='100'){
-                    html+='<td >翼家超市</td>\n' ;
+                else if(data[o].type=='34'){
+                    html+='<td >违章查询</td>\n' ;
                 }
+
+                else if(data[o].type=='606'){
+                    html+='<td >家电专区</td>\n' ;
+                }
+                else if(data[o].type=='607'){
+                    html+='<td >农村家禽类</td>\n' ;
+                }
+                else if(data[o].type=='608'){
+                    html+='<td >延百超市</td>\n' ;
+                }
+                else if(data[o].type=='609'){
+                    html+='<td >翼支付专区</td>\n' ;
+                }
+                else if(data[o].type=='610'){
+                    html+='<td >优惠专区</td>\n' ;
+                }
+                else if(data[o].type=='611'){
+                    html+='<td >商圈代购区</td>\n' ;
+                }
+
+                /*else if(data[o].type=='100'){
+                    html+='<td >翼家超市</td>\n' ;
+                }*/
                 else{
                     html+='<td ></td>\n' ;
                 }
@@ -300,6 +323,4 @@ function  queryTicket (searchText,currentPage,pageSize) {
         }
     });
 }
-
-
 

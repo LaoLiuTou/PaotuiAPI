@@ -229,7 +229,7 @@
 <script src="js/main/reconnecting-websocket.js"></script>
 <script src="js/main/config.js?v=1.1"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_goods.js?v=1.1"></script>
+<script src="js/main/pt_goods.js?v=1.2"></script>
 
 <script>
     $(document).ready(function () {
@@ -283,6 +283,19 @@
                 '</tr>');
         }
         else if(GetQueryString('type')=='5'){
+            $('#thead').html('<tr>\n' +
+                '  <th>编号</th>\n' +
+                '  <th>标题图片</th>\n' +
+                '  <th>标题</th>\n' +
+                '  <th>类型</th>\n' +
+                '  <th>简介</th>\n' +
+                '  <th>价格</th>\n' +
+                '  <th>创建者</th>\n' +
+                '  <th>创建时间</th>\n' +
+                '  <th>操作</th>\n' +
+                '</tr>');
+        }
+        else if(GetQueryString('type')=='6'){
             $('#thead').html('<tr>\n' +
                 '  <th>编号</th>\n' +
                 '  <th>标题图片</th>\n' +
