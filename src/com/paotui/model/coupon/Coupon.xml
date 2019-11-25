@@ -34,6 +34,7 @@
 			<if test="quantity != null"> AND a.QUANTITY =#{quantity} </if>
 			<if test="state != null"> AND a.STATE =#{state} </if>
 			<if test="iscoupon != null"> AND a.ISCOUPON =#{iscoupon} </if>
+			<if test="searchtext != null"> AND a.TITLE like '%${searchtext}%' </if>
 		</trim>  
 			<if test="orderBy!= null"> ORDER BY   #{orderBy} </if>
 		LIMIT #{fromPage},#{toPage} 
@@ -59,6 +60,7 @@
 			<if test="quantity != null"> AND QUANTITY =#{quantity} </if>
 			<if test="state != null"> AND STATE =#{state} </if>
 			<if test="iscoupon != null"> AND ISCOUPON =#{iscoupon} </if>
+			<if test="searchtext != null"> AND TITLE like '%${searchtext}%' </if>
 		</trim>  
 	</select>
 

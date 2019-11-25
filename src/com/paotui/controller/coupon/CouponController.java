@@ -171,6 +171,10 @@ public class CouponController {
 				paramMap.put("quantity",coupon.getQuantity());
 				paramMap.put("state",coupon.getState());
 				paramMap.put("iscoupon",coupon.getIscoupon());
+				//search
+				String searchtext=request.getParameter("searchtext");
+				paramMap.put("searchtext", searchtext);
+				
 				List<Coupon> list=iCouponService.selectCouponByParam(paramMap);
 				int totalnumber=iCouponService.selectCountCouponByParam(paramMap);
 				Map tempMap=new HashMap();

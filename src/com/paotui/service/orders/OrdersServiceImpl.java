@@ -57,9 +57,38 @@ public class OrdersServiceImpl  implements IOrdersService {
 	public  int updateOrders(Orders orders){
 		return iOrdersMapper.updateorders(orders);
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Transactional
 	public  int updateordersBynum(Orders orders){
-		return iOrdersMapper.updateordersBynum(orders);
+		//return iOrdersMapper.updateordersBynum(orders);
+		
+		int result=0;
+		
+		result=iOrdersMapper.updateordersBynum(orders);
+		if(result>0){
+			Map paramMap=new HashMap();
+			paramMap.put("fromPage",0);
+			paramMap.put("toPage",1);
+			paramMap.put("ordernum",orders.getOrdernum());
+			List<Orders> list=iOrdersMapper.selectordersByParam(paramMap);
+			if(list.size()>0){
+				//修改优惠券金额
+				Orders tempOrder=list.get(0);
+			    Customer customer=iCustomerMapper.selectcustomerById(tempOrder.getCus_id()+"");
+			    if(customer!=null){
+			    	String balance=customer.getBalance();  
+					Customer temp = new Customer();
+					temp.setId(orders.getCus_id());
+					DecimalFormat decimalFormat=new DecimalFormat(".0");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+					String cus_balance=decimalFormat.format(Float.parseFloat(balance)-Float.parseFloat(orders.getBalance()));//format 返回的是字符串
+					temp.setBalance(cus_balance);
+					iCustomerMapper.updatecustomer(temp);
+			    }
+				
+			}
+		} 
+		
+		return result;
 	}
 
 	/**
@@ -103,13 +132,13 @@ public class OrdersServiceImpl  implements IOrdersService {
 		orders.setOrdernum(sdf.format(new Date())+((int)((Math.random()*9+1)*100000)));
 		result=iOrdersMapper.addorders(orders);
 		if(result>0){
-			 
-			Customer temp = new Customer();
+			 //支付完成后在扣除优惠券
+			/*Customer temp = new Customer();
 			temp.setId(orders.getCus_id());
 			DecimalFormat decimalFormat=new DecimalFormat(".0");//构造方法的字符格式这里如果小数不足2位,会以0补足.
 			String cus_balance=decimalFormat.format(Float.parseFloat(balance)-Float.parseFloat(orders.getBalance()));//format 返回的是字符串
 			temp.setBalance(cus_balance);
-			iCustomerMapper.updatecustomer(temp);
+			iCustomerMapper.updatecustomer(temp);*/
 			
 			//发送推送消息
 			SendChatMessageUtil.send("3", orders.getOrdernum(), "");

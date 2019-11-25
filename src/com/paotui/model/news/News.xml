@@ -32,6 +32,7 @@
 			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
 			<if test="state != null"> AND a.STATE =#{state} </if>
 			<if test="ismain != null"> AND a.ISMAIN =#{ismain} </if>
+			<if test="searchtext != null"> AND a.TITLE like '%${searchtext}%' </if>
 		</trim>  
 			<if test="orderBy!= null"> ORDER BY   ${orderBy} </if>
 		LIMIT #{fromPage},#{toPage} 
@@ -55,6 +56,7 @@
 			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
 			<if test="state != null"> AND STATE =#{state} </if>
 			<if test="ismain != null"> AND ISMAIN =#{ismain} </if>
+			<if test="searchtext != null"> AND TITLE like '%${searchtext}%' </if>
 		</trim>  
 	</select>
 

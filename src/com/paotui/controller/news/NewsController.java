@@ -169,6 +169,11 @@ public class NewsController {
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 				paramMap.put("state",news.getState());
 				paramMap.put("ismain",news.getIsmain());
+				
+				//search
+				String searchtext=request.getParameter("searchtext");
+				paramMap.put("searchtext", searchtext);
+				
 				List<News> list=iNewsService.selectNewsByParam(paramMap);
 				int totalnumber=iNewsService.selectCountNewsByParam(paramMap);
 				Map tempMap=new HashMap();

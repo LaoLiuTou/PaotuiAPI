@@ -128,7 +128,7 @@ function  queryOrder (searchText,currentPage,pageSize) {
                     html+='<td >已完成</td>\n' ;
                 }
                 else{
-                    html+='<td >代付款</td>\n' ;
+                    html+='<td >未付款</td>\n' ;
                 }
                 html+='<td >' +
                     '<a class="deleteOrder" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-danger label-mini">删除</span></a></td>\n';

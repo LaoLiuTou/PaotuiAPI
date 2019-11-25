@@ -181,6 +181,7 @@
                                                 <th>创建时间</th>
                                                 <th>状态</th>
                                                 <th>增加余额</th>
+                                                <th>修改余额</th>
                                                 <th>操作</th>
                                             </tr>
                                             </thead>
@@ -261,6 +262,51 @@
         </div>
     </div>
 </div>
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="balance-update-box" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">修改代金券余额</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label>代金券余额</label>
+                        <input type="text" class="form-control" onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" id="update_balance" placeholder="请输入代金券余额">
+                    </div>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                <button data-dismiss="modal" class="btn btn-info popovers" type="button" data-toggle="modal" data-target="#balance-confirm-box">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="balance-confirm-box" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">修改代金券余额</h4>
+            </div>
+            <div class="modal-body">
+                确定要修改该用户的代金券余额吗？
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                <button class="btn btn-info popovers" type="button" id="updateBalanceBtn">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="balance-box" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -296,7 +342,7 @@
 <script src="js/main/reconnecting-websocket.js"></script>
 <script src="js/main/config.js?v=1.2"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/pt_customer.js?v=1.0"></script>
+<script src="js/main/pt_customer.js?v=1.1"></script>
 
 <script>
     $(document).ready(function () {
@@ -371,6 +417,16 @@
             updateCustomer(bodyParam);
         });
         //修改余额
+        $('#contentTbody').on('click','.updateBalanceCustomer',function () {
+            customerIndex=$(this).attr('index');
+            currentCustomer=customerList[customerIndex];
+            $('#update_balance').val(currentCustomer.balance);
+        });
+        $('#updateBalanceBtn').click(function () {
+            var bodyParam={'id':currentCustomer.id,'balance':$('#update_balance').val()};
+            updateCustomer(bodyParam);
+        });
+        //增加余额
         $('#contentTbody').on('click','.balanceCustomer',function () {
             customerIndex=$(this).attr('index');
             currentCustomer=customerList[customerIndex];

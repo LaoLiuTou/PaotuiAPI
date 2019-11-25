@@ -126,6 +126,8 @@ function  queryCustomer (searchText,currentPage,pageSize) {
                     html+='<td style="line-height: 50px;">' +
                         '<span class="label label-default label-mini">已增加</span></td>\n';
                 }
+                html+='<td style="line-height: 50px;">' +
+                    '<a class="updateBalanceCustomer" href="" index='+o+' data-toggle="modal" data-target="#balance-update-box"><span class="label label-danger label-mini">修改余额</span></a></td>\n';
 
                 html+='<td style="line-height: 50px;">' +
                     '<a class="passwordUser" href="" index='+o+' data-toggle="modal" data-target="#password-box"><span class="label label-info label-mini">重置密码</span></a>   ' +

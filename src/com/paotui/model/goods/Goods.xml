@@ -70,6 +70,7 @@
 			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
 			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
 			<if test="state != null"> AND STATE =#{state} </if>
+			<if test="searchtext != null"> AND CONCAT(IFNULL(TITLE,''),' ',IFNULL(OLDLEVEL,''),' ',IFNULL(CONFIGURE,''),' ',IFNULL(NETWORK,'')) like '%${searchtext}%' </if>
 		</trim>  
 	</select>
 
