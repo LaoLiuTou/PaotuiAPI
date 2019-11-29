@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -86,13 +87,16 @@ public class ZipUtil {
         packageZip(zipFile,listKey);
         System.out.println("zipFile exists2: " + zipFile.exists());
         System.out.println("zipFile size: " + zipFile.length());*/
+    	/*System.out.println(new Random().nextInt(1000));
     	System.out.println(new Random().nextInt(1000));
     	System.out.println(new Random().nextInt(1000));
     	System.out.println(new Random().nextInt(1000));
     	System.out.println(new Random().nextInt(1000));
     	System.out.println(new Random().nextInt(1000));
     	System.out.println(new Random().nextInt(1000));
-    	System.out.println(new Random().nextInt(1000));
-    	System.out.println(new Random().nextInt(1000));
+    	System.out.println(new Random().nextInt(1000));*/
+    	DecimalFormat decimalFormat=new DecimalFormat(".0");
+    	String cus_balance=decimalFormat.format(Float.parseFloat(".6")-Float.parseFloat(null));
+    	System.out.println(cus_balance);
     }
 }

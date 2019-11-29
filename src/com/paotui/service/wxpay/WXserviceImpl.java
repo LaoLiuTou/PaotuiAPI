@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -135,26 +136,54 @@ public class WXserviceImpl implements WXservice {
 	                        	orders.setOrdernum(out_trade_no);
 	                        	orders.setPay_dt(new Date());
 	                        	orders.setStatus("1");
-	                        	iOrdersMapper.updateordersBynum(orders);
+	                        	 
 	                        	
-	                        	//发送短信
-	                        	paramMap=new HashMap(); 
-	                        	paramMap.put("fromPage",0);
-	            				paramMap.put("toPage",1); 
-	            				paramMap.put("ordernum",out_trade_no);
-	            				List<Orders> tempList=iOrdersMapper.selectordersByParam(paramMap);
-	            				if(tempList.size()>0){ 
-	            					orders =tempList.get(0);
-		                        	if(orders.getNote()!=null&&orders.getNote().equals("免单")){
-		        						
-		        					}
-		        					else{
-		        						Customer customer=iCustomerMapper.selectcustomerById(orders.getCus_id()+"");
-		        						SendThread sendThread = new SendThread(customer,orders.getDriver()+"",orders.getPrice()); 
-		        						sendThread.start(); 
-		        					}
-	            				}
-	                        	
+	                        	int result=0; 
+	                    		result=iOrdersMapper.updateordersBynum(orders);
+	                    		if(result>0){
+	                    			paramMap=new HashMap();
+	                    			paramMap.put("fromPage",0);
+	                    			paramMap.put("toPage",1);
+	                    			paramMap.put("ordernum",out_trade_no);
+	                    			List<Orders> list=iOrdersMapper.selectordersByParam(paramMap);
+	                    			if(list.size()>0){
+	                    				//修改优惠券金额
+	                    				Orders tempOrder=list.get(0);
+	                    			    Customer customer=iCustomerMapper.selectcustomerById(tempOrder.getCus_id()+"");
+	                    			    if(customer!=null){
+	                    			    	String balance=customer.getBalance();  
+	                    					Customer temp = new Customer();
+	                    					temp.setId(customer.getId());
+	                    					logger.info("用户:"+customer.getId()+",余额:"+ balance+",使用:"+tempOrder.getBalance());
+	                    					DecimalFormat decimalFormat=new DecimalFormat(".0");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+	                    					String cus_balance=decimalFormat.format(Float.parseFloat(balance)-Float.parseFloat(tempOrder.getBalance()));//format 返回的是字符串
+	                    					temp.setBalance(cus_balance);
+	                    					iCustomerMapper.updatecustomer(temp);
+	                    			    }
+	                    			    
+	                    			    
+	                    			  //发送短信
+	    	                        	paramMap=new HashMap(); 
+	    	                        	paramMap.put("fromPage",0);
+	    	            				paramMap.put("toPage",1); 
+	    	            				paramMap.put("ordernum",out_trade_no);
+	    	            				List<Orders> tempList=iOrdersMapper.selectordersByParam(paramMap);
+	    	            				if(tempList.size()>0){ 
+	    	            					tempOrder =tempList.get(0);
+	    		                        	if(tempOrder.getNote()!=null&&tempOrder.getNote().equals("免单")){
+	    		        						
+	    		        					}
+	    		        					else{
+	    		        						//Customer customer=iCustomerMapper.selectcustomerById(orders.getCus_id()+"");
+	    		        						SendThread sendThread = new SendThread(customer,tempOrder.getDriver()+"",tempOrder.getPrice()); 
+	    		        						sendThread.start(); 
+	    		        					}
+	    	            				}
+	    	            				
+	                    				
+	                    			}
+	                    		} 
+	                        	  
             				} 
             				
                     		
